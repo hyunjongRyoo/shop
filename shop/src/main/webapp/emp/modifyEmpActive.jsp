@@ -3,6 +3,17 @@
 <%@ page import="java.net.*"%>
 
 <%
+//로그인 세션
+	String loginEmp = (String)session.getAttribute("loginEmp");
+	System.out.println(loginEmp + " <-- loginEmp");
+	if(loginEmp == null){
+		response.sendRedirect("/shop/emp/empLoginForm.jsp");
+		return;
+	}
+	
+%>
+<%
+//받아오는 값 empId, active
 String empId =request.getParameter("empId");
 //디버깅 
 System.out.println("empId"); 
@@ -12,30 +23,36 @@ String active =request.getParameter("active");
 System.out.println("active"); 
 
 
+
+// Off일때 on으로 바꿔준다
+if(active.equals("OFF")){
+		active="ON";
+}else{
+	active="OFF";
+}
+
+
+PreparedStatement stmt = null;
+String sql="update emp set active = ? where emp_id = ?";
 Class.forName("org.mariadb.jdbc.Driver");
 Connection conn = null; 
 conn= DriverManager.getConnection(
 		"jdbc:mariadb://127.0.0.1:3306/shop", "root", "guswhd6656");
 
-String sql="update emp set active = ? where emp_id = ?";
-
-
-PreparedStatement stmt = null;
-ResultSet rs = null;  // db에 있는  테이블 1줄을 넣는다고 생각 칼럼의 값을 (데이터에 1줄 )
 stmt =conn.prepareStatement(sql);
-stmt.setString(1,empId);
+stmt.setString(1, active);
+stmt.setString(2, empId);
+System.out.println(stmt); 
 
+int row = 0;
+row = stmt.executeUpdate();
 
-if(rs.next()) {
-	System.out.println("세션 on");
-	
-	session.setAttribute("active", rs.getString("empId"));
-	response.sendRedirect("/shop/emp/empList.jsp");
+if(row == 1) {
+	System.out.println("변경 완료 ");
 }else{
-	System.out.println("emp_Id를 확인해 주세요");
-	response.sendRedirect("/shop/emp/empLoginForm.jsp");
+	System.out.println("변경 실패");
 }
-
-
+//직원리스트로 이동
+response.sendRedirect("/shop/emp/empList.jsp");
 %>
 

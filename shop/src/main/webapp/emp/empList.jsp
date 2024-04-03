@@ -27,7 +27,7 @@
 <!-- Model Layer -->
 
 <%
-	// 특수한 형태의 데이터(RDBMS:mariadb) 
+	// 특수한 형태의 데이터(RDBMS:mariadb) --관계형 데이터베이스를 업데이트하고 만들고 관리하는데 사용하는 프로그램
 	// -> API사용(JDBC API)하여 자료구조(ResultSet) 취득 
 	// -> 일반화된 자료구조(ArrayList<HashMap>)로 변경 -> 모델 취득
 	Class.forName("org.mariadb.jdbc.Driver");
@@ -85,10 +85,19 @@
 					<td><%=(String)(m.get("empName"))%></td>
 					<td><%=(String)(m.get("empJob"))%></td>
 					<td><%=(String)(m.get("hireDate"))%></td>
-					<td>	
+					<td>
+					<%
+					HashMap<String, Object> sm = (HashMap<String, Object>)(session.getAttribute("loginEmp"));
+					if((Integer)(sm.get("grade"))> 0)
+						{
+					%>	
+					<!--  modifyEmpAction에서 empId와 active 값 두개를 받기 때문에 두개를 a 태그로 넘겨준다 -->
 						<a href="/shop/emp/modifyEmpActive.jsp?empId=<%=(String)(m.get("empId")) %>&active=<%=(String)(m.get("active"))%>">
 							<%=(String)(m.get("active"))%>
 						</a>
+						<%
+						}
+						%>
 					</td>
 				</tr>
 		<%		

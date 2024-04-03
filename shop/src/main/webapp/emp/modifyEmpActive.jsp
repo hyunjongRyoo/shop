@@ -1,15 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import ="java.sql.*" %>
 <%@ page import="java.net.*"%>
-
+<%@ page import = "java.util.*" %>
 <%
 //로그인 세션
-	String loginEmp = (String)session.getAttribute("loginEmp");
-	System.out.println(loginEmp + " <-- loginEmp");
-	if(loginEmp == null){
+	/*
+	String loginEmp = (String)session.getAttribute("loginEmp");  // String으로는 loginEmp에 3개의 값(empId,empName,grade)을 모두 담을수 없기
+	System.out.println(loginEmp + " <-- loginEmp");				//때문에  String을 hashmap(API)으로 변환을
+	if(loginEmp == null){										//해야한다
 		response.sendRedirect("/shop/emp/empLoginForm.jsp");
 		return;
 	}
+	*/
+	
+
+	
+HashMap<String, Object> loginEmp = (HashMap<String, Object>) session.getAttribute("loginEmp");
+System.out.println(loginEmp + " <-- loginEmp");
+if(loginEmp == null){
+	response.sendRedirect("/shop/emp/empLoginForm.jsp");
+	return;
+}
+
 	
 %>
 <%

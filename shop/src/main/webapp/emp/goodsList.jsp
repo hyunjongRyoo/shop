@@ -114,6 +114,7 @@ if(session.getAttribute("loginEmp") == null) {
 		goodsList.add(m);
 		
 	}
+	//resultset으로 부터 가져와서 hashmap에 담아서 리스트에 추가
 %>
 
 <!-- View Layer -->
@@ -187,15 +188,15 @@ if(session.getAttribute("loginEmp") == null) {
 		<%
 			if(currentPage>1 && currentPage<lastPage){
 		%>
-				<a href="/shop/emp/goodsList.jsp?currentPage=1&category=<%=category%>">처음</a>
+				<a href="/shop/emp/goodsList.jsp?currentPage=1&category=<%=category%>">첫장</a>
 				<a href="/shop/emp/goodsList.jsp?currentPage- 1 %>&category=<%=category%>">이전</a>
 				<a href="/shop/emp/goodsList.jsp?currentPage+ 1 %>&category=<%=category%>">다음</a>  
-				<a href="/shop/emp/goodsList.jsp?currentPage=lastPage %>&category=<%=category%>">마지막</a>  
+				<a href="/shop/emp/goodsList.jsp?currentPage=lastPage %>&category=<%=category%>">마지막장</a>  
 		<%
 			}else if(currentPage==1){
 		%>
 				<a href="/shop/emp/goodsList.jsp?currentPage=<%=currentPage + 1 %>&category=<%=category%>">다음</a>
-				<a href="/shop/emp/goodsList.jsp?currentPage=<%=lastPage %>&category=<%=category%>">마지막</a>  
+				<a href="/shop/emp/goodsList.jsp?currentPage=<%=lastPage %>&category=<%=category%>">마지막장</a>  
 		<%
 		
 			}else{

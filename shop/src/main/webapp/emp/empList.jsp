@@ -23,10 +23,8 @@
 	int rowPerPage = 10;
 	int startRow = (currentPage-1)*rowPerPage;
 
-%>
-<!-- Model Layer -->
+// <!-- Model Layer -->
 
-<%
 	// 특수한 형태의 데이터(RDBMS:mariadb) --관계형 데이터베이스를 업데이트하고 만들고 관리하는데 사용하는 프로그램
 	// -> API사용(JDBC API)하여 자료구조(ResultSet) 취득 
 	// -> 일반화된 자료구조(ArrayList<HashMap>)로 변경 -> 모델 취득
@@ -49,14 +47,38 @@
 	// ResultSet -> ArrayList<HashMap<String, Object>>
 	while(rs.next()) {
 		HashMap<String, Object> m = new HashMap<String, Object>();
-		m.put("empId", rs.getString("empId"));
-		m.put("empName", rs.getString("empName"));
-		m.put("empJob", rs.getString("empJob"));
-		m.put("hireDate", rs.getString("hireDate"));
-		m.put("active", rs.getString("active"));
+		String empId = rs.getString("empId");
+		String empName = rs.getString("empName");
+		String empJob = rs.getString("empJob");
+		String hireDate = rs.getString("hireDate");
+		String active = rs.getString("active");
+		
+		m.put("empId", empId);
+		m.put("empName", empName);
+		m.put("empJob", empJob);
+		m.put("hireDate", hireDate);
+		m.put("active", active);
+		
 		list.add(m);
+		
 	}
-	// JDBC API 사용이 끝났다면 DB자원들을 반납
+	
+	String sql2 = "select count(*) cnt from emp";
+	PreparedStatement stmt2 = conn.prepareStatement(sql2);
+	ResultSet rs2 =stmt2 .executeQuery();
+	
+	int count=0;
+	if(rs2.next()){
+			count =rs2.getInt("cnt");
+	}
+	
+	int lastPage =0;
+	if(count % rowPerPage == 0){
+		lastPage = count/rowPerPage;
+	}else{
+		lastPage=count /rowPerPage +1 ;
+	}
+	
 %>
 
 <!-- View Layer : 모델(ArrayList<HashMap<String, Object>>) 출력 -->
@@ -67,6 +89,11 @@
 	<title></title>
 </head>
 <body>
+	<!-- empMenu.jsp include :주체(서버) vs redirect (주체:클라이언트) -->
+	<!-- shop부터 시작하지 않기 // 주체가 서버이기때문이다 -->
+	<jsp:include page ="/emp/inc/empMenu.jsp"></jsp:include>
+	
+	
 	<div><a href="/shop/emp/empLogout.jsp">로그아웃</a></div>
 	<h1>사원 목록</h1>
 	<table border="1">
@@ -104,5 +131,26 @@
 			}
 		%>
 	</table>
+	<%
+			if(currentPage>1 && currentPage<lastPage){
+		%>
+				<a href="/shop/emp/empList.jsp?currentPage=<%=1%>">첫장 </a>
+				<a href="/shop/emp/empList.jsp?currentPage=<%=currentPage-1%>">이전</a>
+				<a href="/shop/emp/empList.jsp?currentPage=<%=currentPage+1%>">다음</a>  
+				<a href="/shop/emp/empList.jsp?currentPage=<%=lastPage%>">마지막장</a>  
+		<%
+			}else if(currentPage==1){
+		%>
+		<a href="/shop/emp/empList.jsp?currentPage=<%=currentPage+1%>">다음</a>  
+		<a href="/shop/emp/empList.jsp?currentPage=<%=lastPage%>">마지막장</a>  
+		<%
+		
+			}else{
+		%>
+		<a href="/shop/emp/empList.jsp?currentPage=<%=currentPage=1%>">첫장 </a>
+		<a href="/shop/emp/empList.jsp?currentPage=<%=currentPage-1%>">이전</a>
+		<% 
+			}
+		%>
 </body>
 </html>

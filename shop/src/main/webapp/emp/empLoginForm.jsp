@@ -32,11 +32,11 @@ System.out.println(errMsg + " <-- loginForm param errMsg");
             <form method="post" action="/shop/emp/empLoginAction.jsp">
             	<div>
             		<label>사원 아이디</label>
-            		<input type="text" name="empId">
+            		<input type="text" name="empId" value="admin">
            		</div>
            		<div>
             		<label>사원 비밀번호</label>
-            		<input type="password" name="empPw">
+            		<input type="password" name="empPw" value="1234">
            		</div>
            		<button type="submit">로그인</button>
            		

@@ -44,32 +44,56 @@
 <head>
 	<meta charset="UTF-8">
 	<title>categoryList</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<style>
+	
+	a{
+	text-decoration: none;
+	
+	color: #000000;
+	}
+	
+	div{
+	text-align: center;
+	}
+	
+
+	
+
+	
+	</style>
 </head>
 <body>
-<div>
-	<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
-</div>
-<div>
-	<a href="/shop/emp/addCategoryForm.jsp">상품등록</a>	
-</div>
-
-	<h1>카테고리 리스트</h1>
-	<table border="1">
-		<tr>
-			<th>카테고리</th>
-			<th>업로드 시간</th> 
-		</tr>
+<body ="container">
+  	<div class="row">
+		<div class="col-5" >
+			<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
+		</div>
+		<div class="col-2" >
+		<div>
+			<a href="/shop/emp/addCategoryForm.jsp">상품등록</a>	
+		</div>
+			<div>
+				<h1>카테고리 리스트</h1>
+				<table border="1" >
+					<tr>
+						<th>카테고리</th>
+						<th>업로드 시간</th> 
+					</tr>
 		<%
-			for(HashMap<String, Object> m : list) {
+					for(HashMap<String, Object> m : list) {
 		%>
-		<tr>
-			<td><%=(String)(m.get("category"))%></td>
-			<td><%=(String)(m.get("createDate"))%></td>
-		</tr>
-	<%
+					<tr>
+						<td><%=(String)(m.get("category"))%></td>
+						<td><%=(String)(m.get("createDate"))%></td>
+					</tr>
+		<%
 			}
-	%>
-	</table>
-		
+		%>	
+				</table>
+			</div>
+		</div>
+	<div class="col-5" ></div>
+	</div>	
 </body>
 </html>

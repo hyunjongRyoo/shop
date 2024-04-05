@@ -20,7 +20,7 @@
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 	}
 	
-	int rowPerPage = 10;
+	int rowPerPage = 25;
 	int startRow = (currentPage-1)*rowPerPage;
 
 // <!-- Model Layer -->
@@ -87,23 +87,41 @@
 <head>
 	<meta charset="UTF-8">
 	<title></title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<style>
+	
+	a{
+	text-decoration: none;
+	
+	color: #000000;
+	}
+	
+	div{
+	text-align: center;
+	}
+	
+
+	
+	</style>
 </head>
-<body>
-	<!-- empMenu.jsp include :주체(서버) vs redirect (주체:클라이언트) -->
-	<!-- shop부터 시작하지 않기 // 주체가 서버이기때문이다 -->
-	<jsp:include page ="/emp/inc/empMenu.jsp"></jsp:include>
+<body ="container">
+  	<div class="row">
+		<div class="col" >
+			<!-- empMenu.jsp include :주체(서버) vs redirect (주체:클라이언트) -->
+			<!-- shop부터 시작하지 않기 // 주체가 서버이기때문이다 -->
+		<jsp:include page ="/emp/inc/empMenu.jsp"></jsp:include> 
+	 	</div>
 	
-	
-	<div><a href="/shop/emp/empLogout.jsp">로그아웃</a></div>
-	<h1>사원 목록</h1>
-	<table border="1">
-		<tr>
-			<th>empId</th>
-			<th>empName</th>
-			<th>empJob</th>
-			<th>hireDate</th>
-			<th>active</th>
-		</tr>
+		<div class="col">
+		<h1 style="text-align: center">사원 목록</h1>
+		<table  style="border=1 solid black;" class="position-absolute top-50 start-50 translate-middle">
+			<tr>
+				<th>사원 이메일</th>
+				<th>사원 이름</th>
+				<th>부서</th>
+				<th>고용일</th>
+				<th>관리 권한</th>
+			</tr>
 		<%
 			for(HashMap<String, Object> m : list) {
 		%>
@@ -113,11 +131,11 @@
 					<td><%=(String)(m.get("empJob"))%></td>
 					<td><%=(String)(m.get("hireDate"))%></td>
 					<td>
-					<%
-					HashMap<String, Object> sm = (HashMap<String, Object>)(session.getAttribute("loginEmp"));
-					if((Integer)(sm.get("grade"))> 0)
-						{
-					%>	
+						<%
+						HashMap<String, Object> sm = (HashMap<String, Object>)(session.getAttribute("loginEmp"));
+						if((Integer)(sm.get("grade"))> 0)
+							{
+						%>	
 					<!--  modifyEmpAction에서 empId와 active 값 두개를 받기 때문에 두개를 a 태그로 넘겨준다 -->
 						<a href="/shop/emp/modifyEmpActive.jsp?empId=<%=(String)(m.get("empId")) %>&active=<%=(String)(m.get("active"))%>">
 							<%=(String)(m.get("active"))%>
@@ -131,26 +149,30 @@
 			}
 		%>
 	</table>
-	<%
-			if(currentPage>1 && currentPage<lastPage){
-		%>
-				<a href="/shop/emp/empList.jsp?currentPage=<%=1%>">첫장 </a>
-				<a href="/shop/emp/empList.jsp?currentPage=<%=currentPage-1%>">이전</a>
-				<a href="/shop/emp/empList.jsp?currentPage=<%=currentPage+1%>">다음</a>  
-				<a href="/shop/emp/empList.jsp?currentPage=<%=lastPage%>">마지막장</a>  
-		<%
-			}else if(currentPage==1){
-		%>
-		<a href="/shop/emp/empList.jsp?currentPage=<%=currentPage+1%>">다음</a>  
-		<a href="/shop/emp/empList.jsp?currentPage=<%=lastPage%>">마지막장</a>  
-		<%
-		
-			}else{
-		%>
-		<a href="/shop/emp/empList.jsp?currentPage=<%=currentPage=1%>">첫장 </a>
-		<a href="/shop/emp/empList.jsp?currentPage=<%=currentPage-1%>">이전</a>
-		<% 
-			}
-		%>
+			<div class="position-absolute bottom-0 start-50 translate-middle-x">
+					<%
+						if(currentPage>1 && currentPage<lastPage){
+					%>
+						<a href="/shop/emp/empList.jsp?currentPage=<%=1%>">첫장 </a>
+						<a href="/shop/emp/empList.jsp?currentPage=<%=currentPage-1%>">이전</a>
+						<a href="/shop/emp/empList.jsp?currentPage=<%=currentPage+1%>" >다음</a>  
+						<a href="/shop/emp/empList.jsp?currentPage=<%=lastPage%>">마지막장</a>  
+					<%
+						}else if(currentPage==1){
+					%>
+						<a href="/shop/emp/empList.jsp?currentPage=<%=currentPage+1%>" >다음</a>  
+						<a href="/shop/emp/empList.jsp?currentPage=<%=lastPage%>"  >마지막장</a>  
+					<%
+					
+						}else{
+					%>
+						<a href="/shop/emp/empList.jsp?currentPage=<%=currentPage=1%>"  >첫장 </a>
+						<a href="/shop/emp/empList.jsp?currentPage=<%=currentPage-1%>"  >이전</a>
+					<% 
+						}
+					%>
+			 </div>
+		</div>
+	<div class="col"></div>
 </body>
 </html>

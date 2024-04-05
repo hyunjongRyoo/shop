@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*"%>
 <%@ page import="java.util.*"%>
+<%@ page import="java.io.*" %>
+<%@ page import="java.nio.file.*" %>
+
 <!-- controller Layer -->
 <%
 //인증분기	 : 세션변수 이름 - loginEmp
@@ -45,15 +48,26 @@ if(session.getAttribute("loginEmp") == null) {
 <head>
 	<meta charset="UTF-8">
 	<title></title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<style>
+	a{
+	text-decoration: none;
+	color: #000000;
+	}
+	div{
+	text-align: center;
+	}
+	</style>
 </head>
-<body>
-<!-- 메인메뉴 -->
-	<div>
+<body="container">
+  	<div class="row">
+		<div class="col-2" >
 		<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
 	</div>
 	
 	<h1>상품등록</h1>
-	<form method="post" action="/shop/emp/addGoodsAction.jsp">
+	<form method="post" action="/shop/emp/addGoodsAction.jsp"
+			enctype="multipart/form-data">
 		<div>
 			category :
 			<select name="category">
@@ -69,24 +83,30 @@ if(session.getAttribute("loginEmp") == null) {
 		</div>
 		<!-- emp_id값은 action쪽에서 세션변수에서 바인딩 -->
 		<div>
-			goodsTitle :
+			goodsTitle : <br>
 			<input type="text" name="goodsTitle">
 		</div>
 		<div>
-			goodsPrice :
+			goodsImage : <br>
+			<input type="file" name="goodsImg">
+		</div>
+		<div>
+			goodsPrice : <br>
 			<input type="number" name="goodsPrice">
 		</div>
 		<div>
-			goodsAmount :
+			goodsAmount : <br>
 			<input type="number" name="goodsAmount">
 		</div>
 		<div>
-			goodsContent :
+			goodsContent : <br>
 			<textarea rows="5" cols="50" name="goodsContent"></textarea>
 		</div>
 		<div>
 			<button type="submit">상품등록</button>
 		</div>
 	</form>
+	<div class="col"></div>
+	</div>
 </body>
 </html>

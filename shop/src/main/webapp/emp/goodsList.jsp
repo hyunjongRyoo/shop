@@ -74,7 +74,7 @@ if(session.getAttribute("loginEmp") == null) {
 	String sql2 = null; //전체 상품 가져옴 
 	PreparedStatement stmt2 = null;
 	if(category == null || category.equals("null")){
-		sql2 = "select goods_no goodsNo, category, emp_id empId, goods_title " + 
+		sql2 = "select goods_no goodsNo, category, filename,emp_id empId, goods_title " + 
 				"goodsTitle, goods_content goodsContent, goods_price goodsPrice, goods_amount goodsAmount, " + 
 				"update_date updateDate, create_date createDate from goods order by goods_no desc limit ?, ?";
 		stmt2 = conn.prepareStatement(sql2);
@@ -82,7 +82,7 @@ if(session.getAttribute("loginEmp") == null) {
 		stmt2.setInt(2, rowPerPage);
 		System.out.println(stmt2);
 	} else { //해당 카테고리에 속하는 상품만 가져옴
-		sql2 = "select goods_no goodsNo, category, emp_id empId, goods_title " + 
+		sql2 = "select goods_no goodsNo, category,filename, emp_id empId, goods_title " + 
 				"goodsTitle, goods_content goodsContent, goods_price goodsPrice, goods_amount goodsAmount, " + 
 				"update_date updateDate, create_date createDate from goods where category = ? order by goods_no desc limit ?, ?";
 		
@@ -103,6 +103,7 @@ if(session.getAttribute("loginEmp") == null) {
 		HashMap<String, Object> m = new HashMap<String, Object>();		
 		m.put("goodsNo", rs2.getInt("goodsNo"));
 		m.put("category", rs2.getString("category"));
+		m.put("filename", rs2.getString("filename"));
 		m.put("empId", rs2.getString("empId"));
 		m.put("goodsTitle", rs2.getString("goodsTitle"));
 		m.put("goodsContent", rs2.getString("goodsContent"));
@@ -124,13 +125,23 @@ if(session.getAttribute("loginEmp") == null) {
 <head>
 	<meta charset="UTF-8">
 	<title>goodsList</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<style>
+	a{
+	text-decoration: none;
+	}
+	div{
+	text-align: center;
+	}
+	</style>
 </head>
-<body>
+<body="container">
+  	<div class="row">
+		<div class="col-2" >
 	<!-- 메인메뉴-->
-	<div>
 		<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
-	</div>
-	
+		</div>
+		<div class="col-8" >
 	<div>
 		<a href="/shop/emp/addGoodsForm.jsp">상품등록</a>	
 	</div>
@@ -155,6 +166,7 @@ if(session.getAttribute("loginEmp") == null) {
 			<tr>
 				<th>goods_no</th>
 				<th>category</th>
+				<th>image</th>
 				<th>emp id</th>
 				<th>goods title</th>
 				<th>goods content</th>
@@ -169,6 +181,9 @@ if(session.getAttribute("loginEmp") == null) {
 			<tr>  <!-- map으로 값 받아주기 -->
 				<td><%=(Integer)(m.get("goodsNo"))%></td>
 				<td><%=(String)(m.get("category"))%></td>
+				<td>
+       			 <img src="/shop/upload/default.jpg" alt="??">
+    			</td>
 				<td><%=(String)(m.get("empId"))%></td>
 				<td><%=(String)(m.get("goodsTitle"))%></td>
 				<td><%=(String)(m.get("goodsContent"))%></td>
@@ -207,5 +222,9 @@ if(session.getAttribute("loginEmp") == null) {
 			}
 		%>
 	</div>
+	</div>
+	<div class="col-2" ></div>
+	</div>
 </body>
+
 </html>

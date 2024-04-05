@@ -71,7 +71,7 @@
 		</div>
 		<div class="col-2" >
 		<div>
-			<a href="/shop/emp/addCategoryForm.jsp">상품등록</a>	
+			<a href="/shop/emp/addCategoryForm.jsp">새로운 카테고리 등록 </a>	
 		</div>
 			<div>
 				<h1>카테고리 리스트</h1>

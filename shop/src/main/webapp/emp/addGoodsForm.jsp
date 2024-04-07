@@ -61,9 +61,9 @@ if(session.getAttribute("loginEmp") == null) {
 </head>
 <body="container">
   	<div class="row">
-		<div class="col-2" >
-		<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
-	</div>
+  	<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
+		<div class="col" >
+			</div>
 	
 	<h1>상품등록</h1>
 	<form method="post" action="/shop/emp/addGoodsAction.jsp"

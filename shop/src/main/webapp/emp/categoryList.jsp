@@ -66,8 +66,8 @@
 <body>
 <body ="container">
   	<div class="row">
+  	<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
 		<div class="col-5" >
-			<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
 		</div>
 		<div class="col-2" >
 		<div>

@@ -137,9 +137,8 @@ if(session.getAttribute("loginEmp") == null) {
 </head>
 <body="container">
   	<div class="row">
-		<div class="col-2" >
-	<!-- 메인메뉴-->
-		<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
+  	<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
+		<div class="col" >
 		</div>
 		<div class="col-8" >
 	<div>
@@ -216,7 +215,7 @@ if(session.getAttribute("loginEmp") == null) {
 		
 			}else{
 		%>
-				<a href="shop/emp/goodsList.jsp?currentPage=1&category=<%=category%>">처음</a>
+				<a href="/shop/emp/goodsList.jsp?currentPage=1&category=<%=category%>">처음</a>
 				<a href="/shop/emp/goodsList.jsp?currentPage=- 1 %>&category=<%=category%>">이전</a>
 		<% 
 			}

@@ -49,8 +49,8 @@ if(session.getAttribute("loginEmp") == null) {
 <body="container" > 
 		<div class="row">
 			<!-- 상단 -->
+			<jsp:include page ="/emp/inc/empMenu.jsp"></jsp:include> 
 			<div class="col" >
-				<jsp:include page ="/emp/inc/empMenu.jsp"></jsp:include> 
 			</div>	
 			<!-- 중단 -->
 			<div class="col" >

@@ -69,10 +69,8 @@
   	<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
 		<div class="col-5" >
 		</div>
-		<div class="col-2" >
-		<div>
-			<a href="/shop/emp/addCategoryForm.jsp">새로운 카테고리 등록 </a>	
-		</div>
+		<div class="col-2 " >
+	
 			<div>
 				<h1>카테고리 리스트</h1>
 				<table border="1" >
@@ -92,6 +90,9 @@
 		%>	
 				</table>
 			</div>
+				<div>
+			<a href="/shop/emp/addCategoryForm.jsp">카테고리 추가 등록 </a>	
+		</div>
 		</div>
 	<div class="col-5" ></div>
 	</div>	

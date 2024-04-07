@@ -6,8 +6,7 @@
 		= (HashMap<String,Object>)(session.getAttribute("loginEmp"));
 	
 %>
-
-
+<!-- 상단 네비게이터 바 -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="/shop/emp/empList.jsp">
@@ -32,6 +31,7 @@
     </div>
   </div>
 </nav>
+
 
 
 

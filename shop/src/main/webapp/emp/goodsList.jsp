@@ -76,7 +76,7 @@ if(session.getAttribute("loginEmp") == null) {
 	if(category == null || category.equals("null")){
 		sql2 = "select goods_no goodsNo, category, filename,emp_id empId, goods_title " + 
 				"goodsTitle, goods_content goodsContent, goods_price goodsPrice, goods_amount goodsAmount, " + 
-				"update_date updateDate, create_date createDate from goods order by goods_no desc limit ?, ?";
+				"update_date updateDate, create_date createDate from goods order by goods_no asc limit ?, ?";
 		stmt2 = conn.prepareStatement(sql2);
 		stmt2.setInt(1, startRow);
 		stmt2.setInt(2, rowPerPage);
@@ -84,7 +84,7 @@ if(session.getAttribute("loginEmp") == null) {
 	} else { //해당 카테고리에 속하는 상품만 가져옴
 		sql2 = "select goods_no goodsNo, category,filename, emp_id empId, goods_title " + 
 				"goodsTitle, goods_content goodsContent, goods_price goodsPrice, goods_amount goodsAmount, " + 
-				"update_date updateDate, create_date createDate from goods where category = ? order by goods_no desc limit ?, ?";
+				"update_date updateDate, create_date createDate from goods where category = ? order by goods_no asc limit ?, ?";
 		
 		stmt2 = conn.prepareStatement(sql2);
 		stmt2.setString(1, category);
@@ -129,6 +129,7 @@ if(session.getAttribute("loginEmp") == null) {
 	<style>
 	a{
 	text-decoration: none;
+	color:#000000;
 	}
 	div{
 	text-align: center;
@@ -139,15 +140,16 @@ if(session.getAttribute("loginEmp") == null) {
   	<div class="row">
   	<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
 		<div class="col" >
-		</div>
-		<div class="col-8" >
-	<div>
-		<a href="/shop/emp/addGoodsForm.jsp">상품등록</a>	
-	</div>
-	
-	<!-- 서브메뉴 카테고리별 상품리스트 -->
-	<div>
-		<a href="/shop/emp/goodsList.jsp">전체</a>
+			<div>
+				<a href="/shop/emp/addGoodsForm.jsp">상품등록</a>	
+			</div>
+			<!-- 서브메뉴 카테고리별 상품리스트 -->
+			<div>
+				<a href="/shop/emp/goodsList.jsp">전체</a>
+			</div>
+			
+				
+			<div>
 		<%
 				for(HashMap m : categoryList) {
 		%>
@@ -160,19 +162,21 @@ if(session.getAttribute("loginEmp") == null) {
 		%>
 	</div>
 	
+		</div>
+		<div class="col-8" >
 	<div>
-		<table border="1">
+		<table border="2">
 			<tr>
-				<th>goods_no</th>
-				<th>category</th>
-				<th>image</th>
-				<th>emp id</th>
-				<th>goods title</th>
-				<th>goods content</th>
-				<th>goods price</th>
-				<th>goods amount</th>
-				<th>update_date</th>
-				<th>create_date</th>
+				<th>품번</th>
+				<th>분류</th>
+				<th>제품 사진</th>
+				<th>직급</th>
+				<th>품명</th>
+				<th>콘텐츠</th>
+				<th>가격</th>
+				<th>수량</th>
+				<th>수정 날짜</th>
+				<th>등록 날짜</th>
 			</tr>
 	<%
 			for(HashMap m: goodsList) { 

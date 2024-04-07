@@ -62,50 +62,54 @@ if(session.getAttribute("loginEmp") == null) {
 <body="container">
   	<div class="row">
   	<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
-		<div class="col" >
-			</div>
-	
-	<h1>상품등록</h1>
-	<form method="post" action="/shop/emp/addGoodsAction.jsp"
-			enctype="multipart/form-data">
-		<div>
-			category :
-			<select name="category">
-				<option value="">선택</option>
-				<%
-					for(String c : categoryList) {
-				%>
-						<option value="<%=c%>"><%=c%></option>
-				<%		
-					}
-				%>
-			</select>
+		<div class="col-2" >
+		  	<jsp:include page="/emp/inc/sidebar.jsp"></jsp:include>
+	  	</div>
+		<div class="col-2" ></div>
+		
+			<div class="col-4" >
+			<h1>상품등록</h1>
+			<form method="post" action="/shop/emp/addGoodsAction.jsp"
+					enctype="multipart/form-data">
+				<div>
+					category :
+					<select name="category">
+						<option value="">선택</option>
+						<%
+							for(String c : categoryList) {
+						%>
+								<option value="<%=c%>"><%=c%></option>
+						<%		
+							}
+						%>
+					</select>
+				</div>
+				<!-- emp_id값은 action쪽에서 세션변수에서 바인딩 -->
+				<div>
+					goodsTitle : <br>
+					<input type="text" name="goodsTitle">
+				</div>
+				<div>
+					goodsImage : <br>
+					<input type="file" name="goodsImg">
+				</div>
+				<div>
+					goodsPrice : <br>
+					<input type="number" name="goodsPrice">
+				</div>
+				<div>
+					goodsAmount : <br>
+					<input type="number" name="goodsAmount">
+				</div>
+				<div>
+					goodsContent : <br>
+					<textarea rows="5" cols="50" name="goodsContent"></textarea>
+				</div>
+				<div>
+					<button type="submit">상품등록</button>
+				</div>
+			</form>
 		</div>
-		<!-- emp_id값은 action쪽에서 세션변수에서 바인딩 -->
-		<div>
-			goodsTitle : <br>
-			<input type="text" name="goodsTitle">
-		</div>
-		<div>
-			goodsImage : <br>
-			<input type="file" name="goodsImg">
-		</div>
-		<div>
-			goodsPrice : <br>
-			<input type="number" name="goodsPrice">
-		</div>
-		<div>
-			goodsAmount : <br>
-			<input type="number" name="goodsAmount">
-		</div>
-		<div>
-			goodsContent : <br>
-			<textarea rows="5" cols="50" name="goodsContent"></textarea>
-		</div>
-		<div>
-			<button type="submit">상품등록</button>
-		</div>
-	</form>
 	<div class="col"></div>
 	</div>
 </body>

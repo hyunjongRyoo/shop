@@ -50,10 +50,13 @@ if(session.getAttribute("loginEmp") == null) {
 		<div class="row">
 			<!-- 상단 -->
 			<jsp:include page ="/emp/inc/empMenu.jsp"></jsp:include> 
-			<div class="col" >
+			<div class="col-2" >
+			 	<jsp:include page="/emp/inc/sidebar.jsp"></jsp:include>
 			</div>	
+			<div class="col-3" >
+			</div>
 			<!-- 중단 -->
-			<div class="col" >
+			<div class="col-2" >
 				<h1 style="text-align: center">카테고리 등록</h1>
 				<form method="post" action="/shop/emp/addCategoryAction.jsp">
 					
@@ -68,6 +71,6 @@ if(session.getAttribute("loginEmp") == null) {
 				</div>
 			</form>
 			<!-- 하단 -->
-	<div class="col" ></div>
+	<div class="col-3" ></div>
 </body>
 </html>

@@ -140,6 +140,7 @@ if(session.getAttribute("loginEmp") == null) {
   	<div class="row">
   	<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
 		<div class="col" >
+		  	<jsp:include page="/emp/inc/sidebar.jsp"></jsp:include>
 			<div>
 				<a href="/shop/emp/addGoodsForm.jsp">상품등록</a>	
 			</div>

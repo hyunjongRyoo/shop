@@ -67,31 +67,35 @@
 <body ="container">
   	<div class="row">
   	<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
-		<div class="col-5" >
+		<div class="col-2" >
+		  	<jsp:include page="/emp/inc/sidebar.jsp"></jsp:include>
 		</div>
-		<div class="col-2 " >
+				<div class="col-3" >
+				</div>
+					<div class="col-2 " >
 	
-			<div>
-				<h1>카테고리 리스트</h1>
-				<table border="1" >
-					<tr>
-						<th>카테고리</th>
-						<th>업로드 시간</th> 
-					</tr>
-		<%
-					for(HashMap<String, Object> m : list) {
-		%>
-					<tr>
-						<td><%=(String)(m.get("category"))%></td>
-						<td><%=(String)(m.get("createDate"))%></td>
-					</tr>
-		<%
-			}
-		%>	
-				</table>
-			</div>
+						<div>
+							<h1>카테고리 리스트</h1>
+							<table border="1" >
+							<tr>
+								<th>카테고리</th>
+								<th>업로드 시간</th> 
+							</tr>
+				<%
+							for(HashMap<String, Object> m : list) {
+				%>
+							<tr>
+								<td><%=(String)(m.get("category"))%></td>
+								<td><%=(String)(m.get("createDate"))%></td>
+							</tr>
+				<%
+					}
+				%>	
+						</table>
+					</div>
 				<div>
-			<a href="/shop/emp/addCategoryForm.jsp">카테고리 추가 등록 </a>	
+			<a href="/shop/emp/addCategoryForm.jsp">
+			<button type="submit">카테고리 추가 등록 </button></a>	
 		</div>
 		</div>
 	<div class="col-5" ></div>

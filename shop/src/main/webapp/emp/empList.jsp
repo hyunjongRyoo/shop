@@ -107,10 +107,12 @@
 <body ="container">
   	<div class="row">
   	<jsp:include page ="/emp/inc/empMenu.jsp"></jsp:include> 
-		<div class="col" >
+		<div class="col-2" >
+			<jsp:include page="/emp/inc/sidebar.jsp"></jsp:include>
 			<!-- empMenu.jsp include :주체(서버) vs redirect (주체:클라이언트) -->
 			<!-- shop부터 시작하지 않기 // 주체가 서버이기때문이다 -->
 	 	</div>
+	 	<div class="col-2" ></div>
 	
 		<div class="col">
 		<h1 style="text-align: center">사원 목록</h1><br>

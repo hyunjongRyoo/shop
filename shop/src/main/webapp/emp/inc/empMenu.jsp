@@ -24,6 +24,10 @@
 		          <a class="nav-link active" aria-current="page" href="/shop/emp/goodsList.jsp">상품 관리</a>
         </li>
         
+        <li class="nav-item">
+		          <a class="nav-link active" aria-current="page" href="/shop/emp/empOne.jsp">내 정보</a>
+        </li>
+        
          <li class="nav-item">
 		          <a class="nav-link active" aria-current="page" href="/shop/emp/empLogout.jsp">로그아웃</a>
         </li>

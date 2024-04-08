@@ -29,16 +29,14 @@
 	// -> API사용(JDBC API)하여 자료구조(ResultSet) 취득 
 	// -> 일반화된 자료구조(ArrayList<HashMap>)로 변경 -> 모델 취득
 	Class.forName("org.mariadb.jdbc.Driver");
-	Connection conn = null;
-	PreparedStatement stmt = null;
-	ResultSet rs = null;
 	String sql = "select emp_id empId, emp_name empName, emp_job empJob, hire_date hireDate, active from emp order by hire_date desc limit ?, ?";
-	conn = DriverManager.getConnection(
+	Connection conn = DriverManager.getConnection(
 			"jdbc:mariadb://127.0.0.1:3306/shop", "root", "guswhd6656");
-	stmt = conn.prepareStatement(sql);
+	PreparedStatement stmt = conn.prepareStatement(sql);
+
 	stmt.setInt(1, startRow);
 	stmt.setInt(2, rowPerPage);
-	rs = stmt.executeQuery(); 
+	ResultSet rs  = stmt.executeQuery(); 
 	// JDBC API 종속된 자료구조 모델 ResultSet  -> 기본 API 자료구조(ArrayList)로 변경
 	
 	ArrayList<HashMap<String, Object>> list
@@ -129,7 +127,11 @@
 		%>
 				<tr>
 					<td><%=(String)(m.get("empId"))%></td>
-					<td><%=(String)(m.get("empName"))%></td>
+						<td>
+							<a href="/shop/emp/empOne.jsp?empName=<%=(String)(m.get("empName"))%>">
+							<%=(String)(m.get("empName"))%>
+							</a>
+						</td>
 					<td><%=(String)(m.get("empJob"))%></td>
 					<td><%=(String)(m.get("hireDate"))%></td>
 					<td>

@@ -49,7 +49,7 @@ if(rs2.next()) {
 		
 		System.out.println("로그인 성공");
 		//하나의 세션변수 안에 여러개의 값을 저장하기 위해서 hashMap을 사용
-		HashMap<String, Object> loginEmp = new HashMap<String, Object>();
+		HashMap<String, Object> loginEmp = new HashMap<String, Object>(); //선언 초기화 참조타입 
 		loginEmp.put("empId", rs2.getString("empId"));
 		loginEmp.put("empName", rs2.getString("empName"));
 		loginEmp.put("grade", rs2.getInt("grade"));

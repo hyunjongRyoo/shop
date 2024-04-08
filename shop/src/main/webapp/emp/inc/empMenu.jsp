@@ -5,7 +5,10 @@
 	HashMap<String,Object> loginMember 
 		= (HashMap<String,Object>)(session.getAttribute("loginEmp"));
 	
+	Object empName = loginMember.get("empName");
 %>
+
+
 <!-- 상단 네비게이터 바 -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
@@ -23,11 +26,10 @@
        <li class="nav-item">
 		          <a class="nav-link active" aria-current="page" href="/shop/emp/goodsList.jsp">상품 관리</a>
         </li>
-        
         <li class="nav-item">
-		          <a class="nav-link active" aria-current="page" href="/shop/emp/empOne.jsp">내 정보</a>
+		          <a class="nav-link active" aria-current="page" href="/shop/emp/empOne.jsp?empName=<%=(Object)(loginMember.get("empName"))%>">내 정보</a>
         </li>
-        
+ 
          <li class="nav-item">
 		          <a class="nav-link active" aria-current="page" href="/shop/emp/empLogout.jsp">로그아웃</a>
         </li>

@@ -13,6 +13,8 @@
     
 	ArrayList<HashMap<String, Object>> list
 	= new ArrayList<HashMap<String, Object>>();
+	
+	
 
 // ResultSet -> ArrayList<HashMap<String, Object>>
 while(rs.next()) {

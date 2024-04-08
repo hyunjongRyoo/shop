@@ -134,12 +134,30 @@ if(session.getAttribute("loginEmp") == null) {
 	div{
 	text-align: center;
 	}
+	
+    .goods-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .goods-item {
+            width: calc(33.33% - 10px); /* 3개의 요소가 한 줄에 들어가도록 폭 조절 */
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        .goods-item img {
+            max-width: 100%;
+            height: auto;
+        }
 	</style>
 </head>
-<body="container">
+<body>
   	<div class="row">
   	<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
-		<div class="col" >
+		<div class="col-2" >
 		  	<jsp:include page="/emp/inc/sidebar.jsp"></jsp:include>
 			<div>
 				<a href="/shop/emp/addGoodsForm.jsp">상품등록</a>	
@@ -165,42 +183,25 @@ if(session.getAttribute("loginEmp") == null) {
 	
 		</div>
 		<div class="col-8" >
-	<div>
-		<table border="2">
-			<tr>
-				<th>품번</th>
-				<th>분류</th>
-				<th>제품 사진</th>
-				<th>직급</th>
-				<th>품명</th>
-				<th>콘텐츠</th>
-				<th>가격</th>
-				<th>수량</th>
-				<th>수정 날짜</th>
-				<th>등록 날짜</th>
-			</tr>
+	<div class="goods-container">
+			
 	<%
 			for(HashMap m: goodsList) { 
 	%>
-			<tr>  <!-- map으로 값 받아주기 -->
-				<td><%=(Integer)(m.get("goodsNo"))%></td>
-				<td><%=(String)(m.get("category"))%></td>
-				<td>
-       			 <img src="/shop/upload/default.jpg" alt="??">
-    			</td>
-				<td><%=(String)(m.get("empId"))%></td>
-				<td><%=(String)(m.get("goodsTitle"))%></td>
-				<td><%=(String)(m.get("goodsContent"))%></td>
-				<td><%=(Integer)(m.get("goodsPrice"))%></td>
-				<td><%=(Integer)(m.get("goodsAmount"))%></td>
-				<td><%=(String)(m.get("updateDate")) %></td>
-				<td><%=(String)(m.get("createDate")) %></td>
-			</tr>
-		<%
-			}
-		%>
-	
-		</table>
+  <!-- map으로 값 받아주기 -->
+  
+ <div class="goods-item">
+                <img src="/shop/upload/default.jpg" alt="??">
+                <br>
+                <a href="shop/emp/goodsOne.jsp">
+                    품명:<%=(String)(m.get("goodsTitle"))%>
+                </a> <br>
+                <%=(Integer)(m.get("goodsPrice"))%>원
+            </div>
+            <%
+                }
+            %>
+        </div>
 	</div>
 	<!-- 페이징 -->
 	<div>

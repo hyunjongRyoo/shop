@@ -58,7 +58,7 @@ while(rs.next()) {
 	</style>
 </head>
 
-<body class="container">
+<body>
   	<div class="row">
   	<jsp:include page ="/emp/inc/empMenu.jsp"></jsp:include> 
 		<div class="col-2" >

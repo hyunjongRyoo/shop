@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.sql.*"%>
-<%@ page import="java.util.*"%>
+
+
+<%
+	//  customer 로그인 인증 분기
+	if(session.getAttribute("loginCustomer") != null) {
+		response.sendRedirect("/shop/emp/goodsList.jsp");
+		return;
+	}
+%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,11 +21,11 @@
 	<div class="row">
 		<div class="col-4"></div>
 			<div class="col-4">
-				<h1>로그인 멘트자리</h1>
+				<h1>회원가입</h1>
 				<form method="post" action="/shop/customer/addCustomerAction.jsp">
 					<div>
 						<label for="mail">E-mail</label>
-						<input type="email" id="mail" name="email" placeholder="abcd@mail.com">
+						<input type="email" id="mail" name="mail" placeholder="abcd@mail.com">
 					</div>
 					
 					<div>
@@ -37,14 +46,14 @@
 					<div>
 						<label>성별</label>
 						<label for="male">남</label>
-						<input type="radio" id="male" name="gender" value="male">
+						<input type="radio" id="male" name="gender" value="남">
 						
 						<label for="female">여</label>
-						<input type="radio" id="female" name="gender" value="female">
+						<input type="radio" id="female" name="gender" value="여">
 					</div>
 					
 					<div>
-					<button type="submit" class="ms-5 mt-3">로그인</button>		
+					<button type="submit" class="ms-5 mt-3">가입하기</button>		
 					</div>			
 				</form>
 			</div>

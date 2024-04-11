@@ -11,13 +11,13 @@
 	System.out.println(mail +"<--mail");
 	System.out.println(pw +"<--pw");
 	
-	String sql="select mail, pw from customer where mail=? , pw= password(?)";
+	String sql="select mail, pw , name, birth from customer where mail=? and pw= password(?)";
 	
 	Class.forName("org.mariadb.jdbc.Driver");
 	
 	Connection conn= DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/shop", "root", "guswhd6656");
 	PreparedStatement stmt = null;
-	stmt= conn.prepareCall(sql);	
+	stmt= conn.prepareStatement(sql);	
 	stmt.setString(1,mail);
 	stmt.setString(2,pw);
 	System.out.println(stmt);

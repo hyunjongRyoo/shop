@@ -23,7 +23,7 @@
 	System.out.println(birth +"<--birth");
 	System.out.println(gender +"<--gender");
 	
-	String sql ="insert into customer(mail,pw,name,birth,gender) values (?,password(?), ? ,? , ?)";
+	String sql ="insert into customer (mail,pw,name,birth,gender) values (?,password(?), ? ,? , ?)";
 	
 	Class.forName("org.mariadb.jdbc.Driver");
 	Connection conn= DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/shop", "root", "guswhd6656");

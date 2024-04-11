@@ -20,7 +20,7 @@
 			<div class="col-4"></div>
 				<div class="col-4">
 					<h1> 로그인 페이지</h1>
-						<form method="post" action="loginAction.jsp">
+						<form method="post" action="/shop/customer/loginAction.jsp">
 						<div>
 							<label for="mail">이메일</label>
 							<input type=email id="mail" name="mail">

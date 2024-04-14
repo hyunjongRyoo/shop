@@ -70,7 +70,7 @@
 				<td><%=(String)(m.get("empId"))%></td>
 			</tr>
 			<tr>
-				<td> 종류</td>
+				<td> 설명</td>
 				<td><%=(String)(m.get("goodsContent"))%></td>
 			</tr>	
 			<tr>
@@ -89,6 +89,7 @@
 	<a href="/shop/emp/goodsList.jsp">
 		<button type="submit">리스트</button>
 	</a>
+	
 
 
 </body>

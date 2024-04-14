@@ -12,8 +12,8 @@
 String checkedEmail = request.getParameter("checkEmail");
 	String check = request.getParameter("check");
 
-	System.out.println(checkedEmail + "<-- addCustomerAction param checkedEmail");
-	System.out.println(check + "<-- addCustomerAction param check");
+	System.out.println(checkedEmail + "<-- checkedEmail");
+	System.out.println(check + "<-- check");
 	
 	//검사한 이메일 checkEmail, 검사 완료 후 사용가능 판정난 이메일 checkedEmail
 	String checkEmail = "";
@@ -32,7 +32,7 @@ String checkedEmail = request.getParameter("checkEmail");
 	
 	if(check.equals("X")){
 		checkedEmail = "";
-		checkMsg = "사용할 수 없는 이메일입니다.";
+		checkMsg = " 이미 존재하는 아이디입니다";
 	}
 
 	 %>

@@ -166,7 +166,7 @@ if(session.getAttribute("loginCustomer") == null) {
 		<%
 				for(HashMap m : categoryList) {
 		%>
-				<a href="/shop/emp/goodsList.jsp?category=<%=(String)(m.get("category"))%>">
+				<a href="/shop/customer/customerGoodsList.jsp?category=<%=(String)(m.get("category"))%>">
 					<%=(String)(m.get("category"))%>
 					(<%=(Integer)(m.get("cnt"))%>) <!-- 카테고리별 상품 숫자,상품 목록 -->
 				</a>	

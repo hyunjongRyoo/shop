@@ -4,12 +4,38 @@
 <%
 	//  customer 로그인 인증 분기
 	if(session.getAttribute("loginCustomer") != null) {
-		response.sendRedirect("/shop/emp/goodsList.jsp");
+		response.sendRedirect("/shop/customer/customerGoodsList.jsp");
 		return;
 	}
 %>
+<%
+String checkedEmail = request.getParameter("checkEmail");
+	String check = request.getParameter("check");
 
+	System.out.println(checkedEmail + "<-- addCustomerAction param checkedEmail");
+	System.out.println(check + "<-- addCustomerAction param check");
+	
+	//검사한 이메일 checkEmail, 검사 완료 후 사용가능 판정난 이메일 checkedEmail
+	String checkEmail = "";
+	String checkMsg = "사용 가능한 이메일입니다.";
+	
+	if(check == null){
+		check = "";
+		checkMsg = "";
+	}
+	
+	if(checkedEmail == null){
+		checkedEmail = "";
+	} else{
+		checkEmail = checkedEmail;
+	}
+	
+	if(check.equals("X")){
+		checkedEmail = "";
+		checkMsg = "사용할 수 없는 이메일입니다.";
+	}
 
+	 %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +48,15 @@
 		<div class="col-4"></div>
 			<div class="col-4">
 				<h1>회원가입</h1>
+				
+				<form  method="post" action="/shop/customer/customerIdcheck.jsp">
+					
+					<div>
+						EmailCheck : <input type="email" name="customerEmail" value="<%=checkEmail %>">
+						<button type="submit">중복 확인 </button>
+					</div>
+				
+				</form>
 				<form method="post" action="/shop/customer/addCustomerAction.jsp">
 					<div>
 						<label for="mail">E-mail</label>

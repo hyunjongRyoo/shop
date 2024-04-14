@@ -4,7 +4,7 @@
 <%
 	//  customer 로그인 인증 분기
 	if(session.getAttribute("loginCustomer") != null) {
-		response.sendRedirect("/shop/emp/goodsList.jsp");
+		response.sendRedirect("/shop/customer/customerGoodsList.jsp");
 		return;
 	}
 %>

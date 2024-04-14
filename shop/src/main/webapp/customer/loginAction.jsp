@@ -7,7 +7,7 @@
 <%
 	//  customer 로그인 인증 분기
 	if(session.getAttribute("loginCustomer") != null) {
-		response.sendRedirect("/shop/emp/goodsList.jsp");
+		response.sendRedirect("/shop/customer/customerGoodsList.jsp");
 		return;
 	}
 %>
@@ -54,7 +54,7 @@
 		System.out.println((String)(m.get("birth")));
 		System.out.println((String)(m.get("gender")));
 		
-		response.sendRedirect("/shop/emp/goodsList.jsp");
+		response.sendRedirect("/shop/customer/customerGoodsList.jsp");
 		
 	}else{
 		System.out.println("로그인 실패");

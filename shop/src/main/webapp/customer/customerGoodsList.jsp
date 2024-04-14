@@ -156,6 +156,7 @@ if(session.getAttribute("loginCustomer") == null) {
 </head>
 <body>
   	<div class="row">
+  	<jsp:include page ="/customer/include/customerMenu.jsp"></jsp:include> 
 		<div class="col-2" >
 		 
 			<!-- 서브메뉴 카테고리별 상품리스트 -->

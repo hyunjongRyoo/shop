@@ -39,11 +39,24 @@
 	<meta charset="UTF-8">
 	<title>goodsOne</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+		<style>
 	
+	a{
+	text-decoration: none;
+	
+	color: #000000;
+	}
+	
+	div{
+	text-align: center;
+	}
+		
+	</style>
 </head>
 <body>
 
 <div class="row">
+		<jsp:include page ="/customer/include/customerMenu.jsp"></jsp:include> 
 		<div class="col-2" >
 	 	</div>
 	 	<div class="col-2" ></div>

@@ -9,7 +9,7 @@
 	}
 %>
 <%
-String checkedEmail = request.getParameter("checkEmail");
+	String checkedEmail = request.getParameter("checkEmail");
 	String check = request.getParameter("check");
 
 	System.out.println(checkedEmail + "<-- checkedEmail");

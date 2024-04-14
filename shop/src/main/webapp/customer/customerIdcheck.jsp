@@ -4,7 +4,7 @@
 <%
 	String mail = request.getParameter("mail");
 
-	System.out.println(mail + "<-- checkMailAction param customerEmail");
+	System.out.println(mail + "<-- customerIdcheck");
 	
 	String sql = "select mail, pw, name, birth, gender from customer where mail =?";
 	Class.forName("org.mariadb.jdbc.Driver");
@@ -14,11 +14,14 @@
 	System.out.println(stmt);
 	ResultSet rs = stmt.executeQuery();
 	
-	String check = "ok";
+	String  duplication= "yes";
+	//사용가능
 	
 	if(rs.next()){
-			check = "no";
+			duplication = "no";
 	}
+	//중복되어서 사용 불가능
 	
-	response.sendRedirect("/shop/customer/addCustomerForm.jsp?checkEmail=" + mail + "&check=" + check);
+	response.sendRedirect("/shop/customer/addCustomerForm.jsp?checkEmail=" + mail + "&duplication=" + duplication);
+	// checkmaul 체크한 이메일과 duplication 메일을 쓸수 있는지 없는지 판단하여 값을 반환함 
 %>

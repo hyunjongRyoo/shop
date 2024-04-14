@@ -9,10 +9,11 @@
 	}
 %>
 <%
-	String checkedEmail = request.getParameter("checkEmail");
-	String check = request.getParameter("check");
+	String passEmail = request.getParameter("checkEmail"); // 사용가능한 이메일  /체크할 이메일 
+	String check = request.getParameter("check"); //사용가능여부 
 
-	System.out.println(checkedEmail + "<-- checkedEmail");
+	//디버깅
+	System.out.println(passEmail + "<-- checkedEmail");
 	System.out.println(check + "<-- check");
 	
 	//검사한 이메일 checkEmail, 검사 완료 후 사용가능 판정난 이메일 checkedEmail
@@ -24,14 +25,14 @@
 		checkMsg = "";
 	}
 	
-	if(checkedEmail == null){
-		checkedEmail = "";
+	if(passEmail == null){
+		passEmail = "";
 	} else{
-		checkEmail = checkedEmail;
+		checkEmail = passEmail;
 	}
 	
 	if(check.equals("X")){
-		checkedEmail = "";
+		passEmail = "";
 		checkMsg = " 이미 존재하는 아이디입니다";
 	}
 
@@ -52,7 +53,7 @@
 				<form  method="post" action="/shop/customer/customerIdcheck.jsp">
 					
 					<div>
-						EmailCheck : <input type="email" name="customerEmail" value="<%=checkEmail %>">
+						이메일 중복 확인 : <input type="email" name="customerEmail" value="<%=checkEmail %>">
 						<button type="submit">중복 확인 </button>
 					</div>
 				
@@ -60,7 +61,7 @@
 				<form method="post" action="/shop/customer/addCustomerAction.jsp">
 					<div>
 						<label for="mail">E-mail</label>
-						<input type="email" id="mail" name="mail" placeholder="abcd@mail.com">
+						<input type="email" id="mail" name="mail" placeholder="abcd@mail.com" value="<%=passEmail%>">
 					</div>
 					
 					<div>

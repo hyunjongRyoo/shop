@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="shop.dao.GoodsDAO"%>
 <%@ page import="java.sql.*"%>
 <%@ page import="java.util.*"%>
 
@@ -22,8 +23,7 @@ if(session.getAttribute("loginEmp") == null) {
 	int rowPerPage= 10;
 	int startRow = (currentPage-1)*rowPerPage;
 	
-	String category =request.getParameter("category");
-	System.out.println(category+"<--category");
+
 	/*
 		null이면 select* from goods 
 		null이 아니면 select *from goods where category=?
@@ -33,26 +33,15 @@ if(session.getAttribute("loginEmp") == null) {
 <!-- Model Layer -->
 
 <%
+	
+	
+	String category =request.getParameter("category");
+	System.out.println(category+"<--category");
+	
 
-	Class.forName("org.mariadb.jdbc.Driver");
-	Connection conn = null;
-	conn = DriverManager.getConnection(
-		"jdbc:mariadb://127.0.0.1:3306/shop", "root", "guswhd6656");
-	PreparedStatement stmt1 = null;
-	
-	String sql1 = "select category, count(*) cnt from goods group by category order by category";
-	stmt1 = conn.prepareStatement(sql1);
-	ResultSet rs1 = null;
-	rs1 = stmt1.executeQuery();
-	
-	ArrayList<HashMap<String, Object>> categoryList =
-			new ArrayList<HashMap<String, Object>>();
-	while(rs1.next()) {
-		HashMap<String, Object> m = new HashMap<String, Object>(); //키 & 벨류
-		m.put("category", rs1.getString("category"));
-		m.put("cnt", rs1.getInt("cnt"));
-		categoryList.add(m);
-	}
+		
+	ArrayList<HashMap<String , Object>> 
+	categoryList= GoodsDAO.categoryList();
 	
 	
 	int lastPage = 0;  
@@ -70,51 +59,13 @@ if(session.getAttribute("loginEmp") == null) {
 	} else {
 		lastPage = cnt / rowPerPage + 1;
 	}
+
 	
-	String sql2 = null; //전체 상품 가져옴 
-	PreparedStatement stmt2 = null;
-	if(category == null || category.equals("null")){
-		sql2 = "select goods_no goodsNo, category, filename,emp_id empId, goods_title " + 
-				"goodsTitle, goods_content goodsContent, goods_price goodsPrice, goods_amount goodsAmount, " + 
-				"update_date updateDate, create_date createDate from goods order by goods_no asc limit ?, ?";
-		stmt2 = conn.prepareStatement(sql2);
-		stmt2.setInt(1, startRow);
-		stmt2.setInt(2, rowPerPage);
-		System.out.println(stmt2);
-	} else { //해당 카테고리에 속하는 상품만 가져옴
-		sql2 = "select goods_no goodsNo, category,filename, emp_id empId, goods_title " + 
-				"goodsTitle, goods_content goodsContent, goods_price goodsPrice, goods_amount goodsAmount, " + 
-				"update_date updateDate, create_date createDate from goods where category = ? order by goods_no asc limit ?, ?";
-		
-		stmt2 = conn.prepareStatement(sql2);
-		stmt2.setString(1, category);
-		stmt2.setInt(2, startRow);
-		stmt2.setInt(3, rowPerPage);
-		System.out.println(stmt2);
-	}
+	ArrayList<HashMap<String , Object>> 
+	goodsList= GoodsDAO.goodsList(category,startRow,rowPerPage);
+
 	
-	
-	ResultSet rs2 = null;
-	rs2 = stmt2.executeQuery();
-	
-	ArrayList<HashMap<String, Object>> goodsList = new ArrayList<HashMap<String, Object>>();
-	
-	while(rs2.next()){
-		HashMap<String, Object> m = new HashMap<String, Object>();		
-		m.put("goodsNo", rs2.getInt("goodsNo"));
-		m.put("category", rs2.getString("category"));
-		m.put("filename", rs2.getString("filename"));
-		m.put("empId", rs2.getString("empId"));
-		m.put("goodsTitle", rs2.getString("goodsTitle"));
-		m.put("goodsContent", rs2.getString("goodsContent"));
-		m.put("goodsPrice", rs2.getInt("goodsPrice"));
-		m.put("goodsAmount", rs2.getInt("goodsAmount"));
-		m.put("updateDate", rs2.getString("updateDate"));
-		m.put("createDate", rs2.getString("createDate"));
-		
-		goodsList.add(m);
-		
-	}
+
 	//resultset으로 부터 가져와서 hashmap에 담아서 리스트에 추가
 %>
 

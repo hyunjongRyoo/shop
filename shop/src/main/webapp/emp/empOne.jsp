@@ -1,39 +1,14 @@
+<%@page import="shop.dao.empDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*"%>
 <%@ page import="java.util.*"%>
 <%
-	String empNameParam = request.getParameter("empName");
-	String sql ="select emp_id empId, emp_name empName, emp_job empJob, hire_date hireDate, active from emp where emp_name= ?";
-	Class.forName("org.mariadb.jdbc.Driver");
-    Connection conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/shop",  "root" , "guswhd6656");
-    PreparedStatement stmt = conn.prepareStatement(sql);
-    stmt.setString(1, empNameParam);
-    ResultSet rs = stmt.executeQuery();
-	
-    
-	ArrayList<HashMap<String, Object>> list
-	= new ArrayList<HashMap<String, Object>>();
-	
-	
 
-// ResultSet -> ArrayList<HashMap<String, Object>>
-while(rs.next()) {
-	HashMap<String, Object> m = new HashMap<String, Object>();
-	String empId = rs.getString("empId");
-	String empName = rs.getString("empName");
-	String empJob = rs.getString("empJob");
-	String hireDate = rs.getString("hireDate");
-	String active = rs.getString("active");
-	
-	m.put("empId", empId);
-	m.put("empName", empName);
-	m.put("empJob", empJob);
-	m.put("hireDate", hireDate);
-	m.put("active", active);
-	
-	list.add(m);
-	
-}
+String empNameParam = request.getParameter("empName"); //값을 받아오고  
+ArrayList<HashMap<String, Object>> 
+list= empDao.list(empNameParam); // 값을 넣어줘야함 
+
+
 %>
 
 

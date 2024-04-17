@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="shop.dao.empDao"%>
 <%@ page import="java.sql.*"%>
 <%@ page import="java.util.*"%>
-
-
 <!-- Controller Layer -->
-
 <%
 	// 인증분기	 : 세션변수 이름 - loginEmp
 	if(session.getAttribute("loginEmp") == null) {
@@ -22,53 +20,14 @@
 	
 	int rowPerPage = 25;
 	int startRow = (currentPage-1)*rowPerPage;
+%>
+<%
+	// empDao 페이징 
+	ArrayList<HashMap<String , Object>> 
+	categoryList= empDao.empPageList();
 
-// <!-- Model Layer -->
-
-	// 특수한 형태의 데이터(RDBMS:mariadb) --관계형 데이터베이스를 업데이트하고 만들고 관리하는데 사용하는 프로그램
-	// -> API사용(JDBC API)하여 자료구조(ResultSet) 취득 
-	// -> 일반화된 자료구조(ArrayList<HashMap>)로 변경 -> 모델 취득
-	Class.forName("org.mariadb.jdbc.Driver");
-	String sql = "select emp_id empId, emp_name empName, emp_job empJob, hire_date hireDate, active from emp order by hire_date desc limit ?, ?";
-	Connection conn = DriverManager.getConnection(
-			"jdbc:mariadb://127.0.0.1:3306/shop", "root", "guswhd6656");
-	PreparedStatement stmt = conn.prepareStatement(sql);
-
-	stmt.setInt(1, startRow);
-	stmt.setInt(2, rowPerPage);
-	ResultSet rs  = stmt.executeQuery(); 
-	// JDBC API 종속된 자료구조 모델 ResultSet  -> 기본 API 자료구조(ArrayList)로 변경
-	
-	ArrayList<HashMap<String, Object>> list
-		= new ArrayList<HashMap<String, Object>>();
-	
-	// ResultSet -> ArrayList<HashMap<String, Object>>
-	while(rs.next()) {
-		HashMap<String, Object> m = new HashMap<String, Object>();
-		String empId = rs.getString("empId");
-		String empName = rs.getString("empName");
-		String empJob = rs.getString("empJob");
-		String hireDate = rs.getString("hireDate");
-		String active = rs.getString("active");
-		
-		m.put("empId", empId);
-		m.put("empName", empName);
-		m.put("empJob", empJob);
-		m.put("hireDate", hireDate);
-		m.put("active", active);
-		
-		list.add(m);
-		
-	}
-	
-	String sql2 = "select count(*) cnt from emp";
-	PreparedStatement stmt2 = conn.prepareStatement(sql2);
-	ResultSet rs2 =stmt2 .executeQuery();
-	
 	int count=0;
-	if(rs2.next()){
-			count =rs2.getInt("cnt");
-	}
+
 	
 	int lastPage =0;
 	if(count % rowPerPage == 0){
@@ -76,6 +35,10 @@
 	}else{
 		lastPage=count /rowPerPage +1 ;
 	}
+	
+	ArrayList<HashMap<String , Object>> 
+	empList= empDao.empList(startRow,rowPerPage);
+
 	
 %>
 
@@ -123,7 +86,7 @@
 				<th>관리 권한</th>
 			</tr>
 		<%
-			for(HashMap<String, Object> m : list) {
+			for(HashMap<String, Object> m : empList) {
 		%>
 				<tr>
 					<td><%=(String)(m.get("empId"))%></td>

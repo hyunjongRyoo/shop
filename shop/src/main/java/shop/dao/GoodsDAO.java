@@ -30,22 +30,46 @@ public class GoodsDAO {
 	//매개변수 goods_no
 	//return Goods--> HashMap
 	
-	public static HashMap<String , Object> selectGoodsOne(int GoodsNo)
-	
-	throws Exception{
-		HashMap<String ,  Object>map = null;
+	public static ArrayList<HashMap<String , Object>>GoodsOne( //메소드 이름
+			int goodsNo)throws Exception{
+		ArrayList<HashMap<String ,  Object>> GoodsOne = //객체 
+				new ArrayList<HashMap<String, Object>>();
 		
-		String sql = "select from goods where goods_no=?";
+		Connection conn = DBHelper.getConnection();
+		String sql = "select goods_no goodsNo , category ,filename , "
+				+ "emp_id empId , goods_title goodsTitle , goods_content goodsContent ,"
+				+ " goods_price goodsPrice ,goods_amount goodsAmount ,update_date updateDate,"
+				+ " create_date createDate  from goods where goods_no= ? ";
+				PreparedStatement stmt = conn.prepareStatement(sql);
+				stmt.setInt(1,goodsNo);
+				
+				
+				ResultSet rs = stmt.executeQuery();
+				if(rs.next()) {
+			    	HashMap<String, Object> m = new HashMap<String, Object>();
+			    	m.put("goodsNo", rs.getInt("goodsNo"));
+			    	m.put("filename", rs.getString("filename"));
+			    	m.put("empId", rs.getString("empId"));
+			    	m.put("goodsTitle", rs.getString("goodsTitle"));
+			    	m.put("goodsContent", rs.getString("goodsContent"));
+			    	m.put("goodsPrice", rs.getInt("goodsPrice"));
+			    	m.put("goodsAmount", rs.getInt("goodsAmount"));
+			    	m.put("updateDate", rs.getString("updateDate"));
+					m.put("createDate", rs.getString("createDate"));
+					
+					GoodsOne.add(m);
+			    }
+		conn.close();
 		
 		
-		
-		return map;
+		return GoodsOne;
 		
 	}
 	
 	
-	public static ArrayList<HashMap<String, Object>> categoryList() throws Exception{
-		ArrayList<HashMap<String , Object>>categoryList =
+	//goodsList 페이징
+	public static ArrayList<HashMap<String, Object>> paging() throws Exception{
+		ArrayList<HashMap<String , Object>>paging =
 				new ArrayList<HashMap<String, Object>>();
 		
 		Connection conn = DBHelper.getConnection();
@@ -59,12 +83,16 @@ public class GoodsDAO {
 			HashMap<String, Object> m = new HashMap<String, Object>(); //키 & 벨류
 			m.put("category", rs1.getString("category"));
 			m.put("cnt", rs1.getInt("cnt"));
-			categoryList.add(m);
+			paging.add(m);
 		}
 		conn.close();
-	return categoryList;
+	return paging;
 	}
-
+	
+	
+	
+	
+	//goodsList
 
 	public static ArrayList<HashMap<String , Object>>  goodsList(
 			String category, int startRow , int rowPerPage) throws Exception{
@@ -116,5 +144,96 @@ public class GoodsDAO {
 		return goodsList;
 		
 	}
- //	public static 
+	
+	//categoryList
+	public static ArrayList<HashMap<String, Object>> categoryList(
+		) throws Exception{
+		ArrayList<HashMap<String , Object>>categoryList =
+				new ArrayList<HashMap<String, Object>>();
+			Connection conn = DBHelper.getConnection();
+		PreparedStatement stmt = null;
+		String sql = "select category, create_date createDate from category";
+		stmt = conn.prepareStatement(sql);
+	
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next()){
+			HashMap<String, Object> m = new HashMap<String,Object>();
+			m.put("category", rs.getString("category"));
+			m.put("createDate", rs.getString("createDate"));
+			categoryList.add(m);
+		}
+		conn.close();
+	return categoryList;
+	}
+	
+	
+	
+	
+	
+	//add GoodsForm
+	public static ArrayList<String>addGoods(
+			)throws Exception{
+		ArrayList<String>GoodsList=
+				new ArrayList<String>();
+	Connection conn = DBHelper.getConnection();
+	PreparedStatement stmt = null;
+	String sql="select category from category";
+	stmt = conn.prepareStatement(sql);
+	ResultSet rs = stmt.executeQuery();
+	while(rs.next()) {
+		GoodsList.add(rs.getString("category"));
+	}
+	conn.close();
+	return GoodsList;
+	}
+	
+	//addGoodsAction
+	public static int addGoodsAction(
+	String category , String  goodsTitle , String empId , String filename, String goodsPrice, String goodsAmount , String goodsContent
+	)throws Exception{
+		
+		int row=0;
+		
+		PreparedStatement stmt = null;
+		Connection conn = DBHelper.getConnection();
+		String sql="insert into goods(category,emp_id,goods_title,filename, goods_price, goods_amount,goods_content) values (?, ?, ?, ?, ?, ?, ?)";
+		
+		stmt = conn.prepareStatement(sql);
+		stmt.setString(1, category);
+		stmt.setString(2, empId);
+		stmt.setString(3, goodsTitle);
+		stmt.setString(4, filename);
+		stmt.setString(5, goodsPrice);
+		stmt.setString(6, goodsAmount);
+		stmt.setString(7, goodsContent);
+		System.out.println(stmt +"<--addgoodsAction.jsp");
+		
+		row=stmt.executeUpdate();
+		conn.close();
+		return row;
+	}
+	//addCatrgoryForm.jsp
+	
+	public static ArrayList<String>addCategoryForm(
+			)throws Exception {
+		ArrayList<String> addCategoryForm =
+				new ArrayList<String>();
+		
+		PreparedStatement stmt= null;
+		Connection conn = DBHelper.getConnection();
+		String sql="select category from category";
+		stmt=conn.prepareCall(sql);
+		
+		ResultSet rs= stmt.executeQuery();
+		
+		while(rs.next()) {
+			addCategoryForm.add(rs.getString("category"));
+		}
+		
+		conn.close();
+		return addCategoryForm;
+		
+	}
+	
+	
 }

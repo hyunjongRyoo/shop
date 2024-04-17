@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="shop.dao.GoodsDAO"%>
 <%@ page import="java.sql.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.io.*" %>
@@ -17,32 +18,11 @@ if(session.getAttribute("loginEmp") == null) {
 
 <%
 
-	Class.forName("org.mariadb.jdbc.Driver");
-	Connection conn = null;
-	PreparedStatement stmt1 = null;
-	ResultSet rs1 = null;
-	conn = DriverManager.getConnection(
-		"jdbc:mariadb://127.0.0.1:3306/shop", "root", "guswhd6656");
-	
-	String sql1 = "select category from category";
-	stmt1 = conn.prepareStatement(sql1);
-	rs1 = stmt1.executeQuery();
-	ArrayList<String> categoryList =
-			new ArrayList<String>();
-	while(rs1.next()) {
-		categoryList.add(rs1.getString("category"));
-	}
-	// 디버깅
-	System.out.println(categoryList);
+	ArrayList<String> GoodsList=GoodsDAO.addGoods();
+	//객체 = class이름. 메소드이름(매개변수);
+
+
 %>
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,7 +56,7 @@ if(session.getAttribute("loginEmp") == null) {
 					<select name="category">
 						<option value="">선택</option>
 						<%
-							for(String c : categoryList) {
+							for(String c : GoodsList) {  //배열의 반복  인덱스 0~끝날때까지 반복
 						%>
 								<option value="<%=c%>"><%=c%></option>
 						<%		

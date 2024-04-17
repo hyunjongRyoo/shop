@@ -23,14 +23,9 @@ if(session.getAttribute("loginEmp") == null) {
 	int rowPerPage= 10;
 	int startRow = (currentPage-1)*rowPerPage;
 	
-
-	/*
-		null이면 select* from goods 
-		null이 아니면 select *from goods where category=?
-	*/
 %>
 
-<!-- Model Layer -->
+
 
 <%
 	
@@ -41,12 +36,12 @@ if(session.getAttribute("loginEmp") == null) {
 
 		
 	ArrayList<HashMap<String , Object>> 
-	categoryList= GoodsDAO.categoryList();
+	paging= GoodsDAO.paging();
 	
 	
 	int lastPage = 0;  
 	int cnt = 0;
-	for(HashMap m : categoryList) {
+	for(HashMap m : paging) {
 		if(((String)(m.get("category"))).equals(category)){ //현재 선택한 카테고리(category)와 일치하는 경우 해당 카테고리의 상품 수를 cnt에 저장합니다.
 			cnt = (Integer)(m.get("cnt")); //그렇지 않은 경우 모든 카테고리의 상품 수를 cnt에 누적하여 저장합니다.
 			break;
@@ -121,11 +116,13 @@ if(session.getAttribute("loginEmp") == null) {
 				
 			<div>
 		<%
-				for(HashMap m : categoryList) {
+				for(HashMap m : paging) {
 		%>
 				<a href="/shop/emp/goodsList.jsp?category=<%=(String)(m.get("category"))%>">
+				<div>
 					<%=(String)(m.get("category"))%>
 					(<%=(Integer)(m.get("cnt"))%>) <!-- 카테고리별 상품 숫자,상품 목록 -->
+				</div>
 				</a>	
 		<%		
 				}

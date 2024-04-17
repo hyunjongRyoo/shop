@@ -1,3 +1,4 @@
+<%@page import="shop.dao.GoodsDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*"%>
 <%@ page import="java.util.*"%>
@@ -13,31 +14,10 @@
 %>
 
 <%
-	Class.forName("org.mariadb.jdbc.Driver");
-	Connection conn = null;
-	PreparedStatement stmt = null;
-	ResultSet rs = null;
-	
-	String sql = "select category, create_date createDate from category ";
-	conn = DriverManager.getConnection(
-			"jdbc:mariadb://127.0.0.1:3306/shop", "root", "guswhd6656");
-	stmt = conn.prepareStatement(sql);
-	rs = stmt.executeQuery(); 
-	
-	ArrayList<HashMap<String, Object>> list
-	= new ArrayList<HashMap<String, Object>>();
-	
-	while(rs.next()){
-		HashMap<String, Object> m = new HashMap<String,Object>();
-		
-		String category =rs.getString("category");
-		String createDate =rs.getString("createDate");
-		
-		m.put("category",category);
-		m.put("createDate",createDate);
-		
-		list.add(m);
-	}
+
+ArrayList<HashMap<String , Object>> 
+categoryList= GoodsDAO.categoryList();
+
 %>
 <!DOCTYPE html>
 <html>
@@ -82,7 +62,7 @@
 								<th>업로드 시간</th> 
 							</tr>
 				<%
-							for(HashMap<String, Object> m : list) {
+							for(HashMap<String, Object> m : categoryList) {
 				%>
 							<tr>
 								<td><%=(String)(m.get("category"))%></td>

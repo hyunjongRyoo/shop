@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.*;
 
 	public class empDao { 
+		//addEmp
 	public static int insertEmp (
 			String empId,
 			String empPw,
@@ -30,6 +31,8 @@ import java.util.*;
 	
 	
 	// 호출코드  HashMap <String , Object> m = EmpDao.empLogin("admin" , "1234");
+	
+	//loginEmp
 		public static HashMap<String, Object> loginEmp(String empId, String empPw) throws Exception {
 		
 		HashMap<String , Object>resultMap = null;  // resultMap 저장 -> loginEmp에다가 하면 안됌
@@ -70,9 +73,60 @@ import java.util.*;
 		
 		
 	}
-		public static ArrayList<HashMap<String, Object>> list(
+		//empList 페이징 
+		public static ArrayList<HashMap<String, Object>> empPageList() throws Exception{
+			ArrayList<HashMap<String , Object>>empPageList =
+					new ArrayList<HashMap<String, Object>>();
+			
+			Connection conn = DBHelper.getConnection();
+			String sql ="select count(*) cnt from emp";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				HashMap<String, Object> m = new HashMap<String, Object>(); //키 & 벨류
+				m.put("cnt", rs.getInt("cnt"));
+				empPageList.add(m);
+			}
+			conn.close();
+		return empPageList;
+		}
+		
+		
+		//empList
+		public static ArrayList<HashMap<String , Object>>  empList(
+			 int startRow , int rowPerPage) throws Exception{
+			ArrayList<HashMap<String , Object>>empList =
+						new ArrayList<HashMap<String, Object>>();
+			
+			Connection conn = DBHelper.getConnection();
+			 //전체 상품 가져옴 
+		
+			String sql = "select emp_id empId, emp_name empName, emp_job "
+					+ "empJob, hire_date hireDate, "
+					+ "active from emp order by hire_date desc limit ?, ?";
+				PreparedStatement stmt = conn.prepareStatement(sql);
+				stmt.setInt(1, startRow);
+				stmt.setInt(2, rowPerPage);
+		
+				ResultSet rs = stmt.executeQuery();	
+				while(rs.next()) {
+				HashMap<String , Object> m  = new HashMap<String, Object >();
+				m.put("empId", rs.getString("empId"));
+				m.put("empName", rs.getString("empName"));
+				m.put("empJob", rs.getString("empJob"));
+				m.put("hireDate", rs.getString("hireDate"));
+				m.put("active", rs.getString("active"));
+				empList.add(m);
+			}
+			conn.close();
+			return empList;
+		}
+		//empOne
+		public static ArrayList<HashMap<String, Object>> One(
 				String empNameParam) throws Exception{
-		ArrayList<HashMap<String , Object>> list =
+		ArrayList<HashMap<String , Object>> One =
 				new ArrayList<HashMap<String, Object>>();
 		
 		Connection conn = DBHelper.getConnection();
@@ -92,15 +146,15 @@ import java.util.*;
 	    	m.put("hireDate", rs2.getString("hireDate"));
 	    	m.put("active", rs2.getString("active"));
 	    	
-	    	list.add(m);
+	    	One.add(m);
 		}
 	    conn.close();
 		
 		
-		return list;
+		return One;
 		}
 		
-		
+		//updateEmp
 		public static int updateEmp (
 				String active,
 				String empId

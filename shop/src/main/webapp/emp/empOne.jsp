@@ -6,7 +6,7 @@
 
 String empNameParam = request.getParameter("empName"); //값을 받아오고  
 ArrayList<HashMap<String, Object>> 
-list= empDao.list(empNameParam); // 값을 넣어줘야함 
+One= empDao.One(empNameParam); // 값을 넣어줘야함 줘야함 
 //
 
 %>
@@ -47,7 +47,7 @@ list= empDao.list(empNameParam); // 값을 넣어줘야함
 		<h1 style="text-align: center">상세 정보</h1><br>
 		
 			<%
-			for(HashMap m: list) { 
+			for(HashMap m: One) { 
 			%>
 		<table class="table">
 			<tr>

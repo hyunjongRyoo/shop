@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="shop.dao.GoodsDAO"%>
 <%@ page import="java.util.*"%>
 <%@page import="java.sql.*" %>
 <%@ page import="java.io.*" %>
@@ -18,8 +19,9 @@ HashMap<String,Object> loginMember = (HashMap<String,Object>)(session.getAttribu
 %>
 <%
 String category = request.getParameter("category");
-String empId = (String)(loginMember.get("empId"));
 String goodsTitle =request.getParameter("goodsTitle");
+String empId = (String)(loginMember.get("empId"));
+String fileN =request.getParameter("goodsTitle");
 String goodsPrice =request.getParameter("goodsPrice");
 String goodsAmount =request.getParameter("goodsAmount");
 String goodsContent =request.getParameter("goodsContent");
@@ -35,27 +37,15 @@ UUID uuid = UUID. randomUUID();
 String filename = uuid.toString().replace("-", "");
 filename = filename + exe;
 
-String sql1 ="insert into goods(category,emp_id,goods_title,filename, goods_price, goods_amount,goods_content) values (?, ?, ?, ?, ?, ?, ?)";
-Class.forName("org.mariadb.jdbc.Driver");
-Connection conn = null;
-conn = DriverManager.getConnection(
-	"jdbc:mariadb://127.0.0.1:3306/shop", "root", "guswhd6656");
-PreparedStatement stmt1 = null;
 
-stmt1 = conn.prepareStatement(sql1);
-stmt1.setString(1, category);
-stmt1.setString(2, empId);
-stmt1.setString(3, goodsTitle);
-stmt1.setString(4, filename);
-stmt1.setString(5, goodsPrice);
-stmt1.setString(6, goodsAmount);
-stmt1.setString(7, goodsContent);
-System.out.println(stmt1);
+
+
 %>
 
 <!-- Controller Layer -->
 <%
-	int row=stmt1.executeUpdate();
+	int row;
+	row= GoodsDAO.addGoodsAction(category, goodsTitle, empId, filename, goodsPrice, goodsAmount, goodsContent);
 
 	if(row == 1){ //insert 성공 -> 파일업로드 진행 
 		//Part -> is(inputStream) -> os(outputStream) -> 빈파일

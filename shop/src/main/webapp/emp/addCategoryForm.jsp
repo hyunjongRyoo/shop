@@ -12,7 +12,7 @@ if(session.getAttribute("loginEmp") == null) {
 
 <%
 
-ArrayList<String> addCategoryForm=GoodsDAO.addCategoryForm();
+ArrayList<String>addCategoryForm=GoodsDAO.addCategoryForm();
 //객체 = class이름. 메소드이름(매개변수);
 %>
 

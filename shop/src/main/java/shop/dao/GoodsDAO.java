@@ -212,6 +212,24 @@ public class GoodsDAO {
 		conn.close();
 		return row;
 	}
+	
+	//addCatrgoryAction.jsp
+	
+	public static  int  addCategoryAction(
+			String category	) throws Exception{
+		int row =0;
+		PreparedStatement stmt = null;
+		Connection conn=DBHelper.getConnection();
+		String sql="insert into category(category)Values(?)";
+		stmt=conn.prepareStatement(sql);
+		stmt.setString(1, category);
+		
+		row =stmt.executeUpdate();
+		conn.close();
+		return row;
+		
+	}
+	
 	//addCatrgoryForm.jsp
 	
 	public static ArrayList<String>addCategoryForm(
@@ -222,7 +240,7 @@ public class GoodsDAO {
 		PreparedStatement stmt= null;
 		Connection conn = DBHelper.getConnection();
 		String sql="select category from category";
-		stmt=conn.prepareCall(sql);
+		stmt=conn.prepareStatement(sql);
 		
 		ResultSet rs= stmt.executeQuery();
 		

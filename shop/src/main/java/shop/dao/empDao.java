@@ -3,7 +3,7 @@ package shop.dao;
 import java.sql.*;
 import java.util.*;
 
-	public class empDao {
+	public class empDao { 
 	public static int insertEmp (
 			String empId,
 			String empPw,
@@ -98,6 +98,30 @@ import java.util.*;
 		
 		
 		return list;
+		}
+		
+		
+		public static int updateEmp (
+				String active,
+				String empId
+				)throws Exception{
+			
+			int row =0;
+			//db 접근
+			
+			Connection conn = DBHelper.getConnection();
+			String sql3="update emp set active = ? where emp_id = ?";
+			PreparedStatement stmt3  = conn.prepareStatement(sql3);
+			stmt3.setString(1, empId);
+			stmt3.setString(2, active);
+			
+			System.out.println(empId+"<--updateEmp empId");
+			System.out.println(active+"<--updateEmp active");
+			
+			row = stmt3.executeUpdate();
+			
+			conn.close();
+			return row;
 		}
 }
 

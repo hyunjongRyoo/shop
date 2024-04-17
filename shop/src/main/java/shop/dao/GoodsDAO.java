@@ -74,4 +74,5 @@ public class GoodsDAO {
 		return goodsList;
 		
 	}
+ //	public static 
 }

@@ -7,7 +7,7 @@
 String empNameParam = request.getParameter("empName"); //값을 받아오고  
 ArrayList<HashMap<String, Object>> 
 list= empDao.list(empNameParam); // 값을 넣어줘야함 
-
+//
 
 %>
 

@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="shop.dao.empDao"%>
 <%@ page import ="java.sql.*" %>
 <%@ page import="java.net.*"%>
 <%@ page import = "java.util.*" %>
+
 <%
 //로그인 세션
 	/*
@@ -27,12 +29,10 @@ if(loginEmp == null){
 <%
 //받아오는 값 empId, active
 String empId =request.getParameter("empId");
-//디버깅 
-System.out.println("empId"); 
-
 String active =request.getParameter("active");
 //디버깅 
-System.out.println("active"); 
+System.out.println(empId+ "<--아이디"); 
+System.out.println(active+ "<--활성상태"); 
 
 
 
@@ -44,20 +44,9 @@ if(active.equals("OFF")){
 }
 
 
-PreparedStatement stmt = null;
-String sql="update emp set active = ? where emp_id = ?";
-Class.forName("org.mariadb.jdbc.Driver");
-Connection conn = null; 
-conn= DriverManager.getConnection(
-		"jdbc:mariadb://127.0.0.1:3306/shop", "root", "guswhd6656");
-
-stmt =conn.prepareStatement(sql);
-stmt.setString(1, active);
-stmt.setString(2, empId);
-System.out.println(stmt); 
-
 int row = 0;
-row = stmt.executeUpdate();
+
+row = empDao.updateEmp(empId,active);
 
 if(row == 1) {
 	System.out.println("변경 완료 ");

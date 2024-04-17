@@ -2,8 +2,48 @@ package shop.dao;
 
 import java.sql.*;
 import java.util.*;
-
 public class GoodsDAO {
+	//싱품 주문 or 취소시  수정할 수량
+	// customer/addOrdersAction.jsp or dropOrdersAction.jsp
+	// 매개변수 int(상품번호) , int (변경할 수량 + -)
+	public static int updateGoodsAmount(int goodsNo, int amount ) 
+												throws Exception {
+		int row= 0;
+		
+		String sql= "update goods "
+					+ "set goods_amount =? , update_date=sysdate"
+					+"where goods_no";
+		
+		
+		return row;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	//goodsOne.jsp
+	//매개변수 goods_no
+	//return Goods--> HashMap
+	
+	public static HashMap<String , Object> selectGoodsOne(int GoodsNo)
+	
+	throws Exception{
+		HashMap<String ,  Object>map = null;
+		
+		String sql = "select from goods where goods_no=?";
+		
+		
+		
+		return map;
+		
+	}
+	
+	
 	public static ArrayList<HashMap<String, Object>> categoryList() throws Exception{
 		ArrayList<HashMap<String , Object>>categoryList =
 				new ArrayList<HashMap<String, Object>>();
@@ -38,6 +78,7 @@ public class GoodsDAO {
 			String sql = "select goods_no goodsNo, category, filename,emp_id empId, goods_title " + 
 					"goodsTitle, goods_content goodsContent, goods_price goodsPrice, goods_amount goodsAmount, " + 
 					"update_date updateDate, create_date createDate from goods order by goods_no asc limit ?, ?";
+					//+"offset ? rows fetch next ? rows only";
 			 stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, startRow);
 			stmt.setInt(2, rowPerPage);
@@ -46,11 +87,12 @@ public class GoodsDAO {
 			String sql = "select goods_no goodsNo, category,filename, emp_id empId, goods_title " + 
 					"goodsTitle, goods_content goodsContent, goods_price goodsPrice, goods_amount goodsAmount, " + 
 					"update_date updateDate, create_date createDate from goods where category = ? order by goods_no asc limit ?, ?";
+					//+"offset ? rows fetch next ? rows only";
 			
-			 stmt = conn.prepareStatement(sql);
-		stmt.setString(1, category);
-		stmt.setInt(2, startRow);
-		stmt.setInt(3, rowPerPage);
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, category);
+			stmt.setInt(2, startRow);
+			stmt.setInt(3, rowPerPage);
 		}
 		ResultSet rs = stmt.executeQuery();
 		while(rs.next()) {

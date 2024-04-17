@@ -4,12 +4,12 @@
 
 
 <%
-	String goodsTitleParam =request.getParameter("goodsTitle");
-	String sql= "select goods_no goodsNo , category ,filename , emp_id empId , goods_title goodsTitle , goods_content goodsContent , goods_price goodsPrice ,goods_amount goodsAmount ,update_date updateDate, create_date createDate  from goods where goods_title= ?  ";
+	String goodsNoParam =request.getParameter("goodsNo");
+	String sql= "select goods_no goodsNo , category ,filename , emp_id empId , goods_title goodsTitle , goods_content goodsContent , goods_price goodsPrice ,goods_amount goodsAmount ,update_date updateDate, create_date createDate  from goods where goods_no= ?  ";
 	Class.forName("org.mariadb.jdbc.Driver");
     Connection conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/shop",  "root" , "guswhd6656");
     PreparedStatement stmt = conn.prepareStatement(sql);
-    stmt.setString(1, goodsTitleParam);
+    stmt.setString(1, goodsNoParam);
     ResultSet rs = stmt.executeQuery();
 
     

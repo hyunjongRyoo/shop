@@ -6,27 +6,28 @@ public class CustomerDAO {
 	//디버깅용 메인 메소드
 	public static void main(String[] args)throws Exception{
 		//메일 체크 메서드 디버깅
-		//System.out.println(CustomerDAO.checkMail("a@goodee.com")); //false
-		//
-		//System.out.println(CustomerDAO.addCustomer(
-		//		"z@goodee.com","1234","zzz","1999/09/09","여")); // 성공
-		//System.out.println(CustomerDAO.login("z@goodee.com", "1234"));
+		System.out.println(CustomerDAO.checkMail("a@goodee.com")); //false
+		System.out.println(CustomerDAO.insertCustomer(	"z@goodee.com","1234","zzz","1999/09/09","여")); // 성공
+		System.out.println(CustomerDAO.login("z@goodee.com", "1234"));
 		System.out.println(CustomerDAO.deleteCustomer("z@goodee.com", "1234"));
+		System.out.println(CustomerDAO.selectCustomerListBypage(10,10));  //10번쨰 부터 10개  출력
 		
 	}
 	//관리자 페이지에서 전체 회원정보보기(pw제외)
 	//호출: /admin/customerList.jsp
 	//매개변수: 없음 (void)
 	//return : Customer배열(리스트) -> ArrayList<HashMap<String, Object >>
+	//페이징
 	
-	public ArrayList<HashMap<String, Object >> selectCustomerListBypage(
+	public static ArrayList<HashMap<String, Object >> selectCustomerListBypage( 
 			int startRow, int rowPerPage) throws Exception{
 		//currentPage + rowPerpage 로  startRow를 구하는 알고리즘을 dao가 아닌 액션에 구현
-		ArrayList<HashMap<String, Object >>list =
+		ArrayList<HashMap<String, Object >>list =   //list 객체
 				new ArrayList<HashMap<String, Object>>();
 		
 		Connection conn = DBHelper.getConnection();
-		String sql="select * from customer"
+		String sql="select "
+				+ "mail,name,birth,gender,update_date updateDate,create_date createDate from customer"
 				+ "order by mail"
 				+ "offset 0 rows fetch next 10 rows only";
 		PreparedStatement stmt = conn.prepareStatement(sql);
@@ -36,6 +37,13 @@ public class CustomerDAO {
 		
 		//jdbc Result (자바에서 일반적이지 않은 구조)
 		//->collections API 타입 -> list , set ,Map
+		
+		while(rs.next()) {
+			HashMap<String ,Object>m = new HashMap<String, Object>();  //HashMap 이름 m
+			m.put("mail", rs.getString("mail"));
+			m.put("name", rs.getString("name"));
+			
+		}
 		
 		return list;
 	}

@@ -144,7 +144,7 @@ if(session.getAttribute("loginEmp") == null) {
  <div class="goods-item">
                 <img src="/shop/upload/default.jpg" alt="??">
                 <br>
-                <a href="/shop/emp/goodsOne.jsp?goodsTitle=<%=(String)(m.get("goodsTitle")) %>">
+                <a href="/shop/emp/goodsOne.jsp?goodsNo=<%=(int)(m.get("goodsNo")) %>">
                     품명:<%=(String)(m.get("goodsTitle"))%>
                 </a> <br>
                 <%=(Integer)(m.get("goodsPrice"))%>원

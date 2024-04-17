@@ -2,12 +2,12 @@
 <%@ page import="java.sql.*"%>
 <%@ page import="java.util.*"%>
 <%
-	String nameParam = request.getParameter("name");
-	String sql ="select mail , pw , name ,birth , gender from customer where name= ?";
+	String mailParam = request.getParameter("mail");
+	String sql ="select mail , name ,birth , gender from customer where mail= ?";
 	Class.forName("org.mariadb.jdbc.Driver");
     Connection conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/shop",  "root" , "guswhd6656");
     PreparedStatement stmt = conn.prepareStatement(sql);
-    stmt.setString(1, nameParam);
+    stmt.setString(1, mailParam);
     ResultSet rs = stmt.executeQuery();
 	
     
@@ -20,13 +20,11 @@
 while(rs.next()) {
 	HashMap<String, Object> m = new HashMap<String, Object>();
 	String mail = rs.getString("mail");
-	String pw = rs.getString("pw");
 	String name = rs.getString("name");
 	String birth = rs.getString("birth");
 	String gender = rs.getString("gender");
 	
 	m.put("mail", mail);
-	m.put("pw", pw);
 	m.put("name", name);
 	m.put("birth", birth);
 	m.put("gender", gender);
@@ -75,10 +73,6 @@ while(rs.next()) {
 			<tr>
 				<td> mail</td>
 				<td><%=(String)(m.get("mail"))%></td>
-			</tr>
-			<tr>
-				<td> pw</td>
-				<td><%=(String)(m.get("pw"))%></td>
 			</tr>
 			<tr>
 				<td> name</td>

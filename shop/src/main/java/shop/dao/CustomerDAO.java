@@ -7,7 +7,7 @@ public class CustomerDAO {
 	public static void main(String[] args)throws Exception{
 		//메일 체크 메서드 디버깅
 		System.out.println(CustomerDAO.checkMail("a@goodee.com")); //false
-		System.out.println(CustomerDAO.insertCustomer(	"z@goodee.com","1234","zzz","1999/09/09","여")); // 성공
+		System.out.println(CustomerDAO.addCustomer(	"z@goodee.com","1234","zzz","1999/09/09","여")); // 성공
 		System.out.println(CustomerDAO.login("z@goodee.com", "1234"));
 		System.out.println(CustomerDAO.deleteCustomer("z@goodee.com", "1234"));
 		System.out.println(CustomerDAO.selectCustomerListBypage(10,10));  //10번쨰 부터 10개  출력
@@ -50,7 +50,7 @@ public class CustomerDAO {
 	
 	
 	
-	//로그인 사용자 회원정보보기
+	//로그인 사용자 회원정보보기- 완료
 	//호출: customerOne.jsp 
 	//매개변수 String()
 	//return: customer (비밀번호 제외)
@@ -171,7 +171,7 @@ public class CustomerDAO {
 		
 		Connection conn = DBHelper.getConnection();
 		
-		String sql="select mail from customer where mail=?";
+		String sql="select mail, pw, name, birth, gender from customer where mail =?";
 		
 		PreparedStatement stmt =conn.prepareStatement(sql);
 		stmt.setString(1, mail);
@@ -185,14 +185,16 @@ public class CustomerDAO {
 		
 		return result;
 	}
-	//회원가입 액션 
+	
+	
+	//회원가입 액션 --끝 
 	//호출: addCustomerAction.jsp
 	//param:customer
 	//return: int(입력 실패 0,입력 성공 1)
-	public static int insertCustomer(String mail, String pw, String name , String birth, String gender ) throws Exception {
+	public static int addCustomer(String mail, String pw, String name , String birth, String gender ) throws Exception {
 		int row=0;
 		Connection conn = DBHelper.getConnection();
-		String sql= "insert into customer(mail, pw, name,birth,gender,update_Date,create_date)values(?,?,?,?,?sysdate,sysdate)";
+		String sql= "insert into customer (mail,pw,name,birth,gender) values (?,password(?), ? ,? , ?)";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, mail);
 		stmt.setString(2, pw);

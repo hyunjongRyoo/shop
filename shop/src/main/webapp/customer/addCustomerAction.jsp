@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="shop.dao.CustomerDAO"%>
 <%@ page import="java.sql.*" %>
 
 <%
@@ -23,24 +24,9 @@
 	System.out.println(birth +"<--birth");
 	System.out.println(gender +"<--gender");
 	
-	String sql ="insert into customer (mail,pw,name,birth,gender) values (?,password(?), ? ,? , ?)";
 	
-	Class.forName("org.mariadb.jdbc.Driver");
-	Connection conn= DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/shop", "root", "guswhd6656");
-	
-	PreparedStatement stmt = null;
-	
-
-	stmt = conn.prepareStatement(sql);
-	stmt.setString(1, mail);
-	stmt.setString(2, pw);
-	stmt.setString(3, name);
-	stmt.setString(4, birth);
-	stmt.setString(5, gender);
-	System.out.println(stmt);
-	
-	
-	int row=stmt.executeUpdate();
+	int row;
+	row=CustomerDAO.addCustomer(mail,pw,name,birth,gender);
 	
 	if(row==1) {
 		System.out.println("회원가입을 축하합니다");

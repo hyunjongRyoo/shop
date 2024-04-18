@@ -55,11 +55,30 @@ public class CustomerDAO {
 	//매개변수 String()
 	//return: customer (비밀번호 제외)
 	
-	public HashMap<String , Object>selectCustomerOne(String mail)
+	public static ArrayList<HashMap<String , Object>>selectCustomerOne(String mailParam)
 												throws Exception	{
-		HashMap<String , Object> map = null;
+		ArrayList<HashMap<String, Object>> One
+		= new ArrayList<HashMap<String,Object>>();
+		Connection conn = DBHelper.getConnection();
+		String sql ="select mail , name ,birth , gender from customer where mail= ?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, mailParam);
 		
-		return map;
+		ResultSet rs=stmt.executeQuery();
+		while(rs.next()) {
+			HashMap<String, Object> m = new HashMap<String, Object>();
+			m.put("mail",rs.getString("mail"));
+			m.put("name",rs.getString("name"));
+			m.put("birth",rs.getString("birth"));
+			m.put("gender",rs.getString("gender"));
+			
+			One.add(m);
+			
+		}
+		conn.close();
+
+		
+		return One;
 	}
 	
 	
@@ -112,7 +131,7 @@ public class CustomerDAO {
 	
 	
 	
-	//로그인 메서드 
+	//로그인 메서드 --완성 
 	// 호출:loginAction.jsp
 	//param :String(mail) ,String(pw)
 	//return: HashMap(메일,이름)
@@ -120,7 +139,7 @@ public class CustomerDAO {
 		HashMap<String,String>map=null;
 		
 		Connection conn=DBHelper.getConnection();
-		String sql="select mail, name from customer where mail=? and pw=?";
+		String sql="select mail, name,  birth , gender from customer where mail=? and pw= password(?)";
 		PreparedStatement stmt= conn.prepareStatement(sql);
 		stmt.setString(1, mail);
 		stmt.setString(2, pw);

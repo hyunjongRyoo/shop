@@ -1,38 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*"%>
+<%@page import="shop.dao.CustomerDAO"%>
 <%@ page import="java.util.*"%>
 <%
-	String mailParam = request.getParameter("mail");
-	String sql ="select mail , name ,birth , gender from customer where mail= ?";
-	Class.forName("org.mariadb.jdbc.Driver");
-    Connection conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/shop",  "root" , "guswhd6656");
-    PreparedStatement stmt = conn.prepareStatement(sql);
-    stmt.setString(1, mailParam);
-    ResultSet rs = stmt.executeQuery();
-	
-    
-	ArrayList<HashMap<String, Object>> list
-	= new ArrayList<HashMap<String, Object>>();
+
+   String mailParam = request.getParameter("mail");
+	ArrayList<HashMap<String,Object>>
+	One=CustomerDAO.selectCustomerOne(mailParam);
+
 	
 	
 
 // ResultSet -> ArrayList<HashMap<String, Object>>
-while(rs.next()) {
-	HashMap<String, Object> m = new HashMap<String, Object>();
-	String mail = rs.getString("mail");
-	String name = rs.getString("name");
-	String birth = rs.getString("birth");
-	String gender = rs.getString("gender");
-	
-	m.put("mail", mail);
-	m.put("name", name);
-	m.put("birth", birth);
-	m.put("gender", gender);
-	
-	list.add(m);
-	
-}
-%>
+
+%> 
 
 
 <!DOCTYPE html>
@@ -67,7 +48,7 @@ while(rs.next()) {
 		<h1 style="text-align: center">고객 상세 정보</h1><br>
 		
 			<%
-			for(HashMap m: list) { 
+			for(HashMap m: One) { 
 			%>
 		<table class="table">
 			<tr>

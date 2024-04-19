@@ -1,32 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="shop.dao.CustomerDAO"%>
 <%@ page import="java.sql.*"%>
 <%@ page import="java.util.*"%>
 
 
-<%
-	String goodsTitleParam =request.getParameter("goodsTitle");
-	String sql= "select goods_no goodsNo , category ,filename , goods_title goodsTitle , goods_content goodsContent , goods_price goodsPrice ,goods_amount goodsAmount ,update_date updateDate, create_date createDate  from goods where goods_title= ?  ";
-	Class.forName("org.mariadb.jdbc.Driver");
-    Connection conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/shop",  "root" , "guswhd6656");
-    PreparedStatement stmt = conn.prepareStatement(sql);
-    stmt.setString(1, goodsTitleParam);
-    ResultSet rs = stmt.executeQuery();
-
-    
- // ResultSet -> ArrayList<HashMap<String, Object>>
-    	HashMap<String, Object> m = new HashMap();
-	    if(rs.next()) {
-    	
-    	m.put("goodsNo", rs.getInt("goodsNo"));
-    	m.put("filename", rs.getString("filename"));
-    	m.put("goodsTitle", rs.getString("goodsTitle"));
-    	m.put("goodsContent", rs.getString("goodsContent"));
-    	m.put("goodsPrice", rs.getInt("goodsPrice"));
-    	m.put("goodsAmount", rs.getInt("goodsAmount"));
-    	m.put("updateDate", rs.getString("updateDate"));
-		m.put("createDate", rs.getString("createDate"));
-    	
-    }
+<%	
+	int goodsNoParam = Integer.parseInt(request.getParameter("goodsNo")); //값을 받아오고  
+	ArrayList<HashMap<String, Object>> 
+	GoodsOne= CustomerDAO.GoodsOne(goodsNoParam); // 값을 넣어줘야함 
 %>
 
 
@@ -63,7 +44,9 @@
 	
 		<div class="col-4">
 		<h1 style="text-align: center">상세 정보</h1><br>
-		
+		<%
+			for(HashMap m: GoodsOne) { 
+		%>
 		<table class="table">
 			<tr>
 				<td> 제품 번호</td>
@@ -86,6 +69,7 @@
 				<td><%=(Integer)(m.get("goodsAmount"))%></td>
 			</tr>	
 			<%
+			}
 			%>
 		</table>
 	<div class="col-4"></div>

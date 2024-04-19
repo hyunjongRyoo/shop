@@ -14,7 +14,7 @@ public class CustomerDAO {
 		
 	}
 	//관리자 페이지에서 전체 회원정보보기(pw제외)
-	//호출: /admin/customerList.jsp
+	//호출: /emp/customerList.jsp
 	//매개변수: 없음 (void)
 	//return : Customer배열(리스트) -> ArrayList<HashMap<String, Object >>
 	//페이징
@@ -109,7 +109,7 @@ public class CustomerDAO {
 	
 	
 	
-	//회원탈퇴
+	//회원탈퇴 --완료
 	//호출
 	//param: String (세션안의 mail), String (pw)
 	//return: int (1이면 탈퇴 	0이면 탈퇴실패)
@@ -130,6 +130,117 @@ public class CustomerDAO {
 	
 	
 	
+	//customerGoodsList페이징 --완성
+	public static ArrayList<HashMap<String, Object>> paging() throws Exception{
+		ArrayList<HashMap<String , Object>>paging =
+				new ArrayList<HashMap<String, Object>>();
+		
+		Connection conn = DBHelper.getConnection();
+		String sql1 = "select category, count(*) cnt from "
+				+ "goods group by category order by category";
+		PreparedStatement stmt1 = conn.prepareStatement(sql1);
+		
+		ResultSet rs1 = stmt1.executeQuery();
+		
+		while(rs1.next()) {
+			HashMap<String, Object> m = new HashMap<String, Object>(); //키 & 벨류
+			m.put("category", rs1.getString("category"));
+			m.put("cnt", rs1.getInt("cnt"));
+			paging.add(m);
+		}
+		conn.close();
+	return paging;
+	}
+	
+	//customerList --완성
+	public static ArrayList<HashMap<String , Object>>  goodsList(
+			String category, int startRow , int rowPerPage) throws Exception{
+		ArrayList<HashMap<String , Object>>goodsList =
+					new ArrayList<HashMap<String, Object>>();
+		
+		Connection conn = DBHelper.getConnection();
+		 //전체 상품 가져옴 
+		PreparedStatement stmt = null;
+		if(category == null || category.equals("null")){
+			String sql = "select goods_no goodsNo, category, filename,emp_id empId, goods_title " + 
+					"goodsTitle, goods_content goodsContent, goods_price goodsPrice, goods_amount goodsAmount, " + 
+					"update_date updateDate, create_date createDate from goods order by goods_no asc limit ?, ?";
+					//+"offset ? rows fetch next ? rows only";
+			 stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, startRow);
+			stmt.setInt(2, rowPerPage);
+			System.out.println(stmt);
+		} else { //해당 카테고리에 속하는 상품만 가져옴
+			String sql = "select goods_no goodsNo, category,filename, emp_id empId, goods_title " + 
+					"goodsTitle, goods_content goodsContent, goods_price goodsPrice, goods_amount goodsAmount, " + 
+					"update_date updateDate, create_date createDate from goods where category = ? order by goods_no asc limit ?, ?";
+					//+"offset ? rows fetch next ? rows only";
+			
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, category);
+			stmt.setInt(2, startRow);
+			stmt.setInt(3, rowPerPage);
+		}
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next()) {
+			HashMap<String , Object> m  = new HashMap<String, Object >();
+			m.put("goodsNo", rs.getInt("goodsNo"));
+			m.put("category", rs.getString("category"));
+			m.put("filename", rs.getString("filename"));
+			m.put("empId", rs.getString("empId"));
+			m.put("goodsTitle", rs.getString("goodsTitle"));
+			m.put("goodsContent", rs.getString("goodsContent"));
+			m.put("goodsPrice", rs.getInt("goodsPrice"));
+			m.put("goodsAmount", rs.getInt("goodsAmount"));
+			m.put("updateDate", rs.getString("updateDate"));
+			m.put("createDate", rs.getString("createDate"));
+			
+			goodsList.add(m);
+		}
+		conn.close();
+		
+		
+		return goodsList;
+		
+	}
+	
+	//CustomeGoodsOne.jsp--완성
+	public static ArrayList<HashMap<String , Object>>GoodsOne( //메소드 이름
+			int goodsNo)throws Exception{
+		ArrayList<HashMap<String ,  Object>> GoodsOne = //객체 
+				new ArrayList<HashMap<String, Object>>();
+		
+		Connection conn = DBHelper.getConnection();
+		String sql = "select goods_no goodsNo , category ,filename , goods_title goodsTitle , "
+				+ "goods_content goodsContent , goods_price goodsPrice ,goods_amount goodsAmount "
+				+ ",update_date updateDate, create_date createDate  from goods where goods_no= ?  ";
+				PreparedStatement stmt = conn.prepareStatement(sql);
+				stmt.setInt(1,goodsNo);
+				
+				
+				ResultSet rs = stmt.executeQuery();
+				if(rs.next()) {
+			    	HashMap<String, Object> m = new HashMap<String, Object>();
+			    	
+			    	m.put("goodsNo", rs.getInt("goodsNo"));
+			    	m.put("filename", rs.getString("filename"));
+			    	m.put("goodsTitle", rs.getString("goodsTitle"));
+			    	m.put("goodsContent", rs.getString("goodsContent"));
+			    	m.put("goodsPrice", rs.getInt("goodsPrice"));
+			    	m.put("goodsAmount", rs.getInt("goodsAmount"));
+			    	m.put("updateDate", rs.getString("updateDate"));
+					m.put("createDate", rs.getString("createDate"));
+			    	
+			    
+					
+					GoodsOne.add(m);
+			    }
+		conn.close();
+		
+		return GoodsOne;
+		
+	
+	}
 	
 	//로그인 메서드 --완성 
 	// 호출:loginAction.jsp

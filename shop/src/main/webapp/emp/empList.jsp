@@ -116,6 +116,10 @@
 			}
 		%>
 	</table>
+			<a href="/shop/emp/addEmp.jsp">
+				<button type="submit">직원추가</button>
+			</a>
+	
 			<div class="position-absolute bottom-0 start-50 translate-middle-x">
 					<%
 						if(currentPage>1 && currentPage<lastPage){

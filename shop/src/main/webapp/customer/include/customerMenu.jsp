@@ -14,7 +14,7 @@
 <!-- 상단 네비게이터 바 -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/shop/customer/goodsList.jsp">
+    <a class="navbar-brand" href="/shop/customer/customerGoodsList.jsp">
    		<%=(String)(loginCustomer.get("name"))%>님
 		</a>
 		 	<div class="collapse navbar-collapse" id="navbarNav">

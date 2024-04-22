@@ -9,22 +9,22 @@ import java.util.*;
 			String empId,
 			String empPw,
 			String empName,
-			String empJob
+			String empJob,
+			String hireDate
 			)
 	throws Exception{
-		int row =0;
-		//db 접근
-		Class.forName("org.mariadb.jdbc.Driver");
-		Connection conn= DriverManager.getConnection(
-				"jdbc:mariadb://127.0.0.1:3306/shop", "root", "guswhd6656");
-		String sql= "insert ... ?,?,?,?";
+	
+		String sql="insert into emp (emp_id,emp_pw,emp_name,emp_job,hire_date) values (?,password(?), ? ,? , ?)";
+		Connection conn= DBHelper.getConnection();
 		PreparedStatement stmt  = conn.prepareStatement(sql);
 		
 		stmt.setString(1, empId);
 		stmt.setString(2, empPw);
 		stmt.setString(3, empName);
 		stmt.setString(4, empJob);
-		conn.close();
+		stmt.setString(5, hireDate);
+		int row =0;
+		row = stmt.executeUpdate();
 		return row;
 	}
 

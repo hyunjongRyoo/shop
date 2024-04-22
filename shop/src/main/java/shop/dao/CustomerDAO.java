@@ -277,8 +277,8 @@ public class CustomerDAO {
 	//check CustomerKeyActrion.jsp
 	//param :String (메일 문자열)
 	// return : boolean(사용 가능하면 true , 불가면 false)
-	public static boolean checkMail(String mail) throws Exception {
-		boolean result = false;
+	public static String checkMail(String mail) throws Exception {
+		String result = "O";
 		
 		Connection conn = DBHelper.getConnection();
 		
@@ -289,7 +289,7 @@ public class CustomerDAO {
 		ResultSet rs =stmt.executeQuery();		
 		
 		if(!rs.next()) { //사용불가
-			result =true;
+			result ="O";
 			
 		}
 		conn.close();

@@ -14,7 +14,7 @@
 <title>deleteCustomerForm</title>
 </head>
 <body>
-	<form method="post" href="deleteCustomerForm.jsp">
+	<form method="post" href="deleteCustomerAction.jsp">
 		<div>
 		<label for="id">id</label>
 		<input type="email" id="id" name="id">

@@ -9,21 +9,22 @@
 	%>
 <%
 String mail = request.getParameter("mail");
-String pw = request.getParameter("pw");
+String OldPw = request.getParameter("OldPw");
+String newPw = request.getParameter("newPw");
 
 //디버깅
 System.out.println(mail+"<--deletemail");
-System.out.println(pw+"<--deletePw");
-
+System.out.println(newPw+"<--newPw");
+System.out.println(OldPw+"<--OldPw");
 
 int row;
-row=CustomerDAO.deleteCustomer(mail,pw);
+row=CustomerDAO.updatePw(mail,OldPw,newPw);
 if(row==1) {
-	System.out.println("회원가입을 축하합니다");
-	response.sendRedirect("/shop/emp/loginForm.jsp]");
+	System.out.println("삭제에 성공하였습니다");
+	response.sendRedirect("/shop/customer/deleteCustomer.jsp]");
 }else{
 	System.out.println("다시 시도해주세요");
-	response.sendRedirect("/shop/customer/addCustomerForm.jsp]");
+	response.sendRedirect("/shop/customer/deleteCustomer.jsp]");
 }
 
 

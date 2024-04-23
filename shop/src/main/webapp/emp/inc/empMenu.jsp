@@ -28,6 +28,9 @@
 			       <li class="nav-item">
 					          <a class="nav-link active" aria-current="page" href="/shop/emp/goodsList.jsp">상품 관리</a>
 			        </li>
+		           <li class="nav-item">
+					          <a class="nav-link active" aria-current="page" href="/shop/emp/customerList.jsp">고객 리스트</a>
+			        </li>
 			         <li class="nav-item">
 					          <a class="nav-link active" aria-current="page" href="/shop/emp/addEmp.jsp?empName=<%=(Object)(loginMember.get("empName"))%>">직원 추가</a>
 			        </li>

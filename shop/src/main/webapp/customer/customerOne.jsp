@@ -76,7 +76,23 @@
 	<a href="/shop/customer/customerGoodsList.jsp">
 		<button type="submit">리스트</button>
 	</a>
-
-
+	<h1>비밀번호 변경하기</h1>
+	<form method="post" action="/shop/customer/modifyCustomerPw.jsp">
+		<div>
+			<label for="mail">email</label>
+			<input type="email" id="mail" name="mail" >
+		</div>
+		
+		<div>
+			<label for="OldPw">OldPw</label>
+			<input type="password" id="OldPw" name="OldPw" >
+		</div>
+		
+		<div>
+			<label for="newPw">newPw</label>
+			<input type="password" id="newPw" name="newPw" >
+		</div>
+		<button type="submit">변경하기</button>		
+	</form>
 </body>
 </html>

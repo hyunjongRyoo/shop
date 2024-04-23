@@ -14,7 +14,7 @@ public class CustomerDAO {
 		System.out.println(CustomerDAO.empCustomerList(10, 10)); // 10번쨰 부터 10개 출력
 
 	}
-	// 관리자 페이지에서 전체 회원정보보기(pw제외)
+	// 관리자 페이지에서 전체 회원정보보기(pw제외) -- 끝
 	// 호출: /emp/customerList.jsp
 	// 매개변수: 없음 (void)
 	// return : Customer배열(리스트) -> ArrayList<HashMap<String, Object >>

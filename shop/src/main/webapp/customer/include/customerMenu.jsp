@@ -22,6 +22,9 @@
 			        <li class="nav-item">
 					          <a class="nav-link active" aria-current="page" href="/shop/customer/customerOne.jsp?mail=<%=(Object)(loginCustomer.get("mail"))%>">내 정보</a>
 			        </li>
+			        <li class="nav-item">
+					          <a class="nav-link active" aria-current="page" href="/shop/customer/ordersList.jsp?mail=<%=(Object)(loginCustomer.get("mail"))%>">내 주문</a>
+			        </li>
 			 
 			         <li class="nav-item">
 					          <a class="nav-link active" aria-current="page" href="/shop/customer/logout.jsp">로그아웃</a>

@@ -34,6 +34,9 @@
 			         <li class="nav-item">
 					          <a class="nav-link active" aria-current="page" href="/shop/emp/addEmp.jsp?empName=<%=(Object)(loginMember.get("empName"))%>">직원 추가</a>
 			        </li>
+			         <li class="nav-item">
+					          <a class="nav-link active" aria-current="page" href="/shop/emp/empOrderList.jsp">고객 주문 정보</a>
+			        </li>
 			        <li class="nav-item">
 					          <a class="nav-link active" aria-current="page" href="/shop/emp/empOne.jsp?empName=<%=(Object)(loginMember.get("empName"))%>">내 정보</a>
 			        </li>

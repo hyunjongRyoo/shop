@@ -2,6 +2,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*"%>
 <%@ page import="java.util.*"%>
+
+<%
+	// 로그인 세션 세션변수- loginEmp
+	if(session.getAttribute("loginEmp") == null) {
+		response.sendRedirect("/shop/emp/empLoginForm.jsp");
+		return;
+	}
+%>
 <%
 
 String empNameParam = request.getParameter("empName"); //값을 받아오고  

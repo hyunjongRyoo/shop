@@ -3,7 +3,6 @@
 <%@ page import="java.sql.*"%>
 <%@ page import="java.util.*"%>
 
-
 <%	
 	int goodsNoParam = Integer.parseInt(request.getParameter("goodsNo")); //값을 받아오고  
 	ArrayList<HashMap<String, Object>> 
@@ -47,37 +46,40 @@
 		<%
 			for(HashMap m: GoodsOne) { 
 		%>
-		<table class="table">
-			<tr>
-				<td> 제품 번호</td>
-				<td><%=(Integer)(m.get("goodsNo"))%></td>
-			</tr>
-			<tr>
-				<td> 사진</td>
-				<td> <img src="/shop/upload/default.jpg" alt="??"></td>
-			</tr>
-			<tr>
-				<td> 종류</td>
-				<td><%=(String)(m.get("goodsContent"))%></td>
-			</tr>	
-			<tr>
-				<td> 가격</td>
-				<td><%=(Integer)(m.get("goodsPrice"))%></td>
-			</tr>
-			<tr>
-				<td> 수량</td>
-				<td><%=(Integer)(m.get("goodsAmount"))%></td>
-			</tr>	
-			<%
+				<table class="table">
+					<tr>
+						<td> 제품 번호</td>
+						<td><%=(Integer)(m.get("goodsNo"))%></td>
+					</tr>
+					<tr>
+						<td> 사진</td>
+						<td> <img src="/shop/upload/default.jpg" alt="??"></td>
+					</tr>
+					<tr>
+						<td> 종류</td>
+						<td><%=(String)(m.get("goodsContent"))%></td>
+					</tr>	
+					<tr>
+						<td> 가격</td>
+						<td><%=(Integer)(m.get("goodsPrice"))%></td>
+					</tr>
+					<tr>
+						<td> 수량</td>
+						<td><%=(Integer)(m.get("goodsAmount"))%></td>
+					</tr>	
+		<%
 			}
-			%>
-		</table>
+		%>
+			</table>
+				<div>
+				<a href="/shop/customer/orderForm.jsp?goodsNo=<%=(goodsNoParam)%>">
+					<button type="submit">주문하기</button>
+				</a>
+				<a href="/shop/customer/customerGoodsList.jsp">
+					<button type="submit">리스트</button>
+				</a>
+			</div>
+		</div>
 	<div class="col-4"></div>
-	
-	<a href="/shop/customer/customerGoodsList.jsp">
-		<button type="submit">리스트</button>
-	</a>
-
-
 </body>
 </html>

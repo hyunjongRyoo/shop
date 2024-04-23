@@ -4,7 +4,7 @@ import java.util.*;
 
 
 public class ordersDAO {
-	//고객의 자신의 주문을 확인 (페이징)
+	//고객의 자신의 주문을 확인 (페이징)--완료(값 확인해야함)
 	public static ArrayList<HashMap<String, Object>>selectOrdersListByCustomer(
 			String mail, int startRow, int rowPerPage) throws Exception {
 		ArrayList<HashMap<String, Object>>list
@@ -40,7 +40,7 @@ public class ordersDAO {
 		conn.close();
 		return list;
 	}
-	//관리자의 전체주문을 확인(페이징)
+	//관리자의 전체주문을 확인(페이징)--완료(값 확인해야함)
 	public static ArrayList<HashMap<String, Object>>selectOrdersListAll(
 			int startRow , int rowPerPage) throws Exception {
 		ArrayList<HashMap<String, Object>>list
@@ -74,7 +74,22 @@ public class ordersDAO {
 		
 		return list;
 	}
-	
+	//ordersAction.jsp
+	public static int ordersAction(String mail, int amount, int price , String address)
+	throws Exception{
+		String sql="insert into orders (mail,amount,price,address) values (?,?,?,?)";
+		Connection conn=DBHelper.getConnection();
+		
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, mail);
+		stmt.setInt(2, amount);
+		stmt.setInt(3, price);
+		stmt.setString(4, address);
+		System.out.println(stmt);
+		int row =0;
+		row=stmt.executeUpdate();
+		return row;
+	}
 	
 	
 }

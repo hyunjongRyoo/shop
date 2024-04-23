@@ -8,22 +8,32 @@ public class GoodsDAO {
 	// 매개변수 int(상품번호) , int (변경할 수량 + -)
 	public static int updateGoodsAmount(int goodsNo, int amount ) 
 												throws Exception {
-		int row= 0;
-		
+		Connection conn=DBHelper.getConnection();
+		PreparedStatement stmt = null;
+		if(amount>0) {
 		String sql= "update goods "
-					+ "set goods_amount =? , update_date=sysdate"
-					+"where goods_no";
-		
-		
-		return row;
-		
+					+ "set goods_amount = goods_amount-? , update_date=now() "
+					+ "where goods_no=? "
+					+ "and goods_amount > ?";
+	stmt= conn.prepareStatement(sql);
+	stmt.setInt(1, amount);
+	stmt.setInt(2, goodsNo);
+	stmt.setInt(3, goodsNo-1); //주문후 수량에서 -1 해주기  
+	System.out.println(stmt);
+	}else{
+		String sql= "update goods "
+				+ "set goods_amount = goods_amount-? , update_date=now() "
+				+ "where goods_no=? ";
+		stmt= conn.prepareStatement(sql);
+		stmt.setInt(1, amount);
+		stmt.setInt(2, goodsNo);
+		System.out.println(stmt);
 	}
+	int row= 0;
+	row=stmt.executeUpdate();
 	
-	
-	
-	
-	
-	
+	return row;
+}
 	
 	
 	//goodsOne.jsp

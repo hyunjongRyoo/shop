@@ -4,15 +4,10 @@
 <%@ page import="java.util.*"%>
 
 <%	
-	int goodsNoParam = Integer.parseInt(request.getParameter("goodsNo")); //값을 받아오고  
+	int goodsNo = Integer.parseInt(request.getParameter("goodsNo")); //값을 받아오고  
 	ArrayList<HashMap<String, Object>> 
-	GoodsOne= CustomerDAO.GoodsOne(goodsNoParam); // 값을 넣어줘야함 
+	GoodsOne= CustomerDAO.GoodsOne(goodsNo); // 값을 넣어줘야함 
 %>
-
-
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,7 +67,7 @@
 		%>
 			</table>
 				<div>
-				<a href="/shop/customer/orderForm.jsp?goodsNo=<%=(goodsNoParam)%>">
+				<a href="/shop/customer/orderAction.jsp?goodsNo=<%=(goodsNo)%>">
 					<button type="submit">주문하기</button>
 				</a>
 				<a href="/shop/customer/customerGoodsList.jsp">
@@ -80,6 +75,35 @@
 				</a>
 			</div>
 		</div>
-	<div class="col-4"></div>
+	<div class="col-4">
+	<form method="post" action="/shop/customer/orderAction.jsp">
+	<div>
+		<label for="goodsNo">상품번호</label>
+		<input type="hidden" id="goodsNo" name="goodsNo" >
+	</div>	
+	<div>
+		<label for="mail">메일</label>
+		<input type="email" id="mail" name="mail">
+	</div>
+	
+	<div>
+		<label for= "amount">수량</label>
+		<input type="number" id="amount" name="amount">
+	</div>
+	
+	<div>
+		<label for="price">가격</label>
+		<input type="number" id="price" name="price">
+	<div>
+		<label for="address">주소 </label>
+		<input type="text" id="address" name="address">
+	</div>	
+		<div>
+			<a href="/shop/customer/orderAction.jsp">
+				<button type="submit">주문하기</button>
+			</a>
+		</div>
+	</form>
+	</div>
 </body>
 </html>

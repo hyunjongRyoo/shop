@@ -21,10 +21,20 @@ HashMap<String,Object> loginMember = (HashMap<String,Object>)(session.getAttribu
 String category = request.getParameter("category");
 String goodsTitle =request.getParameter("goodsTitle");
 String empId = (String)(loginMember.get("empId"));
-String fileN =request.getParameter("goodsTitle");
 String goodsPrice =request.getParameter("goodsPrice");
 String goodsAmount =request.getParameter("goodsAmount");
 String goodsContent =request.getParameter("goodsContent");
+
+
+
+System.out.println(category+"<--addgoodsAction category");
+System.out.println(goodsTitle+"<--addgoodsAction goodsTitle");
+System.out.println(empId+"<--addgoodsAction empId");
+System.out.println(goodsTitle+"<--addgoodsAction goodsPrice");
+System.out.println(goodsPrice+"<--addgoodsAction goodsAmount");
+System.out.println(goodsAmount+"<--addgoodsAction goodsContent");
+
+
 
 Part part = request.getPart("goodsImg");
 String originalName = part.getSubmittedFileName();

@@ -42,7 +42,7 @@ System.out.println(errMsg + " <-- loginForm param errMsg");
             <%
                }
             %>
-            <h1 class="text-center mt-4 fw-bold " style="color: #FFFFFF">Welcome</h1>
+            <h1 class="text-center mt-4 fw-bold " style="color: #FFFFFF">welcome</h1>
             <form method="post" action="/shop/emp/empLoginAction.jsp" >
             	<div>
             		<label class="form-label" style="color: #FFFFFF">사원 아이디</label><br>

@@ -139,7 +139,7 @@ if(session.getAttribute("loginEmp") == null) {
   <!-- map으로 값 받아주기 -->
   
  <div class="goods-item">
-                <img src="/shop/upload/default.jpg" alt="??">
+                <img src="/shop/upload/<%=(String)(m.get("filename"))%>">
                 <br>
                 <a href="/shop/emp/goodsOne.jsp?goodsNo=<%=(int)(m.get("goodsNo")) %>">
                     품명:<%=(String)(m.get("goodsTitle"))%>

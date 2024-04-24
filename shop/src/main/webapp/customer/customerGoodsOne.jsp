@@ -48,9 +48,7 @@ ArrayList<HashMap<String, Object>> GoodsOne = CustomerDAO.GoodsOne(goodsNo, good
 						<td><%=(Integer)(m.get("goodsNo"))%></td>
 					</tr>
 					<tr>
-						<td> 사진</td>
-						<td> <img src="/shop/upload/default.jpg" alt="??"></td>
-					</tr>
+						<td> <img src="/shop/upload/<%=(String)(m.get("filename"))%>"></td>
 					<tr>
 						<td> 종류</td>
 						<td><%=(String)(m.get("goodsContent"))%></td>

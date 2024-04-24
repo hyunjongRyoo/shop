@@ -45,7 +45,7 @@
 				</tr>
 				<tr>
 					<td> 사진</td>
-					<td> <img src="/shop/upload/default.jpg" alt="??"></td>
+					<td> <img src="/shop/upload/<%=(String)(m.get("filename"))%>"></td>
 				</tr>
 				<tr>
 					<td> 담당자</td>

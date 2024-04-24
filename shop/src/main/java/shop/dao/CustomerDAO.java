@@ -187,16 +187,17 @@ public class CustomerDAO {
 
 	// CustomeGoodsOne.jsp--완성
 	public static ArrayList<HashMap<String, Object>> GoodsOne( // 메소드 이름
-			int goodsNo) throws Exception {
+			int goodsNo , int goodsPrice) throws Exception {
 		ArrayList<HashMap<String, Object>> GoodsOne = // 객체
 				new ArrayList<HashMap<String, Object>>();
 
 		Connection conn = DBHelper.getConnection();
 		String sql = "select goods_no goodsNo , category ,filename , goods_title goodsTitle , "
 				+ "goods_content goodsContent , goods_price goodsPrice ,goods_amount goodsAmount "
-				+ ",update_date updateDate, create_date createDate  from goods where goods_no= ?  ";
+				+ ",update_date updateDate, create_date createDate  from goods where goods_no= ? and goods_price=?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, goodsNo);
+		stmt.setInt(2, goodsPrice);
 
 		ResultSet rs = stmt.executeQuery();
 		if (rs.next()) {

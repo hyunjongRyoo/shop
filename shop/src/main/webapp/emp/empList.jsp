@@ -61,6 +61,9 @@
 	text-align: center;
 	}
 	
+	body -1:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
 
 	
 	</style>
@@ -77,7 +80,7 @@
 	
 		<div class="col">
 		<h1 style="text-align: center">사원 목록</h1><br>
-		<table  style="border=1 solid black;">
+		<table  border="1">
 			<tr>
 				<th>사원 이메일</th>
 				<th>사원 이름</th>

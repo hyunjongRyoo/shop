@@ -6,26 +6,26 @@ public class GoodsDAO {
 	//싱품 주문 or 취소시  수정할 수량
 	// customer/addOrdersAction.jsp or dropOrdersAction.jsp
 	// 매개변수 int(상품번호) , int (변경할 수량 + -)
-	public static int updateGoodsAmount(int goodsNo, int amount ) 
+	public static int updateGoodsAmount(int goodsNo, int goodsAmount ) 
 												throws Exception {
 		Connection conn=DBHelper.getConnection();
 		PreparedStatement stmt = null;
-		if(amount>0) {
+		if(goodsAmount>0) {
 		String sql= "update goods "
 					+ "set goods_amount = goods_amount-? , update_date=now() "
 					+ "where goods_no=? "
 					+ "and goods_amount > ?";
 	stmt= conn.prepareStatement(sql);
-	stmt.setInt(1, amount);
+	stmt.setInt(1, goodsAmount);
 	stmt.setInt(2, goodsNo);
-	stmt.setInt(3, goodsNo-1); //주문후 수량에서 -1 해주기  
+	stmt.setInt(3, goodsAmount-1); //주문후 수량에서 -1 해주기  
 	System.out.println(stmt);
 	}else{
 		String sql= "update goods "
 				+ "set goods_amount = goods_amount-? , update_date=now() "
 				+ "where goods_no=? ";
 		stmt= conn.prepareStatement(sql);
-		stmt.setInt(1, amount);
+		stmt.setInt(1, goodsAmount);
 		stmt.setInt(2, goodsNo);
 		System.out.println(stmt);
 	}

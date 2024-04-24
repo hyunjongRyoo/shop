@@ -32,9 +32,15 @@ public class ordersDAO {
 			m.put("ordersNo",rs.getInt("ordersNo"));
 			m.put("mail",rs.getString("mail"));
 			m.put("goodsNo", rs.getInt("goodsNo"));
-			m.put("price", rs.getInt("price"));
-			m.put("ordersNo", rs.getString("ordersNo"));
+			m.put("totalAmount", rs.getInt("totalAmount"));
+			m.put("price", rs.getInt("totalPrice"));
+			m.put("address", rs.getString("address"));
 			m.put("state", rs.getString("state"));
+			m.put("updateDate", rs.getInt("updateDate"));
+			m.put("createDate", rs.getInt("createDate"));
+			m.put("goodsPrice", rs.getInt("goodsPrice"));
+			m.put("goodsTitle", rs.getInt("goodsTitle"));
+			
 			list.add(m);
 		}
 		conn.close();
@@ -65,9 +71,14 @@ public class ordersDAO {
 			m.put("ordersNo",rs.getInt("ordersNo"));
 			m.put("mail",rs.getString("mail"));
 			m.put("goodsNo", rs.getInt("goodsNo"));
-			m.put("price", rs.getInt("price"));
-			m.put("ordersNo", rs.getString("ordersNo"));
+			m.put("totalAmount", rs.getInt("totalAmount"));
+			m.put("price", rs.getInt("totalPrice"));
+			m.put("address", rs.getString("address"));
 			m.put("state", rs.getString("state"));
+			m.put("updateDate", rs.getInt("updateDate"));
+			m.put("createDate", rs.getInt("createDate"));
+			m.put("goodsPrice", rs.getInt("goodsPrice"));
+			m.put("goodsTitle", rs.getInt("goodsTitle"));
 			list.add(m);
 		}
 		conn.close();
@@ -75,15 +86,15 @@ public class ordersDAO {
 		return list;
 	}
 	//ordersAction.jsp
-	public static int ordersAction(String mail, int amount, int price , String address)
+	public static int ordersAction(String mail, int totalAmount, int totalPrice , String address)
 	throws Exception{
-		String sql="insert into orders (mail,amount,price,address) values (?,?,?,?)";
+		String sql="insert into orders (mail,total_amount,total_price,address) values (?,?,?,?)";
 		Connection conn=DBHelper.getConnection();
 		
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, mail);
-		stmt.setInt(2, amount);
-		stmt.setInt(3, price);
+		stmt.setInt(2, totalAmount);
+		stmt.setInt(3, totalPrice);
 		stmt.setString(4, address);
 		System.out.println(stmt);
 		int row =0;

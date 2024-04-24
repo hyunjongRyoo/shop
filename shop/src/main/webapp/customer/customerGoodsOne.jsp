@@ -4,9 +4,11 @@
 <%@ page import="java.util.*"%>
 
 <%	
-	int goodsNo = Integer.parseInt(request.getParameter("goodsNo")); //값을 받아오고  
-	ArrayList<HashMap<String, Object>> 
-	GoodsOne= CustomerDAO.GoodsOne(goodsNo); // 값을 넣어줘야함 
+
+int goodsNo = Integer.parseInt(request.getParameter("goodsNo"));
+int goodsPrice = Integer.parseInt(request.getParameter("goodsPrice"));
+ArrayList<HashMap<String, Object>> GoodsOne = CustomerDAO.GoodsOne(goodsNo, goodsPrice);
+
 %>
 <!DOCTYPE html>
 <html>
@@ -34,9 +36,8 @@
 		<jsp:include page ="/customer/include/customerMenu.jsp"></jsp:include> 
 		<div class="col-2" >
 	 	</div>
-	 	<div class="col-2" ></div>
 	
-		<div class="col-4">
+		<div class="col-6">
 		<h1 style="text-align: center">상세 정보</h1><br>
 		<%
 			for(HashMap m: GoodsOne) { 
@@ -76,32 +77,32 @@
 			</div>
 		</div>
 	<div class="col-4">
+	<h1>주문하기</h1>
 	<form method="post" action="/shop/customer/orderAction.jsp">
 	<div>
-		<label for="goodsNo">상품번호</label>
-		<input type="hidden" id="goodsNo" name="goodsNo" >
-	</div>	
-	<div>
-		<label for="mail">메일</label>
-		<input type="email" id="mail" name="mail">
-	</div>
-	
-	<div>
-		<label for= "amount">수량</label>
-		<input type="number" id="amount" name="amount">
-	</div>
-	
-	<div>
-		<label for="price">가격</label>
-		<input type="number" id="price" name="price">
-	<div>
-		<label for="address">주소 </label>
-		<input type="text" id="address" name="address">
-	</div>	
+	<label for="goodsNo">상품번호</label>
+	<input type="number" id="goodsNo" name="goodsNo" value="<%= goodsNo %>"readonly/>
+		</div>	
+			<div>
+				<label for="mail">메일</label>
+				<input type="email" id="mail" name="mail">
+			</div>
+			
+			<div>
+				<label for= "amount">수량</label>
+				<input type="number" id="amount" name="goodsAmount">
+			</div>
+			
+			<div>
+				<label for="price">가격</label>
+				<input type="number" id="price" name="goodsPrice" value="<%=goodsPrice%>"readonly/>
+			</div>
+			<div>
+				<label for="address">주소 </label>
+				<input type="text" id="address" name="address">
+			</div>	
 		<div>
-			<a href="/shop/customer/orderAction.jsp">
 				<button type="submit">주문하기</button>
-			</a>
 		</div>
 	</form>
 	</div>

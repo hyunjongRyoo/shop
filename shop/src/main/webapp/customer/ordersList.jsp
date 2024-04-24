@@ -12,9 +12,9 @@ if(session.getAttribute("loginCustomer") == null) {
 %>
 
 <%
+HashMap<String, Object> loginCustomer=(HashMap<String, Object>)(session.getAttribute("loginCustomer"));
 //메일값으로 고객 개개인의 주문정보를 받아줌
-String mail=request.getParameter("mail");
-System.out.println(mail + "<--mail");
+String mail=(String)(loginCustomer.get("mail"));
 
 
 //페이징
@@ -61,19 +61,30 @@ list=ordersDAO.selectOrdersListByCustomer(mail, startRow, rowPerPage);
 					<th>주문 번호</th>
 					<th>메일(아이디)</th>
 					<th>상품번호</th>
-					<th>가격</th>
-					<th>배송 상태</th>
+					<th>총 수량</th>
+					<th>총 금액</th>
+					<th>주소</th>
+					<th>주문 상태</th>
+					<th>주문 변경 날짜</th>
+					<th>주문 날짜  </th>
+					<th>상품 가격</th>
+					<th>상품 이름</th>
 				</tr>
 			<%
 				for(HashMap<String , Object> m : list){
 			%>
-					<tr>
+				<tr>
 					<td><%=(Integer)(m.get("ordersNo"))%></td>
 					<td><%=(String)(m.get("mail"))%></td>
 					<td><%=(Integer)(m.get("goodsNo"))%></td>
-					<td><%=(Integer)(m.get("price"))%></td>
-					<td><%=(String)(m.get("ordersNo"))%></td>
+					<td><%=(Integer)(m.get("totalAmount"))%></td>
+					<td><%=(Integer)(m.get("totalPrice"))%></td>
+					<td><%=(Integer)(m.get("address"))%></td>
 					<td><%=(String)(m.get("state"))%></td>
+					<td><%=(Integer)(m.get("updateDate"))%></td>
+					<td><%=(Integer)(m.get("createDate"))%></td>
+					<td><%=(Integer)(m.get("goodsPrice"))%></td>
+					<td><%=(Integer)(m.get("goodsTitle"))%></td>	
 				</tr>
 			<%
 				}

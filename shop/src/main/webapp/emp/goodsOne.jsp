@@ -25,52 +25,56 @@
 <body>
 
 <div class="row">
+<!-- 상단바 -->
   	<jsp:include page ="/emp/inc/empMenu.jsp"></jsp:include> 
+  	<!--좌측부분 -->
 		<div class="col-2" >
 			<jsp:include page="/emp/inc/sidebar.jsp"></jsp:include>
 			<!-- empMenu.jsp include :주체(서버) vs redirect (주체:클라이언트) -->
 			<!-- shop부터 시작하지 않기 // 주체가 서버이기때문이다 -->
 	 	</div>
-	 	<div class="col-2" ></div>
-	
+	 	<div class="col-2"></div>
 		<div class="col-4">
-		<h1 style="text-align: center">상세 정보</h1><br>
-		<%
-			for(HashMap m: GoodsOne) { 
-		%>
-		<table class="table">
-				<tr>
-					<td> 제품 번호</td>
-					<td><%=(Integer)(m.get("goodsNo"))%></td>
-				</tr>
-				<tr>
-					<td> 사진</td>
-					<td> <img src="/shop/upload/<%=(String)(m.get("filename"))%>"></td>
-				</tr>
-				<tr>
-					<td> 담당자</td>
-					<td><%=(String)(m.get("empId"))%></td>
-				</tr>
-				<tr>
-					<td> 설명</td>
-					<td><%=(String)(m.get("goodsContent"))%></td>
-				</tr>	
-				<tr>
-					<td> 가격</td>
-					<td><%=(Integer)(m.get("goodsPrice"))%></td>
-				</tr>
-				<tr>
-					<td> 수량</td>
-					<td><%=(Integer)(m.get("goodsAmount"))%></td>
-				</tr>	
+			<h1 style="text-align: center">상세 정보</h1><br>
 				<%
-				}
+					for(HashMap m: GoodsOne) { 
 				%>
-		</table>
-	<div class="col-4"></div>
-	
-	<a href="/shop/emp/goodsList.jsp">
-		<button type="submit">리스트</button>
-	</a>
+					<table class="table">
+						<tr>
+							<td> 제품 번호</td>
+							<td><%=(Integer)(m.get("goodsNo"))%></td>
+						</tr>
+						<tr>
+							<td> 사진</td>
+							<td> <img src="/shop/upload/<%=(String)(m.get("filename"))%>"></td>
+						</tr>
+						<tr>
+							<td> 담당자</td>
+							<td><%=(String)(m.get("empId"))%></td>
+						</tr>
+						<tr>
+							<td> 설명</td>
+							<td><%=(String)(m.get("goodsContent"))%></td>
+						</tr>	
+						<tr>
+							<td> 가격</td>
+							<td><%=(Integer)(m.get("goodsPrice"))%></td>
+						</tr>
+						<tr>
+							<td> 수량</td>
+							<td><%=(Integer)(m.get("goodsAmount"))%></td>
+						</tr>	
+				<%
+					}
+				%>
+				</table>
+				<div>
+					<a href="/shop/emp/goodsList.jsp">
+						<button type="submit" class=" btn btn-primary">리스트</button>
+					</a>
+				</div>
+			</div>
+		<div class="col-4"></div>
+	</div>
 </body>
 </html>

@@ -68,11 +68,6 @@ customerlist= CustomerDAO.empCustomerList(startRow, rowPerPage);
   	<jsp:include page ="/emp/inc/empMenu.jsp"></jsp:include> 
 		<div class="col-2" >
 			<jsp:include page="/emp/inc/sidebar.jsp"></jsp:include>
-			<div>
-			<a href="/shop/customer/deleteCustomerAction.jsp">
-				<button type="submit">고객 삭제</button>
-			</a>
-			</div>
 			<!-- empMenu.jsp include :주체(서버) vs redirect (주체:클라이언트) -->
 			<!-- shop부터 시작하지 않기 // 주체가 서버이기때문이다 -->
 	 	</div>
@@ -80,7 +75,7 @@ customerlist= CustomerDAO.empCustomerList(startRow, rowPerPage);
 	
 		<div class="col">
 		<h1 style="text-align: center">고객 목록</h1><br>
-		<table border=1>
+		<table class="table table-hover text-center">
 			<tr>
 				<th>아이디</th>
 				<th>이름</th>
@@ -100,6 +95,11 @@ customerlist= CustomerDAO.empCustomerList(startRow, rowPerPage);
 			}
 		%>
 	</table>
+		<div>
+			<a href="/shop/customer/deleteCustomerAction.jsp">
+				<button type="submit" class="btn btn-primary">고객 삭제</button>
+			</a>
+		</div>
 			<div class="position-absolute bottom-0 start-50 translate-middle-x">
 					<%
 						if(currentPage>1 && currentPage<lastPage){

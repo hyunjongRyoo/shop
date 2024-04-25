@@ -75,7 +75,7 @@ categoryList= GoodsDAO.categoryList();
 					</div>
 				<div>
 			<a href="/shop/emp/addCategoryForm.jsp">
-			<button type="submit">카테고리 추가 등록 </button></a>	
+			<button type="submit" class="btn btn-primary">카테고리 추가 등록 </button></a>	
 		</div>
 		</div>
 	<div class="col-5" ></div>

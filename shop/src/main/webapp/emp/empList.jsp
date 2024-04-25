@@ -74,9 +74,6 @@
 				<jsp:include page="/emp/inc/sidebar.jsp"></jsp:include>
 				<!-- empMenu.jsp include :주체(서버) vs redirect (주체:클라이언트) -->
 				<!-- shop부터 시작하지 않기 // 주체가 서버이기때문이다 -->
-				<a href="/shop/emp/addEmp.jsp">
-					직원추가
-				</a>
  		</div>
 	 	<div class="col-2" ></div>
 	
@@ -121,6 +118,14 @@
 			}
 		%>
 	</table>
+<div>
+		<a href="/shop/emp/addEmp.jsp">
+			<button type="submit" class=" btn btn-primary">
+					직원추가
+			</button>
+		</a>
+		
+	</div>
 			<div class="position-absolute bottom-0 start-50 translate-middle-x">
 					<%
 						if(currentPage>1 && currentPage<lastPage){

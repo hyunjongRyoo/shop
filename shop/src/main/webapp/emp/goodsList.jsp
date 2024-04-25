@@ -80,7 +80,6 @@ if(session.getAttribute("loginEmp") == null) {
 	div{
 	text-align: center;
 	}
-	
     .goods-container {
             display: flex;
             flex-wrap: wrap;
@@ -88,7 +87,7 @@ if(session.getAttribute("loginEmp") == null) {
             margin-top: 20px;
         }
         .goods-item {
-            width: calc(33.33% - 10px); /* 3개의 요소가 한 줄에 들어가도록 폭 조절 */
+            width: calc(33.33% - 10px); 
             margin-bottom: 20px;
             box-sizing: border-box;
             border: 1px solid #ccc;
@@ -100,84 +99,88 @@ if(session.getAttribute("loginEmp") == null) {
         }
 	</style>
 </head>
-<body>
-  	<div class="row">
-  	<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
-		<div class="col-2" >
-		  	<jsp:include page="/emp/inc/sidebar.jsp"></jsp:include>
-			<div>
-				<a href="/shop/emp/addGoodsForm.jsp">상품등록</a>	
-			</div>
-			<!-- 서브메뉴 카테고리별 상품리스트 -->
-			<div>
-				<a href="/shop/emp/goodsList.jsp">전체</a>
-			</div>
-			
-				
-			<div>
-		<%
-				for(HashMap m : paging) {
-		%>
-				<a href="/shop/emp/goodsList.jsp?category=<%=(String)(m.get("category"))%>">
-				<div>
-					<%=(String)(m.get("category"))%>
-					(<%=(Integer)(m.get("cnt"))%>) <!-- 카테고리별 상품 숫자,상품 목록 -->
+	<body>
+	  	<div class="row">
+	  			<!--상단 바 -->
+	  		<jsp:include page="/emp/inc/empMenu.jsp"></jsp:include>
+				<div class="col-2" >
+			  		<jsp:include page="/emp/inc/sidebar.jsp"></jsp:include>
+						<div>
+							<a href="/shop/emp/addGoodsForm.jsp">상품등록</a>	
+						</div>
+						<!-- 카테고리별 상품리스트 -->
+						<div>
+							<a href="/shop/emp/goodsList.jsp">전체</a>
+						</div>	
+					<div>
+						<%
+							for(HashMap m : paging) {
+						%>
+							<a href="/shop/emp/goodsList.jsp?category=<%=(String)(m.get("category"))%>">
+								<!-- 카테고리별 상품 숫자,상품 목록 -->
+								<div>
+									<%=(String)(m.get("category"))%>
+									(<%=(Integer)(m.get("cnt"))%>) 
+								</div>
+							</a>	
+						<%		
+							}
+						%>
+					</div>
 				</div>
-				</a>	
-		<%		
-				}
-		%>
+				<!--메인 상품 표시되는 부분 -->
+	<div class="col-8" >
+		<div class="goods-container">			
+	  <!-- map으로 값 받아주기 -->
+			<%
+				for(HashMap m: goodsList) { 
+			%>
+	 			<div class="goods-item">
+	 			<!-- 사진 -->
+				<div>
+	                <img src="/shop/upload/<%=(String)(m.get("filename"))%>">
+	             </div>
+	             <!-- 제품명 :클릭시 goodsOne으로 이동-->
+	             	<div>
+	                	<a href="/shop/emp/goodsOne.jsp?goodsNo=<%=(int)(m.get("goodsNo"))%>">
+	                    	품명:<%=(String)(m.get("goodsTitle"))%>
+	                	</a>
+	            	</div>
+	            	<!-- 가격 -->
+		            <div>
+		                가격:<%=(Integer)(m.get("goodsPrice"))%>원
+		            </div>
+	         	</div>	
+	         <%
+	   			}
+	         %>
+	     </div>
 	</div>
-	
-		</div>
-		<div class="col-8" >
-	<div class="goods-container">
-			
-	<%
-			for(HashMap m: goodsList) { 
-	%>
-  <!-- map으로 값 받아주기 -->
-  
- <div class="goods-item">
-                <img src="/shop/upload/<%=(String)(m.get("filename"))%>">
-                <br>
-                <a href="/shop/emp/goodsOne.jsp?goodsNo=<%=(int)(m.get("goodsNo")) %>">
-                    품명:<%=(String)(m.get("goodsTitle"))%>
-                </a> <br>
-                <%=(Integer)(m.get("goodsPrice"))%>원
-            </div>
-            <%
-                }
-            %>
-        </div>
-	</div>
-	<!-- 페이징 -->
-	<div>
-		<%
-			if(currentPage>1 && currentPage<lastPage){
-		%>
-				<a href="/shop/emp/goodsList.jsp?currentPage=1&category=<%=category%>">첫장</a>
-				<a href="/shop/emp/goodsList.jsp?currentPage- 1 %>&category=<%=category%>">이전</a>
-				<a href="/shop/emp/goodsList.jsp?currentPage+ 1 %>&category=<%=category%>">다음</a>  
-				<a href="/shop/emp/goodsList.jsp?currentPage=lastPage %>&category=<%=category%>">마지막장</a>  
-		<%
-			}else if(currentPage==1){
-		%>
-				<a href="/shop/emp/goodsList.jsp?currentPage=<%=currentPage + 1 %>&category=<%=category%>">다음</a>
-				<a href="/shop/emp/goodsList.jsp?currentPage=<%=lastPage %>&category=<%=category%>">마지막장</a>  
-		<%
-		
-			}else{
-		%>
-				<a href="/shop/emp/goodsList.jsp?currentPage=1&category=<%=category%>">처음</a>
-				<a href="/shop/emp/goodsList.jsp?currentPage=- 1 %>&category=<%=category%>">이전</a>
-		<% 
-			}
-		%>
-	</div>
-	</div>
-	<div class="col-2" ></div>
-	</div>
-</body>
-
+		<!-- 페이징 -->
+				<div>
+					<%
+						if(currentPage>1 && currentPage<lastPage){
+					%>
+							<a href="/shop/emp/goodsList.jsp?currentPage=1&category=<%=category%>">첫장</a>
+							<a href="/shop/emp/goodsList.jsp?currentPage- 1 %>&category=<%=category%>">이전</a>
+							<a href="/shop/emp/goodsList.jsp?currentPage+ 1 %>&category=<%=category%>">다음</a>  
+							<a href="/shop/emp/goodsList.jsp?currentPage=lastPage %>&category=<%=category%>">마지막장</a>  
+					<%
+						}else if(currentPage==1){
+					%>
+							<a href="/shop/emp/goodsList.jsp?currentPage=<%=currentPage + 1 %>&category=<%=category%>">다음</a>
+							<a href="/shop/emp/goodsList.jsp?currentPage=<%=lastPage %>&category=<%=category%>">마지막장</a>  
+					<%
+					
+						}else{
+					%>
+							<a href="/shop/emp/goodsList.jsp?currentPage=1&category=<%=category%>">처음</a>
+							<a href="/shop/emp/goodsList.jsp?currentPage=- 1 %>&category=<%=category%>">이전</a>
+					<% 
+						}
+					%>
+				</div>
+			</div>
+		<div class="col-2" ></div>
+	</body>
 </html>

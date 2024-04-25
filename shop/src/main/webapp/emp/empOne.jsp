@@ -51,43 +51,44 @@ One= empDao.One(empNameParam); // 값을 넣어줘야함 줘야함
 	 	</div>
 	 	<div class="col-2" ></div>
 	
-		<div class="col-4">
-		<h1 style="text-align: center">상세 정보</h1><br>
-		
-			<%
-			for(HashMap m: One) { 
-			%>
-		<table class="table">
-			<tr>
-				<td> empId</td>
-				<td><%=(String)(m.get("empId"))%></td>
-			</tr>
-			<tr>
-				<td> empName</td>
-				<td><%=(String)(m.get("empName"))%></td>
-			</tr>
-			<tr>
-				<td> empJob</td>
-				<td><%=(String)(m.get("empJob"))%></td>
-			</tr>
-			<tr>
-				<td> hireDate</td>
-				<td><%=(String)(m.get("hireDate"))%></td>
-			</tr>
-			<tr>
-				<td> active</td>
-				<td><%=(String)(m.get("active"))%></td>
-			</tr>		
-			<%
-		}
-			%>
-		</table>
-	<div class="col-4"></div>
-	
-	<a href="/shop/emp/empList.jsp">
-		<button type="submit">리스트</button>
-	</a>
-
-
+				<div class="col-4">
+				<h1 style="text-align: center">상세 정보</h1><br>
+				
+					<%
+					for(HashMap m: One) { 
+					%>
+						<table class="table">
+							<tr>
+								<td> empId</td>
+								<td><%=(String)(m.get("empId"))%></td>
+							</tr>
+							<tr>
+								<td> empName</td>
+								<td><%=(String)(m.get("empName"))%></td>
+							</tr>
+							<tr>
+								<td> empJob</td>
+								<td><%=(String)(m.get("empJob"))%></td>
+							</tr>
+							<tr>
+								<td> hireDate</td>
+								<td><%=(String)(m.get("hireDate"))%></td>
+							</tr>
+							<tr>
+								<td> active</td>
+								<td><%=(String)(m.get("active"))%></td>
+							</tr>		
+					<%
+						}
+					%>
+							</table>
+					<div>
+						<a href="/shop/emp/empList.jsp">
+							<button type="submit" class=" btn btn-primary">리스트</button>
+						</a>
+					</div>
+				</div>
+			<div class="col-4"></div>
+		</div>
 </body>
 </html>

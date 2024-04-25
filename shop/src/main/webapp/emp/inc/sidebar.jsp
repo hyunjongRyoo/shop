@@ -16,7 +16,7 @@
 		width="70%" style="border-radius: 50%; margin-bottom">
 		</div>
 		<div>
-		  <a class="navbar-brand" href="/shop/emp/empList.jsp">
+		  <a class="navbar-brand" href="/shop/emp/empOne.jsp?empName=<%=(Object)(loginMember.get("empName"))%>">
     		<%=(String)(loginMember.get("empName"))%>님
 		</a>
 		</div>

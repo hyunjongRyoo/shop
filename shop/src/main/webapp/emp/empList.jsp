@@ -61,8 +61,7 @@
 	text-align: center;
 	}
 	
-	body -1:hover {
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+
 }
 
 	
@@ -72,15 +71,18 @@
   	<div class="row">
   	<jsp:include page ="/emp/inc/empMenu.jsp"></jsp:include> 
 		<div class="col-2" >
-			<jsp:include page="/emp/inc/sidebar.jsp"></jsp:include>
-			<!-- empMenu.jsp include :주체(서버) vs redirect (주체:클라이언트) -->
-			<!-- shop부터 시작하지 않기 // 주체가 서버이기때문이다 -->
-	 	</div>
+				<jsp:include page="/emp/inc/sidebar.jsp"></jsp:include>
+				<!-- empMenu.jsp include :주체(서버) vs redirect (주체:클라이언트) -->
+				<!-- shop부터 시작하지 않기 // 주체가 서버이기때문이다 -->
+				<a href="/shop/emp/addEmp.jsp">
+					직원추가
+				</a>
+ 		</div>
 	 	<div class="col-2" ></div>
 	
-		<div class="col">
+		<div class="col-4">
 		<h1 style="text-align: center">사원 목록</h1><br>
-		<table  border="1">
+		<table  class="table table-hover text-center">
 			<tr>
 				<th>사원 이메일</th>
 				<th>사원 이름</th>
@@ -119,10 +121,6 @@
 			}
 		%>
 	</table>
-			<a href="/shop/emp/addEmp.jsp">
-				<button type="submit">직원추가</button>
-			</a>
-	
 			<div class="position-absolute bottom-0 start-50 translate-middle-x">
 					<%
 						if(currentPage>1 && currentPage<lastPage){
@@ -147,6 +145,6 @@
 					%>
 			 </div>
 		</div>
-	<div class="col"></div>
+	<div class="col-4"></div>
 </body>
 </html>

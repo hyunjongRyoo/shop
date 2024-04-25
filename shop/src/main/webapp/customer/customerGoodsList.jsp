@@ -125,53 +125,50 @@ if(session.getAttribute("loginCustomer") == null) {
 	
 		</div>
 		<div class="col-8" >
-	<div class="goods-container">
+			<div class="goods-container">
 			
-	<%
-			for(HashMap m: goodsList) { 
-	%>
+			<%
+					for(HashMap m: goodsList) { 
+			%>
   <!-- map으로 값 받아주기 -->
   
- <div class="goods-item">
-               <img src="/shop/upload/<%=(String)(m.get("filename"))%>">
-                <br>
-               <a href="/shop/customer/customerGoodsOne.jsp?goodsNo=<%= m.get("goodsNo") %>&goodsPrice=<%= m.get("goodsPrice") %>">
+			<div class="goods-item">
+               	<img src="/shop/upload/<%=(String)(m.get("filename"))%>"><br>
+               	<a href="/shop/customer/customerGoodsOne.jsp?goodsNo=<%= m.get("goodsNo") %>&goodsPrice=<%= m.get("goodsPrice") %>">
                     품명:<%=(String)(m.get("goodsTitle"))%>
-                </a> <br>
+                </a><br>
                 <%=(Integer)(m.get("goodsPrice"))%>원
             </div>
-            <%
-                }
-            %>
+          <%
+               	 }
+          %>
         </div>
-	</div>
+			</div>
 	<!-- 페이징 -->
-	<div>
-		<%
-			if(currentPage>1 && currentPage<lastPage){
-		%>
-				<a href="/shop/customer/customerGoodsList.jsp?currentPage=1&category=<%=category%>">첫장</a>
-				<a href="/shop/customer/customerGoodsList.jsp?currentPage- 1 %>&category=<%=category%>">이전</a>
-				<a href="/shop/customer/customerGoodsList.jsp?currentPage+ 1 %>&category=<%=category%>">다음</a>  
-				<a href="/shop/customer/customerGoodsList.jsp?currentPage=lastPage %>&category=<%=category%>">마지막장</a>  
-		<%
-			}else if(currentPage==1){
-		%>
-				<a href="/shop/customer//customerGoodsList.jsp?currentPage=<%=currentPage + 1 %>&category=<%=category%>">다음</a>
-				<a href="/shop/customer//customerGoodsList.jsp?currentPage=<%=lastPage %>&category=<%=category%>">마지막장</a>  
-		<%
-		
-			}else{
-		%>
-				<a href="/shop/customer/customerGoodsList.jsp?currentPage=1&category=<%=category%>">처음</a>
-				<a href="/shop/customer/customerGoodsList.jsp?currentPage=- 1 %>&category=<%=category%>">이전</a>
-		<% 
-			}
-		%>
-	</div>
-	</div>
+			<div>
+				<%
+					if(currentPage>1 && currentPage<lastPage){
+				%>
+						<a href="/shop/customer/customerGoodsList.jsp?currentPage=1&category=<%=category%>">첫장</a>
+						<a href="/shop/customer/customerGoodsList.jsp?currentPage- 1 %>&category=<%=category%>">이전</a>
+						<a href="/shop/customer/customerGoodsList.jsp?currentPage+ 1 %>&category=<%=category%>">다음</a>  
+						<a href="/shop/customer/customerGoodsList.jsp?currentPage=lastPage %>&category=<%=category%>">마지막장</a>  
+				<%
+					}else if(currentPage==1){
+				%>
+						<a href="/shop/customer//customerGoodsList.jsp?currentPage=<%=currentPage + 1 %>&category=<%=category%>">다음</a>
+						<a href="/shop/customer//customerGoodsList.jsp?currentPage=<%=lastPage %>&category=<%=category%>">마지막장</a>  
+				<%
+				
+					}else{
+				%>
+						<a href="/shop/customer/customerGoodsList.jsp?currentPage=1&category=<%=category%>">처음</a>
+						<a href="/shop/customer/customerGoodsList.jsp?currentPage=- 1 %>&category=<%=category%>">이전</a>
+				<% 
+					}
+				%>
+			</div>
+		</div>
 	<div class="col-2" ></div>
-	</div>
 </body>
-
 </html>

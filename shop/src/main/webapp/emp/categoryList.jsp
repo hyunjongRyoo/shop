@@ -56,7 +56,7 @@ categoryList= GoodsDAO.categoryList();
 	
 						<div>
 							<h1>카테고리 리스트</h1>
-							<table  style="border=1 solid black;">
+							<table  class="table table-hover text-center">
 							<tr>
 								<th>카테고리</th>
 								<th>업로드 시간</th> 

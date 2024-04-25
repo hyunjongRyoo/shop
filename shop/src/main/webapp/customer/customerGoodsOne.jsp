@@ -42,7 +42,7 @@ ArrayList<HashMap<String, Object>> GoodsOne = CustomerDAO.GoodsOne(goodsNo, good
 		<%
 			for(HashMap m: GoodsOne) { 
 		%>
-				<table class="table">
+				<table class="table table-hover text-center">
 					<tr>
 						<td> 제품 번호</td>
 						<td><%=(Integer)(m.get("goodsNo"))%></td>
@@ -66,7 +66,7 @@ ArrayList<HashMap<String, Object>> GoodsOne = CustomerDAO.GoodsOne(goodsNo, good
 		%>
 			</table>
 				<div>
-				<a href="/shop/customer/orderAction.jsp?goodsNo=<%=(goodsNo)%>">
+				<a href="/shop/customer/orderForm.jsp?goodsNo=<%=goodsNo%>&goodsPrice=<%=goodsPrice%>">
 					<button type="submit">주문하기</button>
 				</a>
 				<a href="/shop/customer/customerGoodsList.jsp">
@@ -75,34 +75,6 @@ ArrayList<HashMap<String, Object>> GoodsOne = CustomerDAO.GoodsOne(goodsNo, good
 			</div>
 		</div>
 	<div class="col-4">
-	<h1>주문하기</h1>
-	<form method="post" action="/shop/customer/orderAction.jsp">
-	<div>
-	<label for="goodsNo">상품번호</label>
-	<input type="number" id="goodsNo" name="goodsNo" value="<%= goodsNo %>"readonly/>
-		</div>	
-			<div>
-				<label for="mail">메일</label>
-				<input type="email" id="mail" name="mail">
-			</div>
-			
-			<div>
-				<label for= "amount">수량</label>
-				<input type="number" id="amount" name="goodsAmount">
-			</div>
-			
-			<div>
-				<label for="price">가격</label>
-				<input type="number" id="price" name="goodsPrice" value="<%=goodsPrice%>"readonly/>
-			</div>
-			<div>
-				<label for="address">주소 </label>
-				<input type="text" id="address" name="address">
-			</div>	
-		<div>
-				<button type="submit">주문하기</button>
-		</div>
-	</form>
 	</div>
 </body>
 </html>

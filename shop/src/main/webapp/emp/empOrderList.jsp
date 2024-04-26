@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@	page import="java.util.*"%>
-<%@page import="shop.dao.ordersDAO"%>
+<%@page import="shop.dao.*"%>
+
 
 <%
 	// 로그인 세션 세션변수- loginEmp
@@ -26,7 +27,6 @@ ArrayList<HashMap<String, Object>>
 list=ordersDAO.selectOrdersListAll(startRow, rowPerPage);
 %>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,48 +48,38 @@ list=ordersDAO.selectOrdersListAll(startRow, rowPerPage);
 </head>
 <body>
 <div class="row">
-<jsp:include page ="/emp/inc/empMenu.jsp"></jsp:include> 
-	<div class="col-2" >
-		<jsp:include page="/emp/inc/sidebar.jsp"></jsp:include>
-	</div>
-	<div class="col-2" ></div>
-	
-	<div class="col-4">
-<table>
-		<tr>
-			<th>주문 번호</th>
-			<th>메일(아이디)</th>
-			<th>상품번호</th>
-			<th>총 수량</th>
-			<th>총 금액</th>
-			<th>주소</th>
-			<th>주문 상태</th>
-			<th>주문 변경 날짜</th>
-			<th>주문 날짜  </th>
-			<th>상품 가격</th>
-			<th>상품 이름</th>
-		</tr>
-		<%
-			for(HashMap<String , Object> m : list){
-		%>
-			<tr>
-					<td><%=(Integer)(m.get("ordersNo"))%></td>
-					<td><%=(String)(m.get("mail"))%></td>
-					<td><%=(Integer)(m.get("goodsNo"))%></td>
-					<td><%=(Integer)(m.get("totalAmount"))%></td>
-					<td><%=(Integer)(m.get("totalPrice"))%></td>
-					<td><%=(Integer)(m.get("address"))%></td>
-					<td><%=(String)(m.get("state"))%></td>
-					<td><%=(Integer)(m.get("updateDate"))%></td>
-					<td><%=(Integer)(m.get("createDate"))%></td>
-					<td><%=(Integer)(m.get("goodsPrice"))%></td>
-					<td><%=(Integer)(m.get("goodsTitle"))%></td>
-			</tr>
-		<%
-			}
-		%>
-</table>
-</div>
-<div class="col-4" ></div>
-</body>
+	<jsp:include page ="/emp/inc/empMenu.jsp"></jsp:include> 
+		<div class="col-2" >
+			<jsp:include page="/emp/inc/sidebar.jsp"></jsp:include>
+		</div>
+		<div class="col-2" ></div>
+		<div class="col-4">
+			<table class="table table-hover text-center">
+					<tr>
+						<th>주문 번호</th>
+						<th>상품 이름</th>
+						<th>총 수량</th>
+						<th>총 금액</th>
+						<th>주문 날짜</th>
+						<th>주문 상태</th>
+					</tr>
+			<%
+				for(HashMap<String , Object> m : list){
+			%>
+					<tr>
+						<td><%=(Integer)(m.get("ordersNo"))%></td>
+						<td><%=(String)(m.get("goodsTitle"))%></td>
+						<td><%=(Integer)(m.get("totalAmount"))%></td>
+						<td><%=(Integer)(m.get("totalPrice"))%></td>
+						<td><%=(String)(m.get("createDate"))%></td>
+						<td><%=(String)(m.get("state"))%></td>
+					</tr>
+				</table>
+			<%
+				}
+			%>
+			</div>
+			<div class="col-4" ></div>
+		</div>
+	</body>
 </html>

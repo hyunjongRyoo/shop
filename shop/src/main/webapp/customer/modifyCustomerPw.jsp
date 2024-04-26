@@ -25,6 +25,6 @@ if(row==1){
 	response.sendRedirect("/shop/customer/customerOne.jsp");
 }else{
 	System.out.println("변경에 실패했습니다");
-	response.sendRedirect("/shop/customer/customerOne.jsp");
+	response.sendRedirect("/shop/customer/modifyCustomerPwForm.jsp");
 }
 %>

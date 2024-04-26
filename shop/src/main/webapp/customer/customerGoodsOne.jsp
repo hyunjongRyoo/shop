@@ -31,50 +31,48 @@ ArrayList<HashMap<String, Object>> GoodsOne = CustomerDAO.GoodsOne(goodsNo, good
 	</style>
 </head>
 <body>
-
 <div class="row">
 		<jsp:include page ="/customer/include/customerMenu.jsp"></jsp:include> 
-		<div class="col-2" >
-	 	</div>
-	
+		<div class="col-2"></div>
+		<!-- CustomerGoodsList 구현부분 -->>	
 		<div class="col-6">
 		<h1 style="text-align: center">상세 정보</h1><br>
 		<%
 			for(HashMap m: GoodsOne) { 
 		%>
 				<table class="table table-hover text-center">
-					<tr>
-						<td> 제품 번호</td>
-						<td><%=(Integer)(m.get("goodsNo"))%></td>
-					</tr>
-					<tr>
-						<td> <img src="/shop/upload/<%=(String)(m.get("filename"))%>"></td>
-					<tr>
-						<td> 종류</td>
-						<td><%=(String)(m.get("goodsContent"))%></td>
-					</tr>	
-					<tr>
-						<td> 가격</td>
-						<td><%=(Integer)(m.get("goodsPrice"))%></td>
-					</tr>
-					<tr>
-						<td> 수량</td>
-						<td><%=(Integer)(m.get("goodsAmount"))%></td>
-					</tr>	
-		<%
-			}
-		%>
+				<tr>
+					<td> 제품 번호</td>
+					<td><%=(Integer)(m.get("goodsNo"))%></td>
+				</tr>
+				<tr>
+					<td> <img src="/shop/upload/<%=(String)(m.get("filename"))%>"></td>
+				<tr>
+					<td> 종류</td>
+					<td><%=(String)(m.get("goodsContent"))%></td>
+				</tr>	
+				<tr>
+					<td> 가격</td>
+					<td><%=(Integer)(m.get("goodsPrice"))%></td>
+				</tr>
+				<tr>
+					<td> 수량</td>
+					<td><%=(Integer)(m.get("goodsAmount"))%></td>
+				</tr>	
 			</table>
+			<%
+				}
+			%>
 				<div>
-				<a href="/shop/customer/orderForm.jsp?goodsNo=<%=goodsNo%>&goodsPrice=<%=goodsPrice%>">
-					<button type="submit">주문하기</button>
-				</a>
-				<a href="/shop/customer/customerGoodsList.jsp">
-					<button type="submit">리스트</button>
-				</a>
+					<a href="/shop/customer/orderForm.jsp?goodsNo=<%=goodsNo%>&goodsPrice=<%=goodsPrice%>">
+						<button type="submit">주문하기</button>
+					</a>
+					<a href="/shop/customer/customerGoodsList.jsp">
+						<button type="submit">리스트</button>
+					</a>
+				</div>
 			</div>
+			<div class="col-4"></div>
 		</div>
-	<div class="col-4">
-	</div>
-</body>
+	</body>
 </html>

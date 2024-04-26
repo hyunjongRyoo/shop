@@ -36,7 +36,7 @@ if(row == 1){
 	row = ordersDAO.ordersAction(mail, goodsAmount, goodsPrice, address);
 	if(row == 1){
 		System.out.println("입력 성공");
-		response.sendRedirect("/shop/customer/ordersList.jsp?");
+		response.sendRedirect("/shop/customer/ordersList.jsp");
 		return;
 	} else {
 		System.out.println("수정 실패");

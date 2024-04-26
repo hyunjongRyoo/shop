@@ -14,8 +14,6 @@
 // ResultSet -> ArrayList<HashMap<String, Object>>
 
 %> 
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +34,6 @@
 		
 	</style>
 </head>
-
 <body>
   	<div class="row">
   	<jsp:include page ="/customer/include/customerMenu.jsp"></jsp:include> 
@@ -47,9 +44,9 @@
 		<div class="col-4">
 		<h1 style="text-align: center">고객 상세 정보</h1><br>
 		
-			<%
-			for(HashMap m: One) { 
-			%>
+	<%
+		for(HashMap m: One) { 
+	%>
 		<table class="table">
 			<tr>
 				<td> mail</td>
@@ -67,32 +64,21 @@
 				<td> gender</td>
 				<td><%=(String)(m.get("gender"))%></td>
 			</tr>		
-			<%
-		}
-			%>
 		</table>
-	<div class="col-4"></div>
-	
-	<a href="/shop/customer/customerGoodsList.jsp">
-		<button type="submit">리스트</button>
-	</a>
-	<h1>비밀번호 변경하기</h1>
-	<form method="post" action="/shop/customer/modifyCustomerPw.jsp">
-		<div>
-			<label for="mail">email</label>
-			<input type="email" id="mail" name="mail" >
+	<%
+		}
+	%>
 		</div>
-		
-		<div>
-			<label for="OldPw">OldPw</label>
-			<input type="password" id="OldPw" name="OldPw" >
-		</div>
-		
-		<div>
-			<label for="newPw">newPw</label>
-			<input type="password" id="newPw" name="newPw" >
-		</div>
-		<button type="submit">변경하기</button>		
-	</form>
+			<div>
+				<a href="/shop/customer/customerGoodsList.jsp">
+					<button type="submit" class="btn btn-primary">리스트</button>
+				</a>
+				
+				<a href="/shop/customer/modifyCustomerPwForm.jsp">
+					<button type="submit" class="btn btn-primary">비밀번호변경</button>
+				</a>
+			</div>
+		<div class="col-4"></div>
+	</div>
 </body>
 </html>

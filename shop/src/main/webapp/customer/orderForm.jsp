@@ -26,7 +26,7 @@ ArrayList<HashMap<String, Object>> GoodsOne = CustomerDAO.GoodsOne(goodsNo, good
 	<form method="post" action="/shop/customer/orderAction.jsp">
 	<div>
 		<label for="goodsNo">상품번호</label>
-		<input type="number" id="goodsNo" name="goodsNo" value="<%=goodsNo %>"readonly/>
+		<input type="number" id="goodsNo" name="goodsNo" value="<%=goodsNo%>"readonly>
 	</div>	
 			<div>
 				<label for="mail">메일</label>

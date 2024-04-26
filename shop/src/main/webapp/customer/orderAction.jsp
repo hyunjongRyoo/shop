@@ -33,7 +33,7 @@ System.out.println(mail + "<-- orderAction.jsp mail");
 int row = GoodsDAO.updateGoodsAmount(goodsNo, goodsAmount);
 if(row == 1){
 	System.out.println("상품갯수 수정 성공");
-	row = ordersDAO.ordersAction(mail, goodsAmount, goodsPrice, address);
+	row = ordersDAO.ordersAction(mail, goodsNo, goodsAmount, goodsPrice, address);
 	if(row == 1){
 		System.out.println("입력 성공");
 		response.sendRedirect("/shop/customer/ordersList.jsp");

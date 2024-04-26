@@ -55,29 +55,33 @@ list=ordersDAO.selectOrdersListAll(startRow, rowPerPage);
 		<div class="col-2" ></div>
 		<div class="col-4">
 			<table class="table table-hover text-center">
-					<tr>
-						<th>주문 번호</th>
-						<th>상품 이름</th>
-						<th>총 수량</th>
-						<th>총 금액</th>
-						<th>주문 날짜</th>
-						<th>주문 상태</th>
-					</tr>
-			<%
-				for(HashMap<String , Object> m : list){
-			%>
-					<tr>
-						<td><%=(Integer)(m.get("ordersNo"))%></td>
-						<td><%=(String)(m.get("goodsTitle"))%></td>
-						<td><%=(Integer)(m.get("totalAmount"))%></td>
-						<td><%=(Integer)(m.get("totalPrice"))%></td>
-						<td><%=(String)(m.get("createDate"))%></td>
-						<td><%=(String)(m.get("state"))%></td>
-					</tr>
+				<tr>
+					<th>No</th>
+					<th>아이디</th>
+					<th>상품번호</th>
+					<th>총 수량</th>
+					<th>총 금액</th>
+					<th>주소</th>
+					<th>주문 상태</th>	
+					<th>주문 시간</th>				
+				</tr>
+					<%
+						for(HashMap<String , Object> m : list){
+					%>
+						<tr>
+							<td><%=(Integer)(m.get("ordersNo"))%></td>
+							<td><%=(String)(m.get("mail"))%></td>
+							<td><%=(Integer)(m.get("goodsNo"))%></td>
+							<td><%=(Integer)(m.get("totalAmount"))%></td>
+							<td><%=(Integer)(m.get("totalPrice"))%></td>
+							<td><%=(String)(m.get("address"))%></td>
+							<td><%=(String)(m.get("state"))%></td>
+							<td><%=(String)(m.get("createDate"))%></td>
+						</tr>
+					<%
+						}
+					%>
 				</table>
-			<%
-				}
-			%>
 			</div>
 			<div class="col-4" ></div>
 		</div>

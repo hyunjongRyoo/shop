@@ -1,3 +1,4 @@
+<%@page import="shop.dao.CommentDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="shop.dao.ordersDAO"%>
 <%@page import="java.util.HashMap"%>
@@ -80,6 +81,30 @@ list=ordersDAO.selectOrdersListByCustomer(mail, startRow, rowPerPage);
 							<td><%=(String)(m.get("address"))%></td>
 							<td><%=(String)(m.get("state"))%></td>
 							<td><%=(String)(m.get("createDate"))%></td>
+							<td><a href="/shop/customer/orderOne.jsp?ordersNo=<%=(Integer)(m.get("ordersNo"))%>">주문 상세보기</a></td>
+							
+							<!-- 후기 작성 가능 조건과 후기 작성 가능 유무를 판단후 작성 폼으로 이동 -->
+							<%
+							int ordersNo = (Integer)(m.get("ordersNo"));
+							boolean checkComment = CommentDAO.checkCommentAction(ordersNo);
+							if(checkComment == true){
+							%>
+								<td>후기가 이미 존재합니다</td>
+							<%
+								}else{
+								
+								if(((String)(m.get("state"))).equals("배송 완료")){
+							%>
+									<td><a href="/shop/customer/CommentForm.jsp?ordersNo=<%=(Integer)(m.get("ordersNo"))%>">
+									후기 작성하기</a></td>
+							<%
+								}else{
+							%>
+									<td>후기 작성 불가</td>
+							<%
+								}
+							}
+							%>
 						</tr>
 					<%
 						}

@@ -46,6 +46,7 @@ public class ordersDAO {
 
 			
 			list.add(m);
+			System.out.println(m);
 		}
 		conn.close();
 		return list;
@@ -108,11 +109,14 @@ public class ordersDAO {
 		
 		return row;
 	}
+	
+	
 	//orderOne
 	//상품주문정보  상세보기
 	//param = ordersNo
 	public static ArrayList<HashMap<String,Object>>orderOne(int ordersNo) throws Exception {
-		String sql = "select o.orders_no ordersNo,o.goods_no goodsNo, g.goods_title goodsTitle, g.filename filename, "
+		ArrayList<HashMap<String,Object>> list = new ArrayList<HashMap<String, Object>>();		
+		String sql = "select o.orders_no ordersNo,o.goods_no goodsNo, g.goods_title goodsTitle, "
 				+ " o.total_amount totalAmount, o.total_price totalPrice,o.state state, o.create_date createDate "
 				+ "from orders o inner join goods g on o.goods_no = g.goods_no "
 				+ "where o.orders_no =?";
@@ -123,13 +127,75 @@ public class ordersDAO {
 		ResultSet rs = stmt.executeQuery();
 		
 		while(rs.next()) {
-			
-			
+			HashMap<String, Object> m = new HashMap<String, Object>();
+			//값을 넣어준다
+			m.put("ordersNo", rs.getInt("ordersNo"));
+			m.put("goodsNo", rs.getInt("goodsNo"));
+			m.put("goodsTitle", rs.getString("goodsTitle"));
+			m.put("totalAmount", rs.getInt("totalAmount"));
+			m.put("totalPrice", rs.getInt("totalPrice"));
+			m.put("state", rs.getString("state"));
+			m.put("createDate", rs.getString("createDate"));
+
+			list.add(m);
+			System.out.println(m);
 		}
-		
+		conn.close();
+		return list;
 		
 	}
 	
+	//주문수량
+	//여러개 주문시
+	public static int ordersCount() throws Exception{
+		String sql="select count(*) count from orders";
+		Connection conn = DBHelper.getConnection();
+		PreparedStatement stmt= conn.prepareCall(sql);
+		ResultSet rs= stmt.executeQuery();
+		
+		int count = 0;
+		
+		if(rs.next()) {
+			count=rs.getInt("count");
+			}
+		
+		conn.close();
+		return count;
+		
+	}
 	
-	
+	//관리자 state 바꾸기
+	public static int updateState(String state, int ordersNo)throws Exception{
+		Connection conn=DBHelper.getConnection();
+		// 몇번 주문의 주문상태를 변경할것인지?->리뷰작성을 위해서
+		String sql="update orders set state=? where orders_no=?";
+		
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, state);
+		stmt.setInt(2, ordersNo);
+		
+		System.out.println(stmt);
+		
+		int row=0;
+		row=stmt.executeUpdate();
+		
+		conn.close();
+		return row;
+	}
+	//주문 취소하기(삭제)
+	public static int deleteOrder(int ordersNo) throws Exception{
+		Connection conn= DBHelper.getConnection();
+		
+		String sql="delete from orders whrer orders_no =?";
+		PreparedStatement stmt= conn.prepareStatement(sql);
+		stmt.setInt(1, ordersNo);
+		
+		System.out.println(stmt);
+		int row=0;
+		row = stmt.executeUpdate();
+		
+		
+		conn.close();
+		return row;
+	}
 }

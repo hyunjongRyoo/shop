@@ -16,7 +16,7 @@
 	
 	int ordersNo = Integer.parseInt(request.getParameter("ordersNo"));
 	
-	ArrayList<HashMap<String,Object>> orderOne = ordersDAO.OrderOne(ordersNo);
+	ArrayList<HashMap<String,Object>> orderOne = ordersDAO.orderOne(ordersNo);
 
 
 
@@ -29,6 +29,47 @@
 <title>주문 상세 보기</title>
 </head>
 <body>
-
+	<table>
+		<%
+			for(HashMap m: orderOne){
+		%>
+			<tr>
+				<td>주문번호</td>
+				<td><%=m.get("ordersNo")%></td>
+			</tr>
+			
+			<tr>
+				<td>상품번호</td>
+				<td><%=m.get("goodsNo")%></td>
+			</tr>
+			
+			<tr>
+				<td>상품명</td>
+				<td><%=m.get("goodsTitle")%></td>
+			</tr>
+			
+			<tr>
+				<td>총 수량</td>
+				<td><%=m.get("totalAmount")%></td>
+			</tr>
+			
+			<tr>
+				<td>총 가격</td>
+				<td><%=m.get("totalPrice")%></td>
+			</tr>
+			
+			<tr>
+				<td>주문 상태</td>
+				<td><%=m.get("state")%></td>
+			</tr>
+			
+			<tr>
+				<td>주문 날짜</td>
+				<td><%=m.get("createDate")%></td>
+			</tr>
+		<%
+			}
+		%>
+	</table>
 </body>
 </html>

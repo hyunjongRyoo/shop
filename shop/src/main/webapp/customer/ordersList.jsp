@@ -67,7 +67,7 @@ list=ordersDAO.selectOrdersListByCustomer(mail, startRow, rowPerPage);
 				<th>총 금액</th>
 				<th>주소</th>
 				<th>주문 상태</th>	
-				<th>주문 시간</th>				
+				<th>주문 시간</th>			
 			</tr>
 					<%
 						for(HashMap<String , Object> m : list){

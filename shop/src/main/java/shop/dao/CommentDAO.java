@@ -46,4 +46,23 @@ public class CommentDAO {
 		conn.close();
 		return checkComment;
 	}
+	
+	
+	
+	//리뷰 삭제
+	public static int deleteComment(int ordersNo) throws Exception{
+		Connection conn= DBHelper.getConnection();
+		
+		String sql="delete from orders whrer orders_no =?";
+		PreparedStatement stmt= conn.prepareStatement(sql);
+		stmt.setInt(1, ordersNo);
+		
+		System.out.println(stmt);
+		int row=0;
+		row = stmt.executeUpdate();
+		
+		
+		conn.close();
+		return row;
+	}
 }

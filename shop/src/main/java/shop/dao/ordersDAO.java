@@ -108,6 +108,28 @@ public class ordersDAO {
 		
 		return row;
 	}
+	//orderOne
+	//상품주문정보  상세보기
+	//param = ordersNo
+	public static ArrayList<HashMap<String,Object>>orderOne(int ordersNo) throws Exception {
+		String sql = "select o.orders_no ordersNo,o.goods_no goodsNo, g.goods_title goodsTitle, g.filename filename, "
+				+ " o.total_amount totalAmount, o.total_price totalPrice,o.state state, o.create_date createDate "
+				+ "from orders o inner join goods g on o.goods_no = g.goods_no "
+				+ "where o.orders_no =?";
+		Connection conn = DBHelper.getConnection();
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, ordersNo);
+		System.out.println(stmt);
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			
+			
+		}
+		
+		
+	}
+	
 	
 	
 }

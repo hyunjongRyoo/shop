@@ -105,24 +105,22 @@ if(session.getAttribute("loginCustomer") == null) {
   	<div class="row">
   	<jsp:include page ="/customer/include/customerMenu.jsp"></jsp:include> 
 		<div class="col-2" >
-		 
 			<!-- 서브메뉴 카테고리별 상품리스트 -->
-	
-			
-				
 			<div>
-		<%
-				for(HashMap m : paging) {
-		%>
-				<a href="/shop/customer/customerGoodsList.jsp?category=<%=(String)(m.get("category"))%>">
-					<%=(String)(m.get("category"))%>
-					(<%=(Integer)(m.get("cnt"))%>) <!-- 카테고리별 상품 숫자,상품 목록 -->
-				</a>	
-		<%		
-				}
-		%>
-	</div>
-	
+				<%
+					for(HashMap m : paging) {
+				%>
+						<a href="/shop/customer/customerGoodsList.jsp?category=<%=(String)(m.get("category"))%>">
+					<div>
+							<%=(String)(m.get("category"))%>
+							(<%=(Integer)(m.get("cnt"))%>)
+							 <!-- 카테고리별 상품 숫자,상품 목록 -->
+					</div>
+						</a>	
+				<%		
+					}
+				%>
+			</div>
 		</div>
 		<div class="col-8" >
 			<div class="goods-container">

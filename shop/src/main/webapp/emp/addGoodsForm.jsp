@@ -49,44 +49,46 @@ if(session.getAttribute("loginEmp") == null) {
 		
 			<div class="col-4" >
 			<h1>상품등록</h1>
-			<form method="post" action="/shop/emp/addGoodsAction.jsp"
-					enctype="multipart/form-data">
+			<form method="post" action="/shop/emp/addGoodsAction.jsp" enctype="multipart/form-data">
+				<table class="table table-hover">
+					<tr>
+						<td>category</td>
+						<td>
+							<select name="category">
+							<option value="">선택</option>
+								<%
+									for(String c : GoodsList) {  //배열의 반복  인덱스 0~끝날때까지 반복
+								%>
+									<option value="<%=c%>"><%=c%></option>
+								<%		
+									}
+								%>
+							</select>
+						</td>
+					</tr>
+					<tr>					
+						<td>goodsTitle</td>
+						<td><input type="text" name="goodsTitle"></td>		
+					</tr>
+					<tr>					
+						<td>goodsImage</td>
+						<td><input type="file" name="goodsImg"></td>		
+					</tr>
+					<tr>	
+						<td>goodsPrice</td>
+						<td><input type="number" name="goodsPrice"></td>
+					</tr>
+					<tr>
+						<td>goodsAmount</td>
+						<td><input type="number" name="goodsAmount"></td>
+					</tr>
+					<tr>
+						<td>goodsContent</td>
+						<td><textarea rows="5" cols="50" name="goodsContent"></textarea></td>
+					</tr>
+				</table>
 				<div>
-					category :
-					<select name="category">
-						<option value="">선택</option>
-						<%
-							for(String c : GoodsList) {  //배열의 반복  인덱스 0~끝날때까지 반복
-						%>
-								<option value="<%=c%>"><%=c%></option>
-						<%		
-							}
-						%>
-					</select>
-				</div>
-				<!-- emp_id값은 action쪽에서 세션변수에서 바인딩 -->
-				<div>
-					goodsTitle : <br>
-					<input type="text" name="goodsTitle">
-				</div>
-				<div>
-					goodsImage : <br>
-					<input type="file" name="goodsImg">
-				</div>
-				<div>
-					goodsPrice : <br>
-					<input type="number" name="goodsPrice">
-				</div>
-				<div>
-					goodsAmount : <br>
-					<input type="number" name="goodsAmount">
-				</div>
-				<div>
-					goodsContent : <br>
-					<textarea rows="5" cols="50" name="goodsContent"></textarea>
-				</div>
-				<div>
-					<button type="submit">상품등록</button>
+					<button type="submit" class="btn btn-primary">상품등록</button>
 				</div>
 			</form>
 		</div>

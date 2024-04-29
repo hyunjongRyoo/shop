@@ -34,7 +34,7 @@ ArrayList<HashMap<String, Object>> GoodsOne = CustomerDAO.GoodsOne(goodsNo, good
 <div class="row">
 		<jsp:include page ="/customer/include/customerMenu.jsp"></jsp:include> 
 		<div class="col-2"></div>
-		<!-- CustomerGoodsList 구현부분 -->>	
+		<!-- CustomerGoodsList 구현부분 -->	
 		<div class="col-6">
 		<h1 style="text-align: center">상세 정보</h1><br>
 		<%
@@ -65,7 +65,7 @@ ArrayList<HashMap<String, Object>> GoodsOne = CustomerDAO.GoodsOne(goodsNo, good
 			%>
 				<div>
 					<a href="/shop/customer/orderForm.jsp?goodsNo=<%=goodsNo%>&goodsPrice=<%=goodsPrice%>">
-						<button type="submit">주문하기</button>
+						<button type="submit" class="">주문하기</button>
 					</a>
 					<a href="/shop/customer/customerGoodsList.jsp">
 						<button type="submit">리스트</button>

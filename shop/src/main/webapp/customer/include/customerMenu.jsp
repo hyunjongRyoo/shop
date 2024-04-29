@@ -19,6 +19,9 @@
 		</a>
 		 	<div class="collapse navbar-collapse" id="navbarNav">
 			      <ul class="navbar-nav">
+			      	 <li class="nav-item">
+					          <a class="nav-link active" aria-current="page" href="/shop/customer/customerGoodsList.jsp">상품 리스트</a>
+			        </li>
 			        <li class="nav-item">
 					          <a class="nav-link active" aria-current="page" href="/shop/customer/customerOne.jsp?mail=<%=(Object)(loginCustomer.get("mail"))%>">내 정보</a>
 			        </li>

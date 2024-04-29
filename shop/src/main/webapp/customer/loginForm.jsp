@@ -41,6 +41,11 @@
 							<button type="submit" class="ms-5 mt-3 w-75 btn" style="color: #000000">sign up</button>
 						</div>
 					</form>
+						<div>
+							<a href="/shop/customer/addCustomerForm.jsp">
+								<button type="submit" class="ms-5 mt-3 w-75 btn">회원가입</button>
+							</a>
+						</div>
 				</div>
 		<div class="col-4"></div>
 	</div>

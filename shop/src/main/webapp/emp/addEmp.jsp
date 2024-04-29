@@ -25,32 +25,29 @@
 				<div class="col-2" ></div>
 				<!--리스트 -->
 				<div class="col-4">
-					<form method="post" action="/shop/emp/addEmpAction.jsp" class="position-absolute top-50 start-50 translate-middle">
-						<div>
-							<label for="empId">아이디(이메일):</label> 
-							<input type="email" empId="id" name="empId">
-						</div>
-		
-						<div>
-							<label for="empPw">비밀번호:</label>
-							<input type="password" id="empPw" name="empPw">
-						</div>
-							
-						<div>
-							<label for="empName">이름:</label>
-							<input type="text" id="empName" name="empName">
-						</div>
-								
-						<div>
-							<label for="empJob">파트:</label>
-							<input type="text" id="empJob" name="empJob">
-						</div>
-							
-						<div>
-							<label for="hireDate">채용날짜</label>
-							<input type="date" id="hireDate" name="hireDate">
-						</div>
-							
+						<form method="post" action="/shop/emp/addEmpAction.jsp" class="position-absolute top-50 start-50 translate-middle">
+							<table class="table table-hover">
+								<tr>
+									<td>이메일</td>
+									 <td><input type="email" empId="id" name="empId"></td>
+								 </tr>
+								 <tr>
+							 		<td>비밀번호</td>
+							 		<td><input type="password" id="empPw" name="empPw"></td>
+								 </tr>
+								  <tr>
+							 		<td>이름</td>
+							 		<td><input type="text" id="empName" name="empName"></td>
+								 </tr>
+							  	 <tr>
+							 		<td>파트</td>
+							 		<td><input type="text" id="empJob" name="empJob"></td>
+							 	</tr>	
+							  	<tr>
+							 		<td>채용날짜</td>
+							 	<td><input type="date" id="hireDate" name="hireDate"></td>
+							 </tr>		
+							</table>
 						<div>
 							<button type="submit" class="btn btn-primary">추가하기</button>
 						</div>

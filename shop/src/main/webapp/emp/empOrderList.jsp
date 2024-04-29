@@ -63,7 +63,8 @@ list=ordersDAO.selectOrdersListAll(startRow, rowPerPage);
 					<th>총 금액</th>
 					<th>주소</th>
 					<th>주문 상태</th>	
-					<th>주문 시간</th>			
+					<th>주문 시간</th>		
+					<th>주문 상태 변경</th>	
 				</tr>
 						<%
 							for(HashMap<String , Object> m : list){
@@ -77,6 +78,17 @@ list=ordersDAO.selectOrdersListAll(startRow, rowPerPage);
 							<td><%=(String)(m.get("address"))%></td>
 							<td><%=(String)(m.get("state"))%></td>
 							<td><%=(String)(m.get("createDate"))%></td>
+							<td>
+								<form method="post" action="/shop/emp/updateStateAction.jsp?ordersNo=<%=(Integer)(m.get("ordersNo"))%>">
+									<select name="state">
+										<option value="<%=(String)(m.get("state"))%>"><%=(String)(m.get("state")) %></option>
+										<option value="결제완료">결제완료</option>
+										<option value="배송중">배송중</option>
+										<option value="배송완료">배송완료</option>
+									</select>
+									<button type="submit">상태 변경하기</button>
+								</form>
+							</td>
 						</tr>
 					<%
 						}

@@ -50,6 +50,8 @@ public class CommentDAO {
 	
 	
 	//리뷰 삭제
+	//deleteComment.jsp
+	//param:ordersNo
 	public static int deleteComment(int ordersNo) throws Exception{
 		Connection conn= DBHelper.getConnection();
 		

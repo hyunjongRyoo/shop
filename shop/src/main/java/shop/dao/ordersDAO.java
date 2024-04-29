@@ -4,7 +4,9 @@ import java.util.*;
 
 
 public class ordersDAO {
-	//고객의 자신의 주문을 확인 (페이징)--완료(값 확인해야함)
+	//고객의 자신의 주문을 확인 (페이징)
+	//param: mail로  고객 개개인 확인
+	//ordersList.jsp
 	public static ArrayList<HashMap<String, Object>>selectOrdersListByCustomer(
 			String mail, int startRow, int rowPerPage) throws Exception {
 		ArrayList<HashMap<String, Object>>list
@@ -51,7 +53,10 @@ public class ordersDAO {
 		conn.close();
 		return list;
 	}
-	//관리자의 전체주문을 확인(페이징)--완료(값 확인해야함)
+	//관리자의 전체주문을 확인(페이징)--수정 
+	//고객페이지와의 차이점: state를 바꿀수있어야함
+	//param: startRow,rowPerPage -> 페이징
+	//empOrdersList.jsp
 	public static ArrayList<HashMap<String, Object>>selectOrdersListAll(
 			int startRow , int rowPerPage) throws Exception {
 		ArrayList<HashMap<String, Object>>list
@@ -93,6 +98,8 @@ public class ordersDAO {
 		return list;
 	}
 	//ordersAction.jsp
+	//주문추가
+	//param:mail,goodsNo,amount, address,price
 	public static int ordersAction(String mail, int goodsNo, int amount, int price, String address) throws Exception {
 		String sql = null;
 		sql = "insert into orders(mail, goods_no, total_amount, total_price, address) values(?, ?, ?, ?, ?);";
@@ -113,7 +120,7 @@ public class ordersDAO {
 	
 	//orderOne
 	//상품주문정보  상세보기
-	//param = ordersNo
+	//param: ordersNo
 	public static ArrayList<HashMap<String,Object>>orderOne(int ordersNo) throws Exception {
 		ArrayList<HashMap<String,Object>> list = new ArrayList<HashMap<String, Object>>();		
 		String sql = "select o.orders_no ordersNo,o.goods_no goodsNo, g.goods_title goodsTitle, "
@@ -147,6 +154,7 @@ public class ordersDAO {
 	
 	//주문수량
 	//여러개 주문시
+	//파라미터 없음
 	public static int ordersCount() throws Exception{
 		String sql="select count(*) count from orders";
 		Connection conn = DBHelper.getConnection();
@@ -165,6 +173,8 @@ public class ordersDAO {
 	}
 	
 	//관리자 state 바꾸기
+	//결제완료,배송중,배송완료-> 배송완료일때 리뷰 작성가능 
+	//param: state,ordersNo
 	public static int updateState(String state, int ordersNo)throws Exception{
 		Connection conn=DBHelper.getConnection();
 		// 몇번 주문의 주문상태를 변경할것인지?->리뷰작성을 위해서
@@ -183,6 +193,8 @@ public class ordersDAO {
 		return row;
 	}
 	//주문 취소하기(삭제)
+	//deleteOrdersAction.jsp
+	//param:ordersNo
 	public static int deleteOrder(int ordersNo) throws Exception{
 		Connection conn= DBHelper.getConnection();
 		

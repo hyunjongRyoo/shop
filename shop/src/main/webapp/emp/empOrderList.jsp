@@ -63,11 +63,11 @@ list=ordersDAO.selectOrdersListAll(startRow, rowPerPage);
 					<th>총 금액</th>
 					<th>주소</th>
 					<th>주문 상태</th>	
-					<th>주문 시간</th>				
+					<th>주문 시간</th>			
 				</tr>
-					<%
-						for(HashMap<String , Object> m : list){
-					%>
+						<%
+							for(HashMap<String , Object> m : list){
+						%>
 						<tr>
 							<td><%=(Integer)(m.get("ordersNo"))%></td>
 							<td><%=(String)(m.get("mail"))%></td>

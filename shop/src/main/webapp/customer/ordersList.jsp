@@ -6,18 +6,16 @@
 
 <%
 // 인증분기	 : 세션변수 이름 - loginCustomer
-if(session.getAttribute("loginCustomer") == null) {
+	if(session.getAttribute("loginCustomer") == null) {
 	response.sendRedirect("/shop/customer/loginForm.jsp");
 	return;
-}
+	}
 %>
 
 <%
 HashMap<String, Object> loginCustomer = (HashMap<String, Object>)(session.getAttribute("loginCustomer"));//mail 값 
 //메일값으로 고객 개개인의 주문정보를 받아줌
 String mail=(String)(loginCustomer.get("mail"));
-
-
 
 //페이징
 int currentPage = 1;
@@ -27,8 +25,6 @@ if(request.getParameter("currentPage") != null) {
 
 int rowPerPage = 10;
 int startRow = (currentPage-1)*rowPerPage;
-
-
 
 ArrayList<HashMap<String, Object>>
 list=ordersDAO.selectOrdersListByCustomer(mail, startRow, rowPerPage);
@@ -85,9 +81,9 @@ list=ordersDAO.selectOrdersListByCustomer(mail, startRow, rowPerPage);
 							
 							<!-- 후기 작성 가능 조건과 후기 작성 가능 유무를 판단후 작성 폼으로 이동 -->
 							<%
-							int ordersNo = (Integer)(m.get("ordersNo"));
-							boolean checkComment = CommentDAO.checkCommentAction(ordersNo);
-							if(checkComment == true){
+								int ordersNo = (Integer)(m.get("ordersNo"));
+								boolean checkComment = CommentDAO.checkCommentAction(ordersNo);
+								if(checkComment == true){
 							%>
 								<td>후기가 이미 존재합니다</td>
 							<%

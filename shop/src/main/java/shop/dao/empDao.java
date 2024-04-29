@@ -5,13 +5,10 @@ import java.util.*;
 
 	public class empDao { 
 		//addEmp
-	public static int insertEmp (
-			String empId,
-			String empPw,
-			String empName,
-			String empJob,
-			String hireDate
-			)
+		//emp 추가를 위한 정보
+		//param:empId,empPw,empName.empJob,hireDate
+		
+	public static int insertEmp (String empId,String empPw,String empName,String empJob,String hireDate)
 	throws Exception{
 	
 		String sql="insert into emp (emp_id,emp_pw,emp_name,emp_job,hire_date) values (?,password(?), ? ,? , ?)";
@@ -27,12 +24,9 @@ import java.util.*;
 		row = stmt.executeUpdate();
 		return row;
 	}
-
 	
-	
-	// 호출코드  HashMap <String , Object> m = EmpDao.empLogin("admin" , "1234");
-	
-	//loginEmp
+		//loginEmp
+		//param: empId,empPw
 		public static HashMap<String, Object> loginEmp(String empId, String empPw) throws Exception {
 		
 		HashMap<String , Object>resultMap = null;  // resultMap 저장 -> loginEmp에다가 하면 안됌
@@ -41,19 +35,12 @@ import java.util.*;
 		Class.forName("org.mariadb.jdbc.Driver");
 		Connection conn= DriverManager.getConnection(
 				"jdbc:mariadb://127.0.0.1:3306/shop", "root", "guswhd6656");
-		
-		
 		String sql = "select emp_id empId, emp_name empName, grade from emp where active='ON' and emp_id =? and emp_pw = password(?)";
-		
 		PreparedStatement stmt  = conn.prepareStatement(sql);
-		
 		stmt.setString(1, empId);
 		stmt.setString(2, empPw);
 		ResultSet rs =stmt.executeQuery();
 		
-		
-		
-
 		if(rs.next()) {
 			
 			resultMap = new HashMap<String, Object>(); 
@@ -70,9 +57,8 @@ import java.util.*;
 		}
 		conn.close();
 		return resultMap;
-		
-		
 	}
+		 
 		//empList 페이징 
 		public static ArrayList<HashMap<String, Object>> empPageList() throws Exception{
 			ArrayList<HashMap<String , Object>>empPageList =
@@ -95,6 +81,7 @@ import java.util.*;
 		
 		
 		//empList
+		//param(startRow,rowPerPage)
 		public static ArrayList<HashMap<String , Object>>  empList(
 			 int startRow , int rowPerPage) throws Exception{
 			ArrayList<HashMap<String , Object>>empList =
@@ -123,7 +110,9 @@ import java.util.*;
 			conn.close();
 			return empList;
 		}
-		//empOne
+		
+		//empOne- 고객 상세정보
+		//param:empNameParam
 		public static ArrayList<HashMap<String, Object>> One(
 				String empNameParam) throws Exception{
 		ArrayList<HashMap<String , Object>> One =
@@ -149,30 +138,25 @@ import java.util.*;
 	    	One.add(m);
 		}
 	    conn.close();
-		
-		
 		return One;
 		}
 		
 		//updateEmp
-		public static int updateEmp (
-				String active,
-				String empId
+		//param:active,empId
+		//active 권한 변경
+		public static int updateEmp (String active,String empId
 				)throws Exception{
-			
-			int row =0;
-			//db 접근
-			
 			Connection conn = DBHelper.getConnection();
-			String sql3="update emp set active = ? where emp_id = ?";
-			PreparedStatement stmt3  = conn.prepareStatement(sql3);
-			stmt3.setString(1, empId);
-			stmt3.setString(2, active);
+			String sql="update emp set active = ? where emp_id = ?";
+			PreparedStatement stmt  = conn.prepareStatement(sql);
+			stmt.setString(1, empId);
+			stmt.setString(2, active);
 			
 			System.out.println(empId+"<--updateEmp empId");
 			System.out.println(active+"<--updateEmp active");
 			
-			row = stmt3.executeUpdate();
+			int row =0;	
+			row = stmt.executeUpdate();
 			
 			conn.close();
 			return row;

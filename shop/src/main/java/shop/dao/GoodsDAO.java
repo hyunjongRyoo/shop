@@ -103,7 +103,7 @@ public class GoodsDAO {
 	
 	
 	//goodsList
-
+	//param:category,startRow,rowPerPage
 	public static ArrayList<HashMap<String , Object>>  goodsList(
 			String category, int startRow , int rowPerPage) throws Exception{
 		ArrayList<HashMap<String , Object>>goodsList =
@@ -198,6 +198,9 @@ public class GoodsDAO {
 	}
 	
 	//addGoodsAction
+	//상품 추가
+	//param:category,goodsTitle,empId,filename,goodsPrice,goodsAmount,goodsContent
+	
 	public static int addGoodsAction(
 	String category , String  goodsTitle , String empId , String filename, String goodsPrice, String goodsAmount , String goodsContent
 	)throws Exception{
@@ -224,7 +227,7 @@ public class GoodsDAO {
 	}
 	
 	//addCatrgoryAction.jsp
-	
+	//param:category
 	public static  int  addCategoryAction(
 			String category	) throws Exception{
 		int row =0;
@@ -241,7 +244,6 @@ public class GoodsDAO {
 	}
 	
 	//addCatrgoryForm.jsp
-	
 	public static ArrayList<String>addCategoryForm(
 			)throws Exception {
 		ArrayList<String> addCategoryForm =

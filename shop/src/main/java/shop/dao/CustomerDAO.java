@@ -136,6 +136,7 @@ public class CustomerDAO {
 	}
 
 	// customerList --완성
+	// param:String category, int startRow, int rowPerPage
 	public static ArrayList<HashMap<String, Object>> goodsList(String category, int startRow, int rowPerPage)
 			throws Exception {
 		ArrayList<HashMap<String, Object>> goodsList = new ArrayList<HashMap<String, Object>>();
@@ -186,6 +187,7 @@ public class CustomerDAO {
 	}
 
 	// CustomeGoodsOne.jsp--완성
+	//param:goodsNo,goodsPrice
 	public static ArrayList<HashMap<String, Object>> GoodsOne( // 메소드 이름
 			int goodsNo , int goodsPrice) throws Exception {
 		ArrayList<HashMap<String, Object>> GoodsOne = // 객체
